@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Set this to the main language of your site -->
+<head>
+    <meta charset="utf-8">
+    
+    <title>Cumulative risk of incidence 0-74 years (%), 2008 - 2012 in Thaïland</title>
+    
+    <!-- Enter a brief description of your page -->
+    <meta name="description" content="Cumulative risk of incidence 0-74 years (%), 2008 - 2012 in Thaïland">
+    
+    <!-- Define a viewport to mobile devices to use - telling the browser to assume that the page is as wide as the device (width=device-width) and setting the initial page zoom level to be 1 (initial-scale=1.0) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Add normalize.css which enables browsers to render all elements more consistently and in line with modern standards as it only targets particular styles that need normalizing -->
+    <link href="css/normalize.css" rel="stylesheet" media="all">
+    <!-- For legacy support (IE 6/7, Firefox < 4, and Safari < 5) use normalize-legacy.css instead -->
+    <!--<link href="css/normalize-legacy.css" rel="stylesheet" media="all">-->
+    
+    <!-- Include the site stylesheet -->
+    <link href="css/nv.d3.min.css" rel="stylesheet" media="all">
+    <link href="css/styles.css" rel="stylesheet" media="all">
+    <link href="css/font-awesome.min.css" rel="stylesheet" media="all">
+
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+    <!-- Include the HTML5 shiv print polyfill for Internet Explorer browsers 8 and below -->
+    <!--[if lt IE 9]><script src="js/html5shiv-printshiv.js" media="all"></script><![endif]-->
+
+    <!-- Include d3js -->
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v0.min.js"></script>
+    <script src="js/queue.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/nv.d3.min.js"></script>
+    <script src="js/slidebars.min.js"></script>
+
+</head>
+<body>
+
+	<div class="sb-slidebar sb-left">
+		<h2>About</h2>
+		<h3> Le passage de Lorem Ipsum standard, utilisé depuis 1500 </h3>
+		<p> Lorem ipsum dolor sit amet, <strong> consectetur adipiscing elit </strong>, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. <strong> Excepteur sint occaecat </strong> cupidatat non proident, sunt in culpa qui officia <a href="#"> deserunt mollit anim id est laborum </a>. </p>
+	</div>
+
+	<div class="sb-slidebar sb-right">
+		
+	</div>
+
+	<div id="sb-site">
+    
+	    <!-- The page header typically contains items such as your site heading, logo and possibly the main site navigation -->
+	    <!-- ARIA: the landmark role "banner" is set as it is the prime heading or internal title of the page --> 
+	    <header role="banner">
+	    
+	        <h1>Globocan in Thaïland , 2008 - 2012</h1>
+	        
+	        <!-- ARIA: the landmark role "navigation" is added here as the element contains site navigation
+	        NOTE: The <nav> element does not have to be contained within a <header> element, even though the two examples on this page are. -->
+	        <nav role="navigation">
+	        	<a href="#" id="left-button" class="sb-open-left"><i class="fa fa-question-circle"></i></a>   
+	            <!-- This can contain your site navigation either in an unordered list or even a paragraph that contains links that allow users to navigate your site -->        
+	            <a href="#" id="right-button" class="sb-open-right"><i class="fa fa-bars"></i></a>   
+	        </nav>
+	        
+	    </header>
+	    
+	    <!-- If you want to use an element as a wrapper, i.e. for styling only, then <div> is still the element to use -->
+	    <div class="wrap">
+	    
+	        <!-- The <main> element is used to enclose the main content, i.e. that which contains the central topic of a document -->
+	        <!-- ARIA: the landmark role "main" is added here as it contains the main content of the document, and it is recommended to add it to the
+	        <main> element until user agents implement the required role mapping. -->
+	        <main role="main">
+	    
+	            <!-- The <section> element can be used to enclose content that comes under a related heading. 
+	            NOTE: The <section> element can contain <article> elements and vice versa, if you think the content warrants it. -->       
+	            <section>
+
+	                <!-- The <article> element can be used to enclose content that still makes sense on its own and is therefore "reusable" -->
+	                <article id="introduction">
+	                 	<div id="map">
+	                 		<h2>Thailand map with populations</h2>
+	                 	</div>
+	                 	<div id="datas">
+	                 		<div class="graphs">
+	                 		</div>
+	                 	</div>
+	                </article>
+	               	
+	            </section>
+	            
+	        </main>
+	        
+	        <!-- An <aside> is used to enclose content that is additional to the main content but not essential. If it were removed, the meaning of the main content should not be lost, but the content of the <aside> also retains its meaning.
+	        NOTE: the aside is placed outside of the <main> element as while its content is related to the content that is within the <main>
+	        element, it is not part of it -->
+	        <!-- ARIA: the landmark role "complementary" is added here as it contains supporting information for the main content that remains meaningful even when separated from it -->
+	        <aside role="complementary">
+	        
+	            
+	        </aside>
+	        
+	    </div>
+
+	</div>
+    
+    <!-- The main page footer can contain items such as copyright and contact information. It can also contain a duplicated navigation of your site which is not usually contained within a <nav> -->
+    <!-- ARIA: the landmark role "contentinfo" is added here as it contains metadata that applies to the parent document -->
+    <footer role="contentinfo">
+    
+        <!-- Copyright information can be contained within the <small> element. The <time> element is used here to indicate that the '2015' is a date -->
+        <small>Copyright &copy; IARC <time datetime="2015-2016">2015-2016</time> | Source : Globocan 2012 | Made with love by Donsuk / Mathieu / Frédéric & <a href="http://d3js.org">d3js</a></small>
+        
+    </footer>
+    
+</body>
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		$.slidebars();
+	});
+
+	var width 	= 500;
+	var height 	= 750;
+	var scale0 = (width - 1) / 2 / Math.PI; 
+	var provinces = [9,10,19,18,45,47] ;
+	var div_datas = '#datas' ; 
+	var cumul ; 
+
+	var Populations = { 0 : 5312533.6 , 18 : 740620.4 , 19 : 409312.2 , 47 : 1695922.8 , 9 : 428134.2 , 45 : 884034 , 10 : 1154510 }
+	var Cancers = [] ; 
+
+	var projection = d3.geo.mercator()
+	    .scale(7500)
+	  	// Customize the projection to make the center of Thailand become the center of the map
+	  	.rotate([-100, -17.7])
+	  	.translate([width/1.7,height/2]);
+	  
+	var svg = d3.select("#map").append("svg")
+	      .attr("width", width)
+	      .attr("height", height);
+	var path = d3.geo.path()
+	      .projection(projection);
+	  
+	var json_file = 'general' ; // general , maskline_general
+
+	var radius = d3.scale.sqrt()
+            .domain([ 0, 100000 ])
+            .range([ 0, 15 ]);
+
+	d3.json( "data/regions.topojson", function(error, topology) {
+
+	    var g_general = svg.append("g").attr('class','general') ;
+	    g_general.selectAll("path")
+	        .data(topojson.object(topology, topology.objects.thailand ).geometries)
+	        .enter()
+	        .append("path")
+	        .attr("d", path)
+	        .attr('class',function(d){ return 'province_'+d.properties.ID_1;})
+	        .append("title").text(function(d){ return d.properties.NAME_1; })
+	    ;
+
+	    var label_regions = svg.selectAll(".place-label")
+		    .data(topojson.object(topology, topology.objects.thailand ).geometries)
+		  	.enter().append("text")
+		    .attr("class", function(d) { return "subunit-label " + d.id; })
+		    .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+		    .attr("dy", ".35em")
+		    .text(function(d) { return d.properties.NAME_1; });
+
+		svg.append("g")
+            .selectAll("circle")
+            .data( topojson.object(topology, topology.objects.thailand ).geometries )
+            .enter().append("circle")
+            .attr("class","bubble")
+            .style('fill-opacity', '0.6')
+            .style('stroke','#ffffff')
+            .style('stroke-width','.5px')
+            .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+            .attr("r",0) ; 
+
+        d3.selectAll('.bubble').transition()
+            .duration(5000)
+            .attr('r',function(d){
+                if ( $.inArray( d.properties.ID_1 , provinces ) != -1 ) return radius( Populations[d.properties.ID_1] ) ; 
+            })
+        ; 
+	});
+	
+	var datasets = { 'cumulative' : [] , 'pie' : [] } ; // by province
+	var barcharts = [] , piecharts = [] ; 
+
+	queue()
+	    .defer( d3.csv , "data/cumulative.csv" )
+	    .defer( d3.csv , "data/pie_bar.csv" )
+	    .await(function(error, cumulative , pie ) { 
+	    	
+	    	// cumulative risk 
+	    	for( var item in cumulative )
+	    	{
+	    		var cumul = cumulative[item] ; 
+
+	    		if ( datasets.cumulative[ cumul.province ] == undefined ) 
+	    			datasets.cumulative[ cumul.province ] = {
+	    				'id'		: cumul.province , 
+	    				'label' 	: cumul.province_label , 
+	    				'cancers'	: [] , 
+	    				'males'		: { 'key' : 'Males' , 'color' : '#810F7C'  , 'values' : [] } , 
+	    				'females'	: { 'key' : 'Females' , 'color' : '#F781BF'  , 'values' : [] } 
+	    			} ; 
+	    		datasets.cumulative[ cumul.province ].cancers.push({
+		    			'code' : cumul.cancer_code , 
+		    			'label' : cumul.cancer_label , 
+		    			'cum_risk1' : cumul.cum_risk1 , 
+		    			'cum_risk2' : cumul.cum_risk2 , 
+		    			'rank' : cumul.rank ,
+		    			'tot_cum' : cumul.tot_cum 
+	    			}
+	    		) ;
+
+	    		datasets.cumulative[ cumul.province ].males.values.push({
+		    			'code' : cumul.cancer_code , 
+		    			'label' : cumul.cancer_label , 
+		    			'value' : -cumul.cum_risk1
+	    			}
+	    		) ; 
+	    		datasets.cumulative[ cumul.province ].females.values.push({
+		    			'code' : cumul.cancer_code , 
+		    			'label' : cumul.cancer_label , 
+		    			'value' : cumul.cum_risk2
+	    			}
+	    		) ; 
+	    	}
+
+	    	// pie data 
+	    	for( var item in pie )
+	    	{
+	    		var line = pie[item] ; 
+	    		if ( Cancers[line.cancer_code] == undefined ) Cancers[line.cancer_code] = line.cancer_label ; 
+	    			    		
+	    		if ( datasets.pie[ line.province ] == undefined ) 
+	    			datasets.pie[ line.province ] = {
+	    				'id'		: line.province , 
+	    				'label' 	: line.province_label , 
+	    				'males'		: { 'key' : 'Males' , 'color' : '#810F7C'  , 'values' : [] , 'all' : {} , 'cumul_top' : 0} , 
+	    				'females'	: { 'key' : 'Females' , 'color' : '#F781BF'  , 'values' : [] , 'all' : {} , 'cumul_top' : 0} 
+	    			} ; 
+
+	    		var keySex = ( line.sex == 1 ) ? 'males' : 'females' ; 
+	    		var obj = {
+	    			'code' : line.cancer_code , 
+	    			'label' : line.cancer_label , 
+	    			'value' : Math.round(line.cases)
+    			}; 
+
+	    		if ( line.cancer_code == '0' )
+	    			datasets.pie[ line.province ][ keySex ].all = obj ; 
+	    		else{
+	    			datasets.pie[ line.province ][ keySex ].values.push( obj ); 
+	    			datasets.pie[ line.province ][ keySex ].cumul_top += obj.value ; 
+	    		}
+	    	}
+
+	    	// default build
+	    	// buildCumulative( datasets.cumulative ) ; 
+	    	buildPie( datasets.pie , 'males' ) ; 
+	    });
+
+	/**
+	* Build cumulative sections
+	* @param (array) datasets cumulative risks
+	* @return (bool)
+	**/ 
+	var buildCumulative = function( dataset ){	
+
+		var that = this;
+
+		// build the 7 line 
+    	for ( var item in dataset )
+    	{
+    		cumul = dataset[item] ; 
+    		if ( cumul.id == '0') continue ;
+
+    		$(div_datas).append('<div class="graph" id="cumulative_'+cumul.id+'"><h3>'+cumul.label+'</h3><svg></svg></div>') ; 
+    		
+    		cumul.males.values = cumul.males.values.slice(0,5) ; 
+    		cumul.females.values = cumul.females.values.slice(0,5) ; 
+
+    		// prepare dataset for each dual bar graph
+    		var set = [ cumul.males , cumul.females ] ; 
+    		
+    		// build the graph
+    		nv.addGraph( builNvd3Bars( '#cumulative_'+cumul.id , set) );
+    	}
+
+
+	}
+
+	/**
+	* Build cumulative sections
+	* @param (string) div of svg with #
+	* @param (array) dataset 
+	* @return (bool)
+	**/ 
+	var builNvd3Bars = function( id_div , dataset ) {
+
+	    var chart = nv.models.multiBarHorizontalChart()
+	        .x(function(d) { return d.label })
+	        .y(function(d) { return d.value })
+	        .margin({top: 200, right: 20, bottom: 50, left: 100})
+	        .showValues(false)         
+	        // .stacked(true)
+	        .showControls(false)
+	    ;        
+	    
+	    // chart.xAxis.tickFormat(function(d){ return Math.round(d); });
+	    chart.yAxis.tickFormat(function(d){
+	    	var val = Math.abs(Math.round(d));
+	    	val = val.toString();
+          	return val.replace('-','');
+          });
+
+	    d3.select( id_div +' svg')
+	        .datum(dataset)
+	        .call(chart);
+
+	    nv.utils.windowResize(chart.update);
+
+	    barcharts[ id_div ] = chart ; 
+
+	    return chart;
+	}
+
+	/**
+	* Build cumulative sections
+	* @param (array) datasets cumulative risks
+	* @return (bool)
+	**/ 
+	var buildPie = function( dataset , sex ){	
+
+		var that = this;
+
+		$(div_datas).append('<h2>Incidence for males, from 2008 - 2012</h2>') ;
+
+		// build the 7 line 
+    	for ( var item in dataset )
+    	{
+    		pie = dataset[item] ; 	
+    		if ( pie.id == '0') continue ; 
+
+    		//
+    		var top_cancers = { 'label' : 'Top cancers' , 'value' : 0 , 'color' : '#003030' } ; 
+    		var cumulate_bars = '' ; 
+    		for ( var item in pie[sex].values ) 
+    			top_cancers.value += pie[sex].values[item].value ; 
+    		var low_cancers = { 'label' : 'Others' , 'value' : pie[sex].all.value - top_cancers.value , 'color' : '#5dbaac' } ; 
+
+    		// bar percentage
+    		for ( var item in pie[sex].values ) {
+    			var percentage = Math.round( ( pie[sex].values[item].value * 100 ) / top_cancers.value ) ; 
+    			var percentage_all = Math.round( ( pie[sex].values[item].value * 100 ) / pie[sex].all.value ) ; 
+    			var alt_title = pie[sex].values[item].label + ' : ' + percentage_all + '%' ; 
+    			cumulate_bars += '<div class="cancer_'+pie[sex].values[item].code+' item_cancer tooltip" style="height:'+percentage+'%;" title="'+alt_title+'">&nbsp;</div>' ; 
+    		}
+
+    		// cumulate bars 
+    		var bars = '<div class="cumulate_bar">'+cumulate_bars+'</div>' ; 
+
+    		$(div_datas).append('<div class="graph" id="pie_'+pie.id+'"><h3>'+pie.label+'</h3><h4><i class="fa fa-'+(sex.replace('s',''))+'"></i><span>'+pie[sex].all.value+'</span> new cases</h4><svg class="pie_graph"></svg>'+bars+'</div>') ; 
+    		
+
+    		// build the graph
+    		nv.addGraph( builNvd3Pie( '#pie_'+pie.id , [ top_cancers , low_cancers ] ) );
+    	}
+
+    	// animate new cases number
+    	$('h4 > span').each(function () {
+		    $(this).prop('Counter',0).animate({
+		        Counter: $(this).text()
+		    }, {
+		        duration: 7000,
+		        easing: 'swing',
+		        step: function (now) {
+		            $(this).text(Math.ceil(now));
+		        }
+		    });
+		});
+	}
+
+	/**
+	* Build cumulative sections
+	* @param (string) div of svg with #
+	* @param (array) dataset 
+	* @return (bool)
+	**/
+	var builNvd3Pie = function( id_div , dataset ){
+		 
+	  	var chart = nv.models.pieChart()
+	    	.x(function(d) { return d.label })
+	      	.y(function(d) { return d.value })
+	      	.height(200)
+	      	.margin({top: 0, right: 0, bottom: 0, left: 0})
+	      	.showLabels(true)     // Display pie labels
+	      	.labelType("percent")
+	      	.valueFormat(d3.format(',.2f'))
+	      	.color(function(d,i){ return d.color })
+	      	.labelsOutside(false)
+	      	.labelThreshold(.05)  // Configure the minimum slice size for labels to show up
+	      	.donut(true)          // Turn on Donut mode. Makes pie chart look tasty!
+	      	.donutRatio(0.35)     // Configure how big you want the donut hole size to be.
+	    ;
+
+	    d3.select(id_div+" svg")
+	        .datum(dataset)
+	        .transition().duration(3000)
+	        .call(chart);
+
+	    piecharts[ id_div ] = chart ; 
+
+	  	return chart;
+	}
+
+
+</script>
+
+</html>

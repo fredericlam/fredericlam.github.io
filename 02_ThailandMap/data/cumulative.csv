@@ -1,0 +1,204 @@
+cancer_code,cancer_label,province,province_label,cum_risk1,cum_risk2,tot_cum,rank
+11,"Lung",0,"North",4.09,2.48,6.564622,1
+7,"Liver & bile duct",0,"North",4.44,1.69,6.129297,2
+15,"Breast",0,"North",0.06,2.94,2.996201,3
+6,"Colorectum",0,"North",1.70,1.27,2.973768,4
+16,"Cervix uteri",0,"North",0.00,2.01,2.01229,5
+26,"Non Hodgkin lymphoma",0,"North",0.70,0.48,1.177643,6
+5,"Stomach",0,"North",0.61,0.44,1.052166,7
+28,"Leukaemia",0,"North",0.45,0.35,.8032196,8
+19,"Prostate",0,"North",0.80,0.00,.7998001,9
+22,"Bladder",0,"North",0.52,0.16,.6894469,10
+1,"Lip, oral cavity",0,"North",0.35,0.29,.6450279,11
+18,"Ovary",0,"North",0.00,0.62,.621973,12
+24,"Thyroid",0,"North",0.10,0.40,.5055718,13
+23,"Brain, Nervous system",0,"North",0.28,0.23,.5037667,14
+17,"Corpus uteri",0,"North",0.00,0.50,.5021127,15
+9,"Pancreas",0,"North",0.27,0.21,.4840134,16
+2,"Nasopharynx",0,"North",0.28,0.11,.3907966,17
+21,"Kidney",0,"North",0.25,0.12,.3632848,18
+8,"Gallbladder",0,"North",0.13,0.18,.311723,19
+4,"Oesophagus",0,"North",0.26,0.04,.3036523,20
+10,"Larynx",0,"North",0.21,0.05,.2525664,21
+3,"Other pharynx",0,"North",0.17,0.05,.2218235,22
+27,"Multiple myeloma",0,"North",0.09,0.09,.1848858,23
+104,"Bone",0,"North",0.08,0.07,.1525097,24
+12,"Melanoma of skin",0,"North",0.04,0.04,.0759266,25
+20,"Testis",0,"North",0.06,0.00,.0577223,26
+25,"Hodgkin lymphoma",0,"North",0.04,0.02,.056194,27
+14,"Kaposi sarcoma",0,"North",0.01,0.00,.0127949,28
+13,"Mesothelioma",0,"North",0.00,0.00,.005129,29
+11,"Lung",1,"Lampang",4.57,2.61,7.184491,1
+7,"Liver & bile duct",1,"Lampang",4.39,1.81,6.196585,2
+6,"Colorectum",1,"Lampang",1.60,1.46,3.056358,3
+15,"Breast",1,"Lampang",0.02,2.75,2.770267,4
+16,"Cervix uteri",1,"Lampang",0.00,1.27,1.268489,5
+26,"Non Hodgkin lymphoma",1,"Lampang",0.72,0.49,1.205898,6
+5,"Stomach",1,"Lampang",0.62,0.45,1.070862,7
+28,"Leukaemia",1,"Lampang",0.48,0.40,.8864323,8
+19,"Prostate",1,"Lampang",0.83,0.00,.825911,9
+22,"Bladder",1,"Lampang",0.56,0.19,.7535759,10
+9,"Pancreas",1,"Lampang",0.29,0.33,.6242644,11
+18,"Ovary",1,"Lampang",0.00,0.54,.5437774,12
+1,"Lip, oral cavity",1,"Lampang",0.29,0.24,.5299224,13
+21,"Kidney",1,"Lampang",0.33,0.17,.5027743,14
+17,"Corpus uteri",1,"Lampang",0.00,0.45,.4496365,15
+23,"Brain, Nervous system",1,"Lampang",0.24,0.21,.4441443,16
+24,"Thyroid",1,"Lampang",0.07,0.34,.4100612,17
+8,"Gallbladder",1,"Lampang",0.17,0.23,.4014,18
+2,"Nasopharynx",1,"Lampang",0.25,0.11,.3661471,19
+10,"Larynx",1,"Lampang",0.13,0.08,.2125424,20
+4,"Oesophagus",1,"Lampang",0.18,0.02,.209374,21
+27,"Multiple myeloma",1,"Lampang",0.10,0.11,.2079439,22
+3,"Other pharynx",1,"Lampang",0.12,0.04,.1583953,23
+104,"Bone",1,"Lampang",0.03,0.04,.0710112,24
+20,"Testis",1,"Lampang",0.06,0.00,.0583198,25
+12,"Melanoma of skin",1,"Lampang",0.02,0.03,.0582892,26
+25,"Hodgkin lymphoma",1,"Lampang",0.03,0.02,.0487031,27
+13,"Mesothelioma",1,"Lampang",0.00,0.01,.0096197,28
+14,"Kaposi sarcoma",1,"Lampang",0.01,0.00,.0078137,29
+11,"Lung",2,"Lamphun",5.58,3.34,8.927498,1
+7,"Liver & bile duct",2,"Lamphun",3.76,1.12,4.882085,2
+15,"Breast",2,"Lamphun",0.07,3.48,3.552002,3
+6,"Colorectum",2,"Lamphun",1.74,1.22,2.95154,4
+16,"Cervix uteri",2,"Lamphun",0.00,2.44,2.436491,5
+26,"Non Hodgkin lymphoma",2,"Lamphun",0.82,0.48,1.301306,6
+19,"Prostate",2,"Lamphun",1.13,0.00,1.126344,7
+5,"Stomach",2,"Lamphun",0.73,0.40,1.124384,8
+23,"Brain, Nervous system",2,"Lamphun",0.54,0.45,.9893737,9
+22,"Bladder",2,"Lamphun",0.71,0.23,.9349535,10
+24,"Thyroid",2,"Lamphun",0.18,0.60,.7827349,11
+18,"Ovary",2,"Lamphun",0.00,0.78,.7821605,12
+1,"Lip, oral cavity",2,"Lamphun",0.37,0.26,.6262155,13
+9,"Pancreas",2,"Lamphun",0.33,0.30,.6239853,14
+17,"Corpus uteri",2,"Lamphun",0.00,0.59,.5934628,15
+28,"Leukaemia",2,"Lamphun",0.34,0.21,.5570204,16
+2,"Nasopharynx",2,"Lamphun",0.31,0.16,.4711989,17
+10,"Larynx",2,"Lamphun",0.38,0.05,.4301595,18
+21,"Kidney",2,"Lamphun",0.32,0.10,.4215192,19
+8,"Gallbladder",2,"Lamphun",0.11,0.22,.3376494,20
+3,"Other pharynx",2,"Lamphun",0.20,0.07,.2727228,21
+4,"Oesophagus",2,"Lamphun",0.21,0.05,.2675535,22
+104,"Bone",2,"Lamphun",0.12,0.09,.2131702,23
+27,"Multiple myeloma",2,"Lamphun",0.09,0.08,.1765549,24
+20,"Testis",2,"Lamphun",0.18,0.00,.1759192,25
+12,"Melanoma of skin",2,"Lamphun",0.02,0.06,.079129,26
+14,"Kaposi sarcoma",2,"Lamphun",0.04,0.00,.0352748,27
+25,"Hodgkin lymphoma",2,"Lamphun",0.03,0.01,.034017,28
+13,"Mesothelioma",2,"Lamphun",0.01,0.00,.0057985,29
+11,"Lung",3,"Chiangmai",4.26,2.76,7.013173,1
+7,"Liver & bile duct",3,"Chiangmai",3.64,1.35,4.989169,2
+6,"Colorectum",3,"Chiangmai",1.75,1.27,3.025885,3
+15,"Breast",3,"Chiangmai",0.07,2.95,3.019943,4
+16,"Cervix uteri",3,"Chiangmai",0.00,2.04,2.040635,5
+26,"Non Hodgkin lymphoma",3,"Chiangmai",0.73,0.52,1.253341,6
+5,"Stomach",3,"Chiangmai",0.67,0.43,1.104385,7
+19,"Prostate",3,"Chiangmai",0.92,0.00,.9166514,8
+22,"Bladder",3,"Chiangmai",0.58,0.21,.7942691,9
+28,"Leukaemia",3,"Chiangmai",0.38,0.30,.6836457,10
+18,"Ovary",3,"Chiangmai",0.00,0.58,.5848455,11
+1,"Lip, oral cavity",3,"Chiangmai",0.36,0.20,.5548754,12
+17,"Corpus uteri",3,"Chiangmai",0.00,0.53,.5339934,13
+9,"Pancreas",3,"Chiangmai",0.33,0.17,.5003596,14
+21,"Kidney",3,"Chiangmai",0.31,0.14,.4459519,15
+24,"Thyroid",3,"Chiangmai",0.10,0.34,.4384367,16
+23,"Brain, Nervous system",3,"Chiangmai",0.25,0.15,.4041095,17
+2,"Nasopharynx",3,"Chiangmai",0.27,0.12,.3946072,18
+8,"Gallbladder",3,"Chiangmai",0.12,0.19,.3140529,19
+10,"Larynx",3,"Chiangmai",0.22,0.03,.2583279,20
+4,"Oesophagus",3,"Chiangmai",0.19,0.06,.2524843,21
+27,"Multiple myeloma",3,"Chiangmai",0.12,0.11,.227271,22
+3,"Other pharynx",3,"Chiangmai",0.16,0.03,.1898542,23
+104,"Bone",3,"Chiangmai",0.06,0.05,.1111675,24
+12,"Melanoma of skin",3,"Chiangmai",0.06,0.04,.1016356,25
+25,"Hodgkin lymphoma",3,"Chiangmai",0.04,0.02,.0574724,26
+20,"Testis",3,"Chiangmai",0.03,0.00,.0349115,27
+14,"Kaposi sarcoma",3,"Chiangmai",0.01,0.00,.0138696,28
+13,"Mesothelioma",3,"Chiangmai",0.01,0.00,.0056518,29
+7,"Liver & bile duct",4,"Phrae",9.16,3.39,12.54473,1
+11,"Lung",4,"Phrae",4.47,1.98,6.451434,2
+15,"Breast",4,"Phrae",0.06,3.45,3.507755,3
+6,"Colorectum",4,"Phrae",1.83,1.07,2.900083,4
+16,"Cervix uteri",4,"Phrae",0.00,2.16,2.159235,5
+26,"Non Hodgkin lymphoma",4,"Phrae",0.84,0.41,1.251881,6
+28,"Leukaemia",4,"Phrae",0.53,0.35,.8797392,7
+1,"Lip, oral cavity",4,"Phrae",0.37,0.38,.7578498,8
+5,"Stomach",4,"Phrae",0.42,0.33,.7473556,9
+19,"Prostate",4,"Phrae",0.71,0.00,.7094534,10
+22,"Bladder",4,"Phrae",0.52,0.08,.6036438,11
+23,"Brain, Nervous system",4,"Phrae",0.29,0.26,.5538661,12
+17,"Corpus uteri",4,"Phrae",0.00,0.55,.5537884,13
+18,"Ovary",4,"Phrae",0.00,0.53,.5266,14
+24,"Thyroid",4,"Phrae",0.13,0.37,.4998199,15
+8,"Gallbladder",4,"Phrae",0.27,0.23,.4979192,16
+2,"Nasopharynx",4,"Phrae",0.33,0.08,.4037523,17
+21,"Kidney",4,"Phrae",0.29,0.06,.3542197,18
+9,"Pancreas",4,"Phrae",0.18,0.13,.3166779,19
+4,"Oesophagus",4,"Phrae",0.25,0.01,.2697528,20
+104,"Bone",4,"Phrae",0.16,0.11,.2677179,21
+3,"Other pharynx",4,"Phrae",0.11,0.09,.1960537,22
+10,"Larynx",4,"Phrae",0.15,0.03,.1840231,23
+27,"Multiple myeloma",4,"Phrae",0.07,0.05,.1262057,24
+25,"Hodgkin lymphoma",4,"Phrae",0.05,0.02,.0689626,25
+20,"Testis",4,"Phrae",0.04,0.00,.0404325,26
+12,"Melanoma of skin",4,"Phrae",0.01,0.01,.0126155,27
+14,"Kaposi sarcoma",4,"Phrae",0.01,0.00,.0110849,28
+13,"Mesothelioma",4,"Phrae",0.00,0.00,0,29
+7,"Liver & bile duct",5,"Phitsanulok",2.77,0.98,3.743568,1
+11,"Lung",5,"Phitsanulok",2.32,0.98,3.294847,2
+15,"Breast",5,"Phitsanulok",0.07,2.87,2.945071,3
+6,"Colorectum",5,"Phitsanulok",1.51,1.15,2.654028,4
+16,"Cervix uteri",5,"Phitsanulok",0.00,1.36,1.363258,5
+1,"Lip, oral cavity",5,"Phitsanulok",0.55,0.59,1.145021,6
+26,"Non Hodgkin lymphoma",5,"Phitsanulok",0.60,0.45,1.044612,7
+28,"Leukaemia",5,"Phitsanulok",0.57,0.45,1.019051,8
+19,"Prostate",5,"Phitsanulok",0.74,0.00,.744694,9
+4,"Oesophagus",5,"Phitsanulok",0.63,0.07,.701789,10
+18,"Ovary",5,"Phitsanulok",0.00,0.67,.6667405,11
+5,"Stomach",5,"Phitsanulok",0.34,0.27,.6094673,12
+22,"Bladder",5,"Phitsanulok",0.45,0.08,.5251456,13
+24,"Thyroid",5,"Phitsanulok",0.07,0.41,.4821089,14
+23,"Brain, Nervous system",5,"Phitsanulok",0.22,0.24,.4527584,15
+17,"Corpus uteri",5,"Phitsanulok",0.00,0.40,.4013416,16
+3,"Other pharynx",5,"Phitsanulok",0.35,0.04,.3887522,17
+9,"Pancreas",5,"Phitsanulok",0.20,0.19,.3855874,18
+10,"Larynx",5,"Phitsanulok",0.24,0.03,.2639351,19
+2,"Nasopharynx",5,"Phitsanulok",0.17,0.07,.2379329,20
+21,"Kidney",5,"Phitsanulok",0.12,0.10,.2238304,21
+27,"Multiple myeloma",5,"Phitsanulok",0.09,0.13,.2195662,22
+104,"Bone",5,"Phitsanulok",0.12,0.07,.184509,23
+8,"Gallbladder",5,"Phitsanulok",0.05,0.09,.1444412,24
+12,"Melanoma of skin",5,"Phitsanulok",0.02,0.06,.0803198,25
+25,"Hodgkin lymphoma",5,"Phitsanulok",0.03,0.03,.0592937,26
+20,"Testis",5,"Phitsanulok",0.05,0.00,.0493391,27
+13,"Mesothelioma",5,"Phitsanulok",0.00,0.00,.0029466,28
+14,"Kaposi sarcoma",5,"Phitsanulok",0.00,0.00,0,29
+11,"Lung",6,"Chiangrai",4.13,3.11,7.243293,1
+7,"Liver & bile duct",6,"Chiangrai",4.93,1.98,6.912628,2
+6,"Colorectum",6,"Chiangrai",1.80,1.35,3.151806,3
+15,"Breast",6,"Chiangrai",0.05,2.71,2.755557,4
+16,"Cervix uteri",6,"Chiangrai",0.00,2.74,2.739547,5
+5,"Stomach",6,"Chiangrai",0.79,0.64,1.437905,6
+26,"Non Hodgkin lymphoma",6,"Chiangrai",0.63,0.46,1.082563,7
+28,"Leukaemia",6,"Chiangrai",0.43,0.37,.803414,8
+18,"Ovary",6,"Chiangrai",0.00,0.67,.6732753,9
+24,"Thyroid",6,"Chiangrai",0.12,0.47,.5889637,10
+19,"Prostate",6,"Chiangrai",0.59,0.00,.5873617,11
+22,"Bladder",6,"Chiangrai",0.41,0.17,.5802847,12
+23,"Brain, Nervous system",6,"Chiangrai",0.30,0.25,.5469054,13
+17,"Corpus uteri",6,"Chiangrai",0.00,0.50,.5019433,14
+2,"Nasopharynx",6,"Chiangrai",0.36,0.13,.4936939,15
+9,"Pancreas",6,"Chiangrai",0.26,0.20,.4609206,16
+1,"Lip, oral cavity",6,"Chiangrai",0.22,0.22,.438638,17
+8,"Gallbladder",6,"Chiangrai",0.11,0.16,.271393,18
+21,"Kidney",6,"Chiangrai",0.14,0.10,.2385006,19
+10,"Larynx",6,"Chiangrai",0.17,0.06,.2285146,20
+3,"Other pharynx",6,"Chiangrai",0.13,0.07,.1977164,21
+104,"Bone",6,"Chiangrai",0.08,0.10,.1825886,22
+4,"Oesophagus",6,"Chiangrai",0.14,0.03,.1737673,23
+27,"Multiple myeloma",6,"Chiangrai",0.06,0.05,.1175703,24
+12,"Melanoma of skin",6,"Chiangrai",0.05,0.03,.077826,25
+25,"Hodgkin lymphoma",6,"Chiangrai",0.04,0.02,.0556233,26
+20,"Testis",6,"Chiangrai",0.05,0.00,.0533262,27
+14,"Kaposi sarcoma",6,"Chiangrai",0.00,0.01,.0142683,28
+13,"Mesothelioma",6,"Chiangrai",0.00,0.00,.0042676,29

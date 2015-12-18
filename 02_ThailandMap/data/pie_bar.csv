@@ -1,0 +1,85 @@
+sex,cancer_code,cancer_label,province,province_label,cases,rk_cases
+1,0,"All cancer but C44",0,"North",27680,1
+1,7,"Liver & bile duct",0,"North",7127,2
+1,11,"Lung",0,"North",6057,3
+1,6,"Colorectum",0,"North",2663,4
+1,19,"Prostate",0,"North",1294,5
+1,26,"Non Hodgkin lymphoma",0,"North",1129,6
+2,0,"All cancer but C44",0,"North",28720,1
+2,15,"Breast",0,"North",5527,2
+2,11,"Lung",0,"North",4053,3
+2,16,"Cervix uteri",0,"North",3826,4
+2,7,"Liver & bile duct",0,"North",2962,5
+2,6,"Colorectum",0,"North",2248,6
+1,0,"All cancer but C44",1,"Lampang",4456,1
+1,7,"Liver & bile duct",1,"Lampang",1141,2
+1,11,"Lung",1,"Lampang",1114,3
+1,6,"Colorectum",1,"Lampang",406,4
+1,19,"Prostate",1,"Lampang",211,5
+1,26,"Non Hodgkin lymphoma",1,"Lampang",177,6
+2,0,"All cancer but C44",1,"Lampang",4174,1
+2,15,"Breast",1,"Lampang",787,2
+2,11,"Lung",1,"Lampang",666,3
+2,7,"Liver & bile duct",1,"Lampang",502,4
+2,6,"Colorectum",1,"Lampang",392,5
+2,16,"Cervix uteri",1,"Lampang",361,6
+1,0,"All cancer but C44",2,"Lamphun",2480,1
+1,11,"Lung",2,"Lamphun",687,2
+1,7,"Liver & bile duct",2,"Lamphun",473,3
+1,6,"Colorectum",2,"Lamphun",217,4
+1,19,"Prostate",2,"Lamphun",143,5
+1,26,"Non Hodgkin lymphoma",2,"Lamphun",99,6
+2,0,"All cancer but C44",2,"Lamphun",2595,1
+2,15,"Breast",2,"Lamphun",508,2
+2,11,"Lung",2,"Lamphun",424,3
+2,16,"Cervix uteri",2,"Lamphun",384,4
+2,6,"Colorectum",2,"Lamphun",191,5
+2,7,"Liver & bile duct",2,"Lamphun",175,6
+1,0,"All cancer but C44",3,"Chiangmai",7763,1
+1,11,"Lung",3,"Chiangmai",1785,2
+1,7,"Liver & bile duct",3,"Chiangmai",1742,3
+1,6,"Colorectum",3,"Chiangmai",806,4
+1,19,"Prostate",3,"Chiangmai",422,5
+1,26,"Non Hodgkin lymphoma",3,"Chiangmai",355,6
+2,0,"All cancer but C44",3,"Chiangmai",8357,1
+2,15,"Breast",3,"Chiangmai",1685,2
+2,11,"Lung",3,"Chiangmai",1315,3
+2,16,"Cervix uteri",3,"Chiangmai",1194,4
+2,7,"Liver & bile duct",3,"Chiangmai",722,5
+2,6,"Colorectum",3,"Chiangmai",689,6
+1,0,"All cancer but C44",4,"Phrae",3367,1
+1,7,"Liver & bile duct",4,"Phrae",1344,2
+1,11,"Lung",4,"Phrae",613,3
+1,6,"Colorectum",4,"Phrae",251,4
+1,26,"Non Hodgkin lymphoma",4,"Phrae",113,5
+1,22,"Bladder",4,"Phrae",87,6
+2,0,"All cancer but C44",4,"Phrae",2945,1
+2,15,"Breast",4,"Phrae",580,2
+2,7,"Liver & bile duct",4,"Phrae",557,3
+2,16,"Cervix uteri",4,"Phrae",375,4
+2,11,"Lung",4,"Phrae",339,5
+2,6,"Colorectum",4,"Phrae",176,6
+1,0,"All cancer but C44",5,"Phitsanulok",3551,1
+1,7,"Liver & bile duct",5,"Phitsanulok",716,2
+1,11,"Lung",5,"Phitsanulok",581,3
+1,6,"Colorectum",5,"Phitsanulok",350,4
+1,19,"Prostate",5,"Phitsanulok",213,5
+1,26,"Non Hodgkin lymphoma",5,"Phitsanulok",162,6
+2,0,"All cancer but C44",5,"Phitsanulok",3747,1
+2,15,"Breast",5,"Phitsanulok",842,2
+2,16,"Cervix uteri",5,"Phitsanulok",404,3
+2,6,"Colorectum",5,"Phitsanulok",315,4
+2,11,"Lung",5,"Phitsanulok",271,5
+2,7,"Liver & bile duct",5,"Phitsanulok",255,6
+1,0,"All cancer but C44",6,"Chiangrai",6063,1
+1,7,"Liver & bile duct",6,"Chiangrai",1711,2
+1,11,"Lung",6,"Chiangrai",1277,3
+1,6,"Colorectum",6,"Chiangrai",633,4
+1,5,"Stomach",6,"Chiangrai",250,5
+1,19,"Prostate",6,"Chiangrai",227,6
+2,0,"All cancer but C44",6,"Chiangrai",6902,1
+2,15,"Breast",6,"Chiangrai",1125,2
+2,16,"Cervix uteri",6,"Chiangrai",1108,3
+2,11,"Lung",6,"Chiangrai",1038,4
+2,7,"Liver & bile duct",6,"Chiangrai",751,5
+2,6,"Colorectum",6,"Chiangrai",485,6
