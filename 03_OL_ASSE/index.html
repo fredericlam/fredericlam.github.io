@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Set this to the main language of your site -->
+<head>
+    <meta charset="utf-8">
+    
+    <title>OL - ASSE / Ligue 1 2015-2016</title>
+    
+    <!-- Enter a brief description of your page -->
+    <meta name="description" content="Derby OL - ASSE">
+    
+    <!-- Define a viewport to mobile devices to use - telling the browser to assume that the page is as wide as the device (width=device-width) and setting the initial page zoom level to be 1 (initial-scale=1.0) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Add normalize.css which enables browsers to render all elements more consistently and in line with modern standards as it only targets particular styles that need normalizing -->
+    <link href="css/normalize.css" rel="stylesheet" media="all">
+    <!-- For legacy support (IE 6/7, Firefox < 4, and Safari < 5) use normalize-legacy.css instead -->
+    <!--<link href="css/normalize-legacy.css" rel="stylesheet" media="all">-->
+    
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+
+    <!-- Include the site stylesheet -->
+    <link href="css/styles.css" rel="stylesheet" media="all">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+    <!-- Include the HTML5 shiv print polyfill for Internet Explorer browsers 8 and below -->
+    <!--[if lt IE 9]><script src="js/html5shiv-printshiv.js" media="all"></script><![endif]-->
+</head>
+<body>
+
+    <!-- The page header typically contains items such as your site heading, logo and possibly the main site navigation -->
+    <!-- ARIA: the landmark role "banner" is set as it is the prime heading or internal title of the page --> 
+    <header role="banner">
+    
+        <h1>Influence et relations entre chaque joueur (en nombres de passes) </h1>
+        
+        <!-- ARIA: the landmark role "navigation" is added here as the element contains site navigation
+        NOTE: The <nav> element does not have to be contained within a <header> element, even though the two examples on this page are. -->
+        <nav role="navigation">
+            <!-- This can contain your site navigation either in an unordered list or even a paragraph that contains links that allow users to navigate your site -->           
+        </nav>
+        
+    </header>
+    
+    <!-- If you want to use an element as a wrapper, i.e. for styling only, then <div> is still the element to use -->
+    <div class="wrap">
+    
+        <!-- The <main> element is used to enclose the main content, i.e. that which contains the central topic of a document -->
+        <!-- ARIA: the landmark role "main" is added here as it contains the main content of the document, and it is recommended to add it to the
+        <main> element until user agents implement the required role mapping. -->
+        <main role="main">
+    
+            <!-- The <section> element can be used to enclose content that comes under a related heading. 
+            NOTE: The <section> element can contain <article> elements and vice versa, if you think the content warrants it. -->        
+            <section>
+            
+                <!-- This is the section's header. It contains the heading and navigation links for within the section -->
+                <header>
+                    <h2></h2>
+                    
+                </header>
+                
+                <article id="head">
+                    
+                    <h2>
+                        <img src="img/ol.png" title="Olympique lyonnais" align="left">
+                        OL : <span id="total_ol"></span> ballons joués <br/>
+                    </h2>
+                    <h2>
+                        <img src="img/asse.png" title="ASSE" align="left">
+                        ASSE : <span id="total_asse"></span> ballons joués <br/>
+                    </h2>
+
+                </article>
+
+                <!-- The <article> element can be used to enclose content that still makes sense on its own and is therefore "reusable" -->
+                <article id="introduction">
+                    
+                    <div id="viz-ol" class="viz"></div>
+                    <div id="viz-asse" class="viz"></div>
+
+                </article>
+
+            </section>
+            
+        </main>
+        
+        <!-- An <aside> is used to enclose content that is additional to the main content but not essential. If it were removed, the meaning of the main content should not be lost, but the content of the <aside> also retains its meaning.
+        NOTE: the aside is placed outside of the <main> element as while its content is related to the content that is within the <main>
+        element, it is not part of it -->
+        <!-- ARIA: the landmark role "complementary" is added here as it contains supporting information for the main content that remains meaningful even when separated from it -->
+        <aside role="complementary">
+            
+        </aside>
+        
+    </div>
+    
+    <!-- The main page footer can contain items such as copyright and contact information. It can also contain a duplicated navigation of your site which is not usually contained within a <nav> -->
+    <!-- ARIA: the landmark role "contentinfo" is added here as it contains metadata that applies to the parent document -->
+    <footer role="contentinfo">
+    
+        <!-- Copyright information can be contained within the <small> element. The <time> element is used here to indicate that the '2015' is a date -->
+        <small>Copyright &copy; <time datetime="2015">2015</time></small>
+        
+    </footer>
+    
+</body>
+</html>
+
+<script type="text/javascript">
+
+    var src_players = {
+        'lopes' : {
+            'name' : 'Anthony Lopes' , 
+            'number' : 16 ,
+            'team' : 'ol'
+        },
+        'rafael' : {
+            'name' : 'Rafael' , 
+            'number' : 20 ,
+            'team' : 'ol'
+        }, 
+        'umtiti' : {
+            'name' : 'Samuel umtiti' ,
+            'number' : 23,
+            'team' : 'ol'
+        },  
+        'jallet' : {
+            'name' : 'Jeremie Jallet' ,
+            'number' : 19,
+            'team' : 'ol'
+        },
+        'mapou' : {
+            'name' : 'Mapou Yanga Mbiwa' ,
+            'number' : 2,
+            'team' : 'ol'
+        }, 
+        'morel' : {
+            'name' : 'Jérémie Morel' ,
+            'number' : 15,
+            'team' : 'ol'
+        }, 
+        'tolisso' : {
+            'name' : 'Corentin Tolisso' ,
+            'number' : 8,
+            'team' : 'ol'
+        },
+        'ferri' : {
+            'name' : 'Jordan Ferri' ,
+            'number' : 12,
+            'team' : 'ol'
+        }, 
+        'gonalons' : {
+            'name' : 'Maxime Gonalons' ,
+            'number' : 21,
+            'team' : 'ol'
+        }, 
+        'darder' : {
+            'name' : 'Sergi Darder' ,
+            'number' : 14,
+            'team' : 'ol'
+        }, 
+        'valbuena' : {
+            'name' : 'Mathieu Valbuena' ,
+            'number' : 19,
+            'team' : 'ol'
+        }, 
+        'lacazette' : {
+            'name' : 'Alexandre Lacazette' ,
+            'number' : 10,
+            'team' : 'ol'
+        }, 
+        'beauvue' : {
+            'name' : 'Claudio Beauvue' ,
+            'number' : 9,
+            'team' : 'ol'
+        },
+        'ruffier' : {
+            'name' : 'Stephane Ruffier' , 
+            'number' : 1 ,
+            'team' : 'asse'
+        },
+        'clerc' : {
+            'name' : 'François Clerc' , 
+            'number' : 29 ,
+            'team' : 'asse'
+        }, 
+        'perrin' : {
+            'name' : 'Loïc Perrin' ,
+            'number' : 24,
+            'team' : 'asse'
+        }, 
+        'pogba' : {
+            'name' : 'Florent Pogba' ,
+            'number' : 19 ,
+            'team' : 'asse'
+        }, 
+        'assou' : {
+            'name' : 'Benoit Assou-Ekotto' ,
+            'number' : 8,
+            'team' : 'asse'
+        }, 
+        'polomat' : {
+            'name' : 'Polomat' ,
+            'number' : 2,
+            'team' : 'asse'
+        }, 
+        'clement' : {
+            'name' : 'Jeremie Clément' ,
+            'number' : 6,
+            'team' : 'asse'
+        }, 
+        'pajot' : {
+            'name' : 'Vincent Pajot' ,
+            'number' : 15,
+            'team' : 'asse'
+        }, 
+        'lemoine' : {
+            'name' : 'Fabien Lemoine' ,
+            'number' : 21,
+            'team' : 'asse'
+        }, 
+        'eysseric' : {
+            'name' : 'Vincent Eysseric' ,
+            'number' : 7,
+            'team' : 'asse'
+        }, 
+        'hamouma' : {
+            'name' : 'Romain Hamouma' ,
+            'number' : 10,
+            'team' : 'asse'
+        }, 
+        'roux' : {
+            'name' : 'Nolan Roux' ,
+            'number' : 9,
+            'team' : 'asse'
+        },
+        'beric' : {
+            'name' : 'Robert Beric' ,
+            'number' : 27,
+            'team' : 'asse'
+        }
+    } ; 
+
+    var clubs = {
+        'ol' : { 'num_color' : 'red' } , 
+        'asse' : { 'num_color' : '#ffffff' }
+    }
+
+    var w_width     = $(window).width() ; 
+    var w_height    = $(window).height() - 100  ; 
+
+    var width = (w_width / 2) - 50  , height = (w_height / 2) + 150 ;
+
+    var color = d3.scale.category20();
+
+    var force = d3.layout.force()
+        .charge(-150)
+        .linkDistance(200)
+        .size([width, height]);
+
+    var force_asse = d3.layout.force()
+        .charge(-150)
+        .linkDistance(200)
+        .size([width, height]);
+
+    var svg_ol = d3.select("body #viz-ol").append("svg")
+        .attr("width", width )
+        .attr("height", height );
+
+    var total_asse = 0 , total_ol = 0 ; 
+
+    d3.json("data/ol.json", function(error, graph) {
+
+        if (error) throw error;
+
+        computeData(graph.nodes,'ol') ; 
+
+        force
+            .nodes(graph.nodes)
+            .links(graph.links)
+            .start();
+
+        var link = svg_ol.selectAll(".link")
+            .data(graph.links)
+            .enter().append("line")
+            .attr("class", function(d){
+                var team = src_players[d.source.name].team ;
+                return "link "+team ;
+            })
+            // .style("stroke-width", function(d) { return Math.abs(d.value); })
+        ;
+
+        var node = svg_ol.selectAll(".node")
+            .data(graph.nodes)
+            .enter().append("g")
+            .attr("class","node")
+            .call(force.drag);
+
+        var circles = node.append('circle')
+            .attr('class',function(d){ var color = src_players[d.name].team ; return color ; })
+            .attr("r", function(d){ total_ol += d.passes ; $('span#total_ol').text(total_ol); return Math.sqrt(d.passes) * 5 ; })
+            .on('mouseover',function(d){
+                hoverPlayer(d);
+            }); 
+
+        /*node.append("title")
+            .text(function(d) { return d.name; });*/
+        
+        node.append("text")
+            .attr("dx", 0)
+            .attr("dy", ".35em")
+            .attr("class","number")
+            .attr('text-anchor','middle')
+            .style('fill',function(d){
+                return clubs[src_players[d.name].team].num_color ; 
+            })
+            .text(function(d){
+                // return d.passes ; 
+                return src_players[d.name].number ; 
+            })
+
+        force.on("tick", function() {
+
+            link.attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; });
+
+            node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        });
+
+    });
+    
+    var svg_asse = d3.select("body #viz-asse").append("svg")
+        .attr("width", width )
+        .attr("height", height );
+
+    
+    d3.json("data/asse.json", function(error, graph) {
+
+        if (error) throw error;
+
+        computeData(graph.nodes,'asse') ; 
+
+        force_asse
+            .nodes(graph.nodes)
+            .links(graph.links)
+            .start();
+
+        var link_asse = svg_asse.selectAll(".link")
+            .data(graph.links)
+            .enter().append("line")
+            .attr("class", function(d){
+                var team = src_players[d.source.name].team ;
+                return "link "+team ;
+            })
+        ;
+
+        var node_asse = svg_asse.selectAll(".node")
+            .data(graph.nodes)
+            .enter().append("g")
+            .attr("class","node")
+            .call(force_asse.drag);
+
+        var circles_asse = node_asse.append('circle')
+            .attr('class',function(d){ var color = src_players[d.name].team ; return color ; })
+            .attr("r", function(d){ total_asse += d.passes ; $('span#total_asse').text(total_asse); return Math.sqrt(d.passes) * 5 ; })
+             .on('mouseover',function(d){
+                hoverPlayer(d);
+            }); 
+        
+        node_asse.append("text")
+            .attr("dx", 0)
+            .attr("dy", ".35em")
+            .attr("class","number")
+            .attr('text-anchor','middle')
+            .style('fill',function(d){
+                return clubs[src_players[d.name].team].num_color ; 
+            })
+            .text(function(d){
+                // return d.passes ; 
+                return src_players[d.name].number ; 
+            })
+
+        force_asse.on("tick", function() {
+
+            link_asse.attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; });
+
+            node_asse.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        });
+    });
+    
+    // hover data player
+    var hoverPlayer = function(d){
+
+    }
+
+    var computeData = function( nodes , club){
+        return ; 
+        //console.log( nodes ) ; 
+        for( var item in nodes){
+            var j = nodes[item]  ; 
+            $('#data-'+club+' table').append( '<tr><td>'+src_players[j.name].number+'</td><td>'+src_players[j.name].name+'</td><td>'+j.passes+'</td></tr>' ) ; 
+        }
+    }
+    
+</script>
