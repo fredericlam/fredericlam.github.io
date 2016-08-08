@@ -6,13 +6,17 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title></title>
+        <title>Champions cyclistes - #lesdecodeurs </title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="bower_components/c3/c3.min.css">
+
         <link rel="stylesheet" href="css/normalize.min.css">
         <link rel="stylesheet" href="css/main.css">
+
 
         <link href='https://fonts.googleapis.com/css?family=Cabin:400,600,700,500' rel='stylesheet' type='text/css'>
         
@@ -25,57 +29,123 @@
 
         <div class="header-container">
             <header class="wrapper clearfix">
-                <h1 class="title"><img src="img/logo.png" title="Tour de france">Champions cyclistes</h1>
+                <h1 class="title">
+                    <a href="/" class="circle"><img src="img/logo.png" title="Tour de france"></a>
+                    Champions cyclistes
+                </h1>
+                <ul class="social">
+                    <li><a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
+                </ul>
             </header>
         </div>
 
         <div class="main-container">
             <div class="main wrapper clearfix">
 
-                <article>
-                    <header>
-                        <h1>Découvrez les vainqueurs de l'histoire du Tour</h1>
-                        <p>Selectionnez votre date de naissance à partir de cette liste afin de découvrir les différents vainqueurs de chaque prix cette année là. </p>
-                    </header>
+                <header>
+                    <h1>Découvrez les vainqueurs de l'histoire du Tour</h1>
+                    <p class="center">Selectionnez <select name="year"><option value="">votre année de naissance</option></select> afin de découvrir les différents vainqueurs. </p>
+                </header>
+                
+                <article class="viz">
+                    
+                    <section>
+                        <h2>Résultats</h2>
+                        
+                        <div class="row">
+                            <div class="cycler">
+                                <h3>Top grimpeur</h3>
+                                <img src="img/red.png" title="Meilleur grimpeur">
+                                <h4 id="climber">Roberto contador</h4>
+                            </div>
+                            <div class="cycler">
+                                <h3>Vainqueur</h3>
+                                <img src="img/yellow.png" title="Vainqueur du tour">
+                                <h4 id="winner">Roberto contador</h4>
+                            </div>
+                            <div class="cycler">
+                                <h3>Top sprinter</h3>
+                                <img src="img/green.png" title="Meilleur sprinter">
+                                <h4 id="sprinter">Roberto contador</h4>
+                            </div>
+                            <div class="cycler">
+                                <h3>Meilleur jeune</h3>
+                                <img src="img/blue.png" title="Meilleur jeune">
+                                <h4 id="youth">Roberto contador</h4>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Statistiques</h2>
+                        <div class="row">
+                            <div class="dataviz">
+                                <h3>Nombres d'étapes</h3>
+                                <div class="step">
+                                    <span class="figure"> 12 </span> <ul>
+                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
+                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
+                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
+                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
+                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
+                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
+                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
+                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
+                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
+                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
+                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
+                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="dataviz">
+                                <h3>Vitesse moyenne</h3>
+                                <div id="speed"></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    
+
                 </article>
 
-                <section>
-                    <h2>Résultats</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec. Curabitur posuere enim eget turpis feugiat tempor. Etiam ullamcorper lorem dapibus velit suscipit ultrices. Proin in est sed erat facilisis pharetra.</p>
-                </section>
-                <section>
-                    <h2>Informations</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec. Curabitur posuere enim eget turpis feugiat tempor. Etiam ullamcorper lorem dapibus velit suscipit ultrices. Proin in est sed erat facilisis pharetra.</p>
-                </section>
-                <footer>
-                    <h3>A propos</h3>
-                    <p>Cette page a été créé à partir d'outil open source : bower, initializr, et est hebergé sur github.</p>
-                    <p>Les données proviennent de wikipédia.</p>
-                    <p>copyright images : @https://dribbble.com/rfaura https://dribbble.com/shots/976453-Tour-de-France-icons-Bloomberg-Markets</p>
-                </footer>
+                <aside>
+                    <h2> Distance </h2>
+                    <p><span class="figure"> 2091 </span>m</p>
+                    <div id="distance">
+
+                    </div>
+                </aside>
+
+
+                <article class="about">
+                    
+                    <footer>
+                        <h2>A propos</h2>
+                        <p> <i class="fa fa-github" aria-hidden="true"></i> <strong>:: Coding tools</strong> : <a href="https://bower.io/" target="_blank">bower</a>, html + js + css & hebergé sur <a href="https://github.com/fredericlam/fredericlam.github.io/tree/master/04_ChampionsCyclistes" target="_blank">github</a> .</p>
+                        <p> <i class="fa fa-html5" aria-hidden="true"></i> <strong>:: Design/UX</strong> : <a href="http://www.initializr.com/" target="_blank">initializr</a> .</p>
+                        <p><i class="fa fa-database" aria-hidden="true"></i> <strong>:: Data</strong> : <a href="https://fr.wikipedia.org/wiki/Palmar%C3%A8s_du_Tour_de_France">wikipedia</a> (les données ont été extraites depuis la table html, vers un format json via la library <a href="http://lightswitch05.github.io/table-to-json/" target="_blank">Table-to-json</a>. Un traitement a été effectué sur des champs tel que année/classement) .</p>
+                        <p><i class="fa fa-picture-o" aria-hidden="true"></i><strong>:: Materiel(s)</strong> : icons from <a href="https://twitter.com/rfaura_" target="_blank"> @rfaura_ </a>, logos/colors from <a href="http://www.letour.fr/fr/" target="_blank">Tour de france</a> </p>
+                    </footer>
+
+                </article>
 
             </div> <!-- #main -->
         </div> <!-- #main-container -->
 
         <div class="footer-container">
             <footer class="wrapper">
-                <h3>Made with love by @fredericlam : Assistant Informatics Web at @iarc / @who</h3>
+                <p class="center">2016 - Made with love by <a href="https://twitter.com/fredericlam" target="_blank">@fredericlam </a> : Assistant Informatics Web at <a href="http://www.iarc.fr" target="_blank">@iarc</a> / <a href="http://www.who.int/" target="_blank">@who</a></p>
             </footer>
         </div>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/d3/d3.min.js"></script>
+        <script src="bower_components/c3/c3.min.js"></script>
         <script src="js/main.js"></script>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
-        </script>
     </body>
 </html>

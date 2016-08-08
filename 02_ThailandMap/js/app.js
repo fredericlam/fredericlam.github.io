@@ -26,9 +26,7 @@
 	var radius = d3.scale.sqrt()
             .domain([ 0, 100000 ])
             .range([ 0, 15 ]);
-
-
-
+    
 	d3.json( "data/regions.topojson", function(error, topology) {
 
 	    var g_general = svg.append("g").attr('class','general') ;
