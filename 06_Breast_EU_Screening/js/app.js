@@ -28,14 +28,15 @@
     var key_val = 'BREAST' ; 
 
     var color_no_data = '#cccccc' ; 
-    var color_no_programme = '#ffffff' ; 
+    var color_no_programme = '#40403d' ; 
+    var color_extra_eu = '#ffffff' ; 
 
     var cancer = 'breast' ; 
 
     var data ; 
 
     // global 
-    var europe , data_breast , data_colon , data_cervix , sweden , uk , belgium , portugal ;
+    var europe , data_breast , data_colon , data_cervix , sweden , uk , belgium , portugal, italy ;
 
     var range_colors ; 
 
@@ -75,7 +76,7 @@
         11 : { 'code' : 'E' , 'name' : 'Östergötland County', 'region' : 3 } , 
         12 : { 'code' : 'M' , 'name' : 'Skåne County', 'region' : 5 } , 
         13 : { 'code' : 'D' , 'name' : 'Södermanland County', 'region' : 1 } , 
-        14 : { 'code' : 'AB' , 'name' : 'Stockholm County' , 'region' : 3 } , 
+        14 : { 'code' : 'AB' , 'name' : 'Stockholm County' , 'region' : 2 } , 
         15 : { 'code' : 'C' , 'name' : 'Uppsala County', 'region' : 1 } , 
         16 : { 'code' : 'S' , 'name' : 'Värmlands County', 'region' : 1 } ,  
         17 : { 'code' : 'AC' , 'name' : 'Västerbotten County', 'region' : 0 } , 
@@ -84,7 +85,30 @@
         20 : { 'code' : 'O' , 'name' : 'Västra Götaland County', 'region' : 4 } 
     } ; 
 
-    var g_general , g_sweden , g_portugal , g_belgium , g_uk, g_data ; 
+    var italy_regions = {
+        1 :{ "name": "piemonte" } , 
+        2 :{ "name": "valle d'aosta" } , 
+        3 :{ "name": "lombardia" } , 
+        4 :{ "name": "trentino-alto adige" } , 
+        5 :{ "name": "veneto" } , 
+        6 :{ "name": "friuli venezia giulia" } , 
+        7 :{ "name": "liguria" } , 
+        8 :{ "name": "emilia-romagna" } , 
+        9 :{ "name": "toscana" } , 
+        10 :{ "name": "umbria" } , 
+        11 :{ "name": "marche" } , 
+        12 :{ "name": "lazio" } , 
+        13 :{ "name": "abruzzo" } , 
+        14 :{ "name": "molise" } , 
+        15 :{ "name": "campania" } , 
+        16 :{ "name": "puglia" } , 
+        17 :{ "name": "basilicata" } , 
+        18 :{ "name": "calabria" } , 
+        19 :{ "name": "sicilia" } , 
+        20 :{ "name": "sardegna" } 
+    }; 
+
+    var g_general , g_sweden , g_portugal , g_belgium , g_uk, g_italy ,  g_data ; 
 
     
 
@@ -108,8 +132,9 @@
         .defer( d3.json , "data/uk.topojson" )
         .defer( d3.json , "data/belgium.json" )
         .defer( d3.json , "data/portugal.json")
+        .defer( d3.json , "data/italy.json")
         .defer( d3.csv , "data/data.csv" )
-	    .await( function( error , europe_p , /* data_breast_p , data_colon_p ,  data_cervix_p ,*/  sweden_p , uk_p , belgium_p , portugal_p , data_d ) { 
+	    .await( function( error , europe_p , /* data_breast_p , data_colon_p ,  data_cervix_p ,*/  sweden_p , uk_p , belgium_p , portugal_p , italy_p , data_d ) { 
     	
         europe = europe_p ; 
         
@@ -122,6 +147,7 @@
         belgium = belgium_p
         portugal = portugal_p ;
         g_data = data_d ; 
+        italy = italy_p ;
     	
     	// range_colors.unshift('#ffffff') ;
     	// range_colors[0] = '#ffffff' ; // 0 or no value means no data = grey 
@@ -153,14 +179,15 @@ function initMap()
         .attr("d", path)
         .attr('id',function(d){ return 'CODE_' + d.id ; })
         .attr('class',function(d){ 
-            /*var extra_css = '' ; 
+            var extra_css = '' ; 
             for( var item in data )
                 if ( data[item].CODE == d.id )
                 {
                     extra_css = quantize(data[item][key_val]) ;
                     break ; 
                 }
-            return 'country '+extra_css.replace('#','');*/
+            return 'country '+d.id;
+            
         })
         .append('title')
         .text( function(d){ 
@@ -177,6 +204,25 @@ function initMap()
         .attr("d", path)
         .attr('class',function(d,i){
             return "swe_counties " + sweden_counties[i].code  ; 
+        })
+    ;
+
+    g_italy = svg.append("g").attr('class','sweden') ;
+    g_italy.selectAll("path")
+        .data( topojson.object( italy , italy.objects.collection ).geometries )
+        .enter()
+        .append("path")
+        .attr("d", path)
+        .attr('class',function(d,i){
+            var extra_class ; 
+            if ( i < 8 )
+                extra_class = "north" ; 
+            else if ( i >= 8 && i <= 11 )
+                extra_class = "centre" ; 
+            else
+                extra_class = "south" ; 
+
+            return "italy-region " + extra_class ; 
         })
     ;
 
@@ -295,9 +341,10 @@ function runGradient()
                 {
                     if ( data[item].CODE_REGION == id_region && data[item].REGION == 1 )
                     {
+                        // console.info( id_region , data[item][key_val] , quantize( data[item][key_val])  ) ; 
                         if ( data[item][key_val] == 'WHITE') return color_no_programme ; 
                         else if ( data[item][key_val] == 'GRAY') return color_no_data ; 
-                        return quantize( data[item][key_val] );
+                        else return quantize( data[item][key_val] );
                     }
                 }
             }
@@ -315,13 +362,45 @@ function runGradient()
                     {
                         if ( data[item][key_val] == 'WHITE') return color_no_programme ; 
                         else if ( data[item][key_val] == 'GRAY') return color_no_data ; 
-
-                        return quantize( data[item][key_val] );
+                        else return quantize( data[item][key_val] );
                     }
                 }
             }
 
             return "transparent" ; 
+        })
+    ;
+
+    g_italy.selectAll("path")
+        .data( topojson.object( italy , italy.objects.collection ).geometries )
+        .transition()
+        .duration(500)
+        .attr('fill',function(d,i){
+
+            for( var item in data )
+            {
+                if ( data[item].CODE == 'IT' ){
+                    if ( data[item].CODE_REGION == 0 && data[item].REGION == 1 && i < 8 )
+                        return quantize( data[item][key_val] ); 
+                    else if ( data[item].CODE_REGION == 1 && data[item].REGION == 1 && i >= 8 && i <= 11)
+                        return quantize( data[item][key_val] ); 
+                    else if ( data[item].CODE_REGION == 2 && data[item].REGION == 1 && i > 11 )
+                        return quantize( data[item][key_val] ); 
+                }
+            } 
+        })
+        .attr('stroke',function(d,i){
+            for( var item in data )
+            {
+                if ( data[item].CODE == 'IT' ){
+                    if ( data[item].CODE_REGION == 0 && data[item].REGION == 1 && i < 8 )
+                        return quantize( data[item][key_val] ); 
+                    else if ( data[item].CODE_REGION == 1 && data[item].REGION == 1 && i >= 8 && i <= 11)
+                        return quantize( data[item][key_val] ); 
+                    else if ( data[item].CODE_REGION == 2 && data[item].REGION == 1 && i > 11 )
+                        return quantize( data[item][key_val] ); 
+                }
+            } 
         })
     ;
 
@@ -469,6 +548,17 @@ function buildLegend()
         .style("stroke-width", "0.5px")
         .style("fill", function(d){ return color_no_programme ;})
 
+    legend
+        .append('rect')
+        .attr('class','rect_Legend')
+        .attr("x", 100 ) 
+        .attr("y", lastYRect + 75 )
+        .attr("width", 25 )
+        .attr("height", 10 )
+        .style("stroke","#cccccc")
+        .style("stroke-width", "0.5px")
+        .style("fill", function(d){ return color_extra_eu ;})
+
     legendEntries
         .append('text')
         .attr('class','text_Legend')
@@ -532,6 +622,15 @@ function buildLegend()
         .style('font-size','12px')
         .attr("dy", "0.9em") // place text one line *below* the x,y point
         .text("no programme") ;
+
+    legend
+        .append('text')
+        .attr('class','text_Legend')
+        .attr("x",  140 )  // leave 5 pixel space after the <rect>
+        .attr("y", lastYText + 75 )  // + (CanMapHeight - 200);})
+        .style('font-size','12px')
+        .attr("dy", "0.9em") // place text one line *below* the x,y point
+        .text("Extra EU countries") ;
 }
 
 function changeColor( new_color )

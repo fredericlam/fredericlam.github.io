@@ -20,9 +20,9 @@ Greece,GR,0,0,WHITE,WHITE,WHITE
 Hungary,HU,0,0,38.4,4.50,0.6
 Ireland,IE,0,0,76.2,GRAY,11.5
 Italy,IT,0,0,WHITE,WHITE,WHITE
-Italy North,IT,0,0,56.1,33.20,49.9
-Italy Centre,IT,0,0,42.7,33.10,22.8
-Italy South,IT,0,0,13.8,17.50,8.1
+Italy North,IT,1,0,56.1,33.20,49.9
+Italy Centre,IT,1,1,42.7,33.10,22.8
+Italy South,IT,1,2,13.8,17.50,8.1
 Latvia,LV,0,0,33.6,32.90,11.1
 Lithuania,LT,0,0,44.9,37.50,53.1
 Luxembourg,LU,0,0,60.4,WHITE,WHITE
