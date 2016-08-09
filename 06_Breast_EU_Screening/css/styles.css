@@ -20,7 +20,7 @@
    ---------------------------------------------------------*/
     body {
 		padding: 0 20px ;  
-		background: #fff ;
+		background: #f0f0f0 ;
 		color: #498076 ;   
     }
     h1{
@@ -142,3 +142,13 @@
     select[name="crc_mode"]{
         display: none ; 
     }
+
+    rect.rect_Legend, text.text_Legend{
+        cursor: pointer ; 
+    }
+    rect.rect_Legend.no_click, text.text_Legend.no_click{
+        cursor: default ; 
+    }
+
+    
+

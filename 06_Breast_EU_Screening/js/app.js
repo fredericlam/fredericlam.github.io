@@ -61,6 +61,9 @@
 
     var quantize ; 
 
+    var show_all_colors = true ; 
+    var current_color_selected = '' ; 
+
     var sweden_counties = {
         0 : { 'code' : 'K' , 'name' : 'Blekinge County' , 'region' : 5 } ,
         1 : { 'code' : 'W' , 'name' : 'Dalarna County', 'region' : 1 } ,
@@ -308,7 +311,7 @@ function setData()
         data = data_cervix ;*/
 }
 
-function runGradient()
+function runGradient( restrict , current_color )
 {
     g_general.selectAll("path")
         .data( topojson.object( europe, europe.objects.collection ).geometries )
@@ -321,8 +324,16 @@ function runGradient()
                     if ( data[item][key_val] == 'WHITE') return color_no_programme ; 
                     else if ( data[item][key_val] == 'GRAY') return color_no_data ; 
 
-                    // console.info( d.id ,  data[item][key_val] , data[item] ,  quantize(data[item][key_val]) );
-                    return quantize( data[item][key_val] );
+                    var color = quantize( data[item][key_val] ) ; 
+
+                    if ( restrict == true )
+                        if ( color == current_color )
+                            return current_color ; 
+                        else 
+                            return color_extra_eu ; 
+                    else
+                        // console.info( d.id ,  data[item][key_val] , data[item] ,  quantize(data[item][key_val]) );
+                        return color ;
                 }
 
             return "#ffffff" ; 
@@ -344,7 +355,18 @@ function runGradient()
                         // console.info( id_region , data[item][key_val] , quantize( data[item][key_val])  ) ; 
                         if ( data[item][key_val] == 'WHITE') return color_no_programme ; 
                         else if ( data[item][key_val] == 'GRAY') return color_no_data ; 
-                        else return quantize( data[item][key_val] );
+                        else 
+                        {
+                            var color = quantize( data[item][key_val] ) ; 
+                            if ( restrict == true )
+                                if ( color == current_color )
+                                    return current_color ; 
+                                else 
+                                    return color_extra_eu ; 
+                            else
+                                // console.info( d.id ,  data[item][key_val] , data[item] ,  quantize(data[item][key_val]) );
+                                return color ;
+                        }
                     }
                 }
             }
@@ -362,7 +384,17 @@ function runGradient()
                     {
                         if ( data[item][key_val] == 'WHITE') return color_no_programme ; 
                         else if ( data[item][key_val] == 'GRAY') return color_no_data ; 
-                        else return quantize( data[item][key_val] );
+                        else 
+                        {
+                            var color = quantize( data[item][key_val] ) ; 
+                            if ( restrict == true )
+                                if ( color == current_color )
+                                    return current_color ; 
+                                else 
+                                    return color_extra_eu ; 
+                            else
+                                return color ;
+                        }
                     }
                 }
             }
@@ -380,12 +412,32 @@ function runGradient()
             for( var item in data )
             {
                 if ( data[item].CODE == 'IT' ){
+
+                    var color = quantize( data[item][key_val] ) ; 
                     if ( data[item].CODE_REGION == 0 && data[item].REGION == 1 && i < 8 )
-                        return quantize( data[item][key_val] ); 
+                        if ( restrict == true )
+                            if ( color == current_color )
+                                return current_color ; 
+                            else 
+                                return color_extra_eu ; 
+                        else
+                            return color ;
                     else if ( data[item].CODE_REGION == 1 && data[item].REGION == 1 && i >= 8 && i <= 11)
-                        return quantize( data[item][key_val] ); 
+                        if ( restrict == true )
+                            if ( color == current_color )
+                                return current_color ; 
+                            else 
+                                return color_extra_eu ; 
+                        else
+                            return color ;
                     else if ( data[item].CODE_REGION == 2 && data[item].REGION == 1 && i > 11 )
-                        return quantize( data[item][key_val] ); 
+                        if ( restrict == true )
+                            if ( color == current_color )
+                                return current_color ; 
+                            else 
+                                return color_extra_eu ; 
+                        else
+                            return color ;
                 }
             } 
         })
@@ -393,12 +445,33 @@ function runGradient()
             for( var item in data )
             {
                 if ( data[item].CODE == 'IT' ){
+
+                    var color = quantize( data[item][key_val] ) ; 
+
                     if ( data[item].CODE_REGION == 0 && data[item].REGION == 1 && i < 8 )
-                        return quantize( data[item][key_val] ); 
+                        if ( restrict == true )
+                            if ( color == current_color )
+                                return current_color ; 
+                            else 
+                                return color_extra_eu ; 
+                        else
+                            return color ;
                     else if ( data[item].CODE_REGION == 1 && data[item].REGION == 1 && i >= 8 && i <= 11)
-                        return quantize( data[item][key_val] ); 
+                        if ( restrict == true )
+                            if ( color == current_color )
+                                return current_color ; 
+                            else 
+                                return color_extra_eu ; 
+                        else
+                            return color ;
                     else if ( data[item].CODE_REGION == 2 && data[item].REGION == 1 && i > 11 )
-                        return quantize( data[item][key_val] ); 
+                        if ( restrict == true )
+                            if ( color == current_color )
+                                return current_color ; 
+                            else 
+                                return color_extra_eu ; 
+                        else
+                            return color ;
                 }
             } 
         })
@@ -419,7 +492,18 @@ function runGradient()
                         if ( data[item][key_val] == 'WHITE') return color_no_programme ; 
                         else if ( data[item][key_val] == 'GRAY') return color_no_data ; 
                         
-                        return quantize( data[item][key_val] );
+                        else 
+                        {
+                            var color = quantize( data[item][key_val] ) ; 
+                            if ( restrict == true )
+                                if ( color == current_color )
+                                    return current_color ; 
+                                else 
+                                    return color_extra_eu ; 
+                            else
+                                // console.info( d.id ,  data[item][key_val] , data[item] ,  quantize(data[item][key_val]) );
+                                return color ;
+                        }
                     }
                 }
             }
@@ -444,7 +528,18 @@ function runGradient()
                         if ( data[item][key_val] == 'WHITE') return color_no_programme ; 
                         else if ( data[item][key_val] == 'GRAY') return color_no_data ; 
 
-                        return quantize( data[item][key_val] );
+                        else 
+                        {
+                            var color = quantize( data[item][key_val] ) ; 
+                            if ( restrict == true )
+                                if ( color == current_color )
+                                    return current_color ; 
+                                else 
+                                    return color_extra_eu ; 
+                            else
+                                // console.info( d.id ,  data[item][key_val] , data[item] ,  quantize(data[item][key_val]) );
+                                return color ;
+                        }
                     }
                 }
             }
@@ -470,7 +565,18 @@ function runGradient()
                         if ( data[item][key_val] == 'WHITE') return color_no_programme ; 
                         else if ( data[item][key_val] == 'GRAY') return color_no_data ; 
 
-                        return quantize( data[item][key_val] );
+                        else 
+                        {
+                            var color = quantize( data[item][key_val] ) ; 
+                            if ( restrict == true )
+                                if ( color == current_color )
+                                    return current_color ; 
+                                else 
+                                    return color_extra_eu ; 
+                            else
+                                // console.info( d.id ,  data[item][key_val] , data[item] ,  quantize(data[item][key_val]) );
+                                return color ;
+                        }
                     }
                 }
             }
@@ -524,11 +630,15 @@ function buildLegend()
        .style("stroke","#cccccc")
        .style("stroke-width", "0.5px")
        .attr('color', function(d){ return d;})
-       .style("fill", function(d){return d;}) ; 
+       .style("fill", function(d){return d;}) 
+       .on("click", function(d){
+            filterGradientLegend(d);
+        })
+    ; 
 
     legend
         .append('rect')
-        .attr('class','rect_Legend')
+        .attr('class','rect_Legend no_click')
         .attr("x", 100 ) 
         .attr("y", lastYRect + 15 )
         .attr("width", 25 )
@@ -539,7 +649,7 @@ function buildLegend()
 
     legend
         .append('rect')
-        .attr('class','rect_Legend')
+        .attr('class','rect_Legend no_click')
         .attr("x", 100 ) 
         .attr("y", lastYRect + 30 )
         .attr("width", 25 )
@@ -550,7 +660,7 @@ function buildLegend()
 
     legend
         .append('rect')
-        .attr('class','rect_Legend')
+        .attr('class','rect_Legend no_click')
         .attr("x", 100 ) 
         .attr("y", lastYRect + 75 )
         .attr("width", 25 )
@@ -585,11 +695,14 @@ function buildLegend()
                 return format(extent[0]+1)+ "%–" + format(extent[1])+'%' ;
         
         })
+        .on("click", function(d){
+            filterGradientLegend(d);
+        })
     ;
 
     legend
         .append('text')
-        .attr('class','text_Legend')
+        .attr('class','text_Legend no_click')
         .attr("x",  140 )  // leave 5 pixel space after the <rect>
         .attr("y", lastYText + 15 )  // + (CanMapHeight - 200);})
         .style('font-size','12px')
@@ -598,7 +711,7 @@ function buildLegend()
 
     legend
         .append('text')
-        .attr('class','text_Legend')
+        .attr('class','text_Legend no_click')
         .attr("x",  140 )  // leave 5 pixel space after the <rect>
         .attr("y", lastYText + 30 )  // + (CanMapHeight - 200);})
         .style('font-size','12px')
@@ -607,7 +720,7 @@ function buildLegend()
 
     legend
         .append('text')
-        .attr('class','text_Legend')
+        .attr('class','text_Legend no_click')
         .attr("x",  140 )  // leave 5 pixel space after the <rect>
         .attr("y", lastYText + 45 )  // + (CanMapHeight - 200);})
         .style('font-size','12px')
@@ -616,7 +729,7 @@ function buildLegend()
 
     legend
         .append('text')
-        .attr('class','text_Legend')
+        .attr('class','text_Legend no_click')
         .attr("x",  140 )  // leave 5 pixel space after the <rect>
         .attr("y", lastYText + 60 )  // + (CanMapHeight - 200);})
         .style('font-size','12px')
@@ -625,7 +738,7 @@ function buildLegend()
 
     legend
         .append('text')
-        .attr('class','text_Legend')
+        .attr('class','text_Legend no_click')
         .attr("x",  140 )  // leave 5 pixel space after the <rect>
         .attr("y", lastYText + 75 )  // + (CanMapHeight - 200);})
         .style('font-size','12px')
@@ -645,7 +758,6 @@ function setKey( new_key )
     runGradient() ; 
     updateTitle();
 }
-
 
 function setCancer( new_cancer)
 {
@@ -673,4 +785,20 @@ function updateTitle()
 {
     $('#type_screening').text( '(' + $('select[name="key"] option:selected').text() +')' ) ; 
     $('#type_cancer').text( $('select[name="cancer"] option:selected').text() ) ; 
+}
+
+function filterGradientLegend( color ){
+
+    if ( show_all_colors == true || current_color_selected != color )
+    {
+        show_all_colors = false ; 
+        runGradient( true , color ) ; 
+        current_color_selected = color ; 
+    }
+    else
+    {
+        show_all_colors = true ; 
+        runGradient( false ); 
+        current_color_selected = '' ; 
+    }
 }
