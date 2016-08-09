@@ -6,9 +6,9 @@ Belgium Flanders,BE,1,0,50.2,7.40,48.0
 Belgium Wallonia,BE,1,2,8.0,WHITE,6.5
 Bulgaria,BG,0,0,WHITE,WHITE,WHITE
 Croatia,HR,0,0,45.1,10.80,13.9
-Cyprus All,CY,0,0,GRAY,WHITE,WHITE
-Cyprus Nicosia,CY,1,0,42.2,,
-Cyprus Other,CY,1,0,WHITE,,
+Cyprus All,CY,0,0,GRAY,GRAY,GRAY
+Cyprus Nicosia,CYP,1,0,42.2,,
+Cyprus Other,CYP,1,0,WHITE,,
 Czech Republic,CZ,0,0,59.1,GRAY,34.8
 Denmark,DK,0,0,72.0,47.50,GRAY
 Estonia,EE,0,0,45.9,44.40,WHITE
