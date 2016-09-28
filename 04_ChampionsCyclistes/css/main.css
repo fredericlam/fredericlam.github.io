@@ -180,6 +180,7 @@ nav a:hover {
 
 .main aside {
     color: white;
+    float: left;
     padding: 0px 5% 10px;
 }
 
@@ -227,15 +228,35 @@ select{
     margin: 0 5px ; 
 }
 
+.main header{
+    -webkit-transition: min-height 1s; 
+  -moz-transition: min-height 1s; 
+  -ms-transition: min-height 1s; 
+  -o-transition: min-height 1s; 
+  transition: min-height 1s;  
+    min-height: 500px ;
+    padding-top: 200px; 
+}
+
+.main header.run{
+    min-height: 0px ; 
+    padding-top: 0px; 
+}
+
 div.cycler{
-    width: 22% ; 
+    width: 50% ; 
     display: inline-block ; 
+    float: left ; 
 }
 
 .cycler img{
     margin: auto ;
     display: block ; 
     text-align: center ; 
+}
+
+section.container-statistics{
+    float: left ; 
 }
 
 h3{
@@ -248,7 +269,6 @@ h4{
 }
 
 .dataviz{
-    width: 49% ; 
     min-height: 140px ; 
     display: inline-block ; 
     float: left;
@@ -277,6 +297,10 @@ span.figure{
     margin-bottom: 5px ; 
 }
 
+.viz,.cycler{
+    display: none ; 
+}
+
 .step ul li i{
     color: #000 ; 
 }
@@ -285,10 +309,27 @@ span.figure{
     margin-right: 10px ; 
 }
 
+ul#list-nb-step{
+    display: block;
+    width: 100%;
+    float: left;
+    /* margin-left: 0px; */
+    padding: 10px 35px 10px 10px;
+}
 
+#distance svg{
+    margin-top: 20px ;
+}
 
+ol.legend li{
+    font-style: italic;
+    font-size: 11px ;
+    line-height: 15px;
+}
 
-
+.disclaimer,.about{
+    float: left;
+}
 
 
 
@@ -299,6 +340,14 @@ span.figure{
 /* ==========================================================================
    Media Queries
    ========================================================================== */
+
+@media only screen and (max-width: 480px) {
+
+    div.cycler{
+        width: 100% ; 
+    }
+
+}
 
 @media only screen and (min-width: 480px) {
 
@@ -371,6 +420,10 @@ span.figure{
         width: 70% ; 
     }
 
+    .main article.disclaimer{
+        width: 100%;
+    }
+
     .main article.about{
         width: 100%  
     }
@@ -380,6 +433,10 @@ span.figure{
         width: 18%;
         min-height: 600px;
     }
+
+    div.cycler{
+        width: 49%; 
+   }
 }
 
 @media only screen and (min-width: 1140px) {
@@ -387,6 +444,13 @@ span.figure{
 /* ===============
     Maximal Width
    =============== */
+   .dataviz{
+        width: 49% ; 
+   }
+
+   div.cycler{
+        width: 22%; 
+   }
 
     .wrapper {
         width: 1026px; /* 1140px - 10% for margins */

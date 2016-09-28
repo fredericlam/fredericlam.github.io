@@ -36,8 +36,6 @@
                 <ul class="social">
                     <li><a href="#"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
                     <li><a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
-                    <li><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
-                    <li><a href="#"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
                 </ul>
             </header>
         </div>
@@ -47,7 +45,7 @@
 
                 <header>
                     <h1>Découvrez les vainqueurs de l'histoire du Tour</h1>
-                    <p class="center">Selectionnez <select name="year"><option value="">votre année de naissance</option></select> afin de découvrir les différents vainqueurs. </p>
+                    <p class="center">Selectionnez <select name="year" id="select-year"><option value="">votre année de naissance</option></select> afin de découvrir les différents vainqueurs. </p>
                 </header>
                 
                 <article class="viz">
@@ -56,48 +54,36 @@
                         <h2>Résultats</h2>
                         
                         <div class="row">
-                            <div class="cycler">
-                                <h3>Top grimpeur</h3>
-                                <img src="img/red.png" title="Meilleur grimpeur">
-                                <h4 id="climber">Roberto contador</h4>
-                            </div>
-                            <div class="cycler">
+                            <div class="cycler" id="container-winner">
                                 <h3>Vainqueur</h3>
                                 <img src="img/yellow.png" title="Vainqueur du tour">
-                                <h4 id="winner">Roberto contador</h4>
+                                <h4 id="winner"></h4>
                             </div>
-                            <div class="cycler">
+                            <div class="cycler" id="container-climber">
+                                <h3>Top grimpeur</h3>
+                                <img src="img/red.png" title="Meilleur grimpeur">
+                                <h4 id="climber"></h4>
+                            </div> 
+                            <div class="cycler" id="container-sprinter">
                                 <h3>Top sprinter</h3>
                                 <img src="img/green.png" title="Meilleur sprinter">
-                                <h4 id="sprinter">Roberto contador</h4>
+                                <h4 id="sprinter"></h4>
                             </div>
-                            <div class="cycler">
+                            <div class="cycler" id="container-youth">
                                 <h3>Meilleur jeune</h3>
                                 <img src="img/blue.png" title="Meilleur jeune">
-                                <h4 id="youth">Roberto contador</h4>
+                                <h4 id="youth"></h4>
                             </div>
                         </div>
                     </section>
 
-                    <section>
+                    <section class="container-statistics">
                         <h2>Statistiques</h2>
                         <div class="row">
                             <div class="dataviz">
                                 <h3>Nombres d'étapes</h3>
                                 <div class="step">
-                                    <span class="figure"> 12 </span> <ul>
-                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
-                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
-                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
-                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
-                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
-                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
-                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
-                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
-                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
-                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
-                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
-                                        <li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>
+                                    <span class="figure" id="nb-step"> 12 </span> <ul id="list-nb-step">
                                     </ul>
                                 </div>
                             </div>
@@ -112,13 +98,40 @@
 
                 </article>
 
-                <aside>
+                <aside class="viz">
                     <h2> Distance </h2>
-                    <p><span class="figure"> 2091 </span>m</p>
+                    <p><span class="figure" id="nb-distance"> 0 </span></p>
                     <div id="distance">
 
                     </div>
                 </aside>
+
+                <article class="disclaimer">
+                    <section>
+                        <div class="row">
+                            <h2> Notes et références </h2>
+                            <p><ol class="legend">
+
+        <li> Vitesse moyenne du vainqueur du Tour. Source : Coll., Tour de France, 100 ans, Paris, L'Équipe, 2003, 3 tomes.</li>
+        <li>Victoire sur tapis vert prononcée le 2 décembre 1904 (plus de quatre mois après l’arrivée) à la suite du déclassement pour triche des quatre premiers du classement (Maurice Garin qui était premier, Lucien Pothier, César Garin et Hippolyte Aucouturier).</li>
+        <li> Le Danois Bjarne Riis, de l'équipe Telekom, est retiré du palmarès sur le site letour.fr le 7 juin 2007, après qu'il a avoué avoir pris de l'EPO. Mais finalement, le 4 juillet 2008, en reconnaissance de ces aveux, son nom est remis par les organisateurs du Tour de France sur la liste des vainqueurs, avec sous son nom mention de ses aveux de dopage, cf. cet article de Sport24.com.</li>
+        <li> Titre de Lance Armstrong révoqué par l'UCI le 22 octobre 2012 pour dopage.</li>
+        <li> « Sept éditions sans vainqueur » sur lequipe.fr,‎ 26 octobre 2012 (consulté le 26 octobre 2012)</li>
+        <li> Victoire attribuée a posteriori, après la disqualification de Floyd Landis contrôlé positif à la testostérone lors du Tour.</li>
+        <li> Bernhard Kohl est déclassé de ce prix pour dopage. Selon le règlement antidopage alors en vigueur, l'UCI réattribue le prix à Sastre même si le Tour de France le laisse sans vainqueur dans sa documentation.</li>
+        <li> Franco Pellizotti est déclassé de ce prix pour violation des règles antidopages. Selon le règlement antidopage alors en vigueur, l'UCI réattribue le prix à Martínez même si le Tour de France le laisse sans vainqueur dans sa documentation.</li>
+        <li> Romain Bonte, « Contador suspendu deux ans » sur France Télévisions Sport ‎ 6 février 2012 (consulté le 6 février 2012)</li>
+        <li> <a href="http://archive.wikiwix.com/cache/?url=http%3A%2F%2Fledicodutour.perso.sfr.fr%2Fstatistiques%2Fechappees.htm">archive</a></li>
+        <li> http://www.ladepeche.fr/article/2008/07/08/463215-tour-de-france-frederic-vichot-ca-reste-un-jour-exceptionnel.html [archive]</li>
+        <li> a et b « 10 anecdotes sur le Tour de France » linternaute.com, juillet 2007.</li>
+        <li> Les 10 et 80 étaient respectivement les numéros de dossard d’Odile Defraye en 1912 et de Roger Walkowiak en 1956, ce sont des numéros de dossard qui ne sont actuellement plus attribués, chaque équipe étant constituée de neuf coureurs, l’organisation n’attribue plus de dossard avec un numéro ayant un zéro en dernière position.</li>
+                            </ol>
+                            </p>
+                        </div>
+
+                    </section>
+
+                </article>
 
 
                 <article class="about">

@@ -1,5 +1,5 @@
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="js/table-to-json.js"></script>
+<script type="text/javascript" src="js/jquery.tabletojson.js"></script>
 
 <input type="button" name="Convert" value="convert" id="convert-table">
 <table class="wikitable sortable jquery-tablesorter" id="winners" style="font-size:95%">
@@ -1160,9 +1160,10 @@ $('#convert-table').click( function() {
   	var speed = object.speed.replace('km/h','') ; 
   	speed = speed.replace(',','.');
 
+  	var distance = object.distance.replace(' ','');
   	var line = {
   		'climber': object.climber , 
-		'distance': parseFloat(object.distance), 
+		'distance': distance, 
 		'points': object.points, 
 		'speed': parseFloat(speed), 
 		'step': Math.floor(object.step), 

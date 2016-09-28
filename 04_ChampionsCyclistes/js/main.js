@@ -19,7 +19,24 @@
   $(function() {
   	
   	var main_color = '#fabb00' ; 
+  	var current_year = null ; 
 
+  	
+
+	var row = {} ; 
+	var dataset = [] ; 
+
+	// load data
+	$.getJSON( "data/winners.json", function( data ) {
+		dataset = data ; 
+	});
+
+	// calculate max
+	var max_distance = d3.max( dataset , function(d){ return d.distance ; }) ; 
+	var max_speed = d3.max( dataset , function(d){ return d.speed ; }) ; 
+	var max_step = d3.max( dataset , function(d){ return d.step ; }) ; 
+
+	// rectange for distance
   	var distance_chart = c3.generate({
 	    bindto: '#distance',
 	    size: {
@@ -27,7 +44,7 @@
 		},
 	    data: {
 	      columns: [
-	        [ 'distance', 50 ]
+	        [ 'distance', 0 ]
 	      ],
 	      type: 'bar'
 	    },
@@ -42,14 +59,20 @@
 		},
 	    bar: {
 	        width: 100 
+	    }, 
+	    axis : {
+	    	y : {
+	    		max : 5500 
+	    	}
 	    }
 	});
 
+  	// gauge for speed 
 	var gauge_chart = c3.generate({
 		bindto: '#speed',
 	    data: {
 	        columns: [
-	            ['speed', 91]
+	            ['speed', 0 ]
 	        ],
 	        type: 'gauge',
 	        onclick: function (d, i) { console.log("onclick", d, i); },
@@ -78,13 +101,83 @@
 	    }
 	});
 
-	$('select[name="year"]').click(function(){
-		var max = 100 , min = 50 ; 
-		var random = Math.random() * (max - min) + min ; 
+	// feed years
+	for( var y = 1905 ; y <= 2016 ; y++ ) $('select#select-year').append('<option value="'+y+'">'+y+'</option>') ; 
+
+	// handler on year
+	$('select[name="year"]').change(function(){
+
+		$('.main header').addClass('run');
+		$('.viz').show();
+
+		current_year = $(this).val();
+		
+		for( var item in dataset )
+		{
+		  	if ( current_year == dataset[item].year )
+		  	{
+		  		row = dataset[item] ; 
+		  		break  ;
+		  	}
+		}
+
+		//console.info(row);
+		
+		// set winner 
+		if ( row.winner != '' ) 
+		{	
+			$('#winner').text( row.winner ) ; 
+			$('#winner').fadeIn();
+		}
+
+		if ( row.climber != '' ) 
+		{
+			$('#climber').text( row.climber ) ; 
+			$('#container-climber,#climber').fadeIn();
+		}
+		else
+		{
+			$('#container-climber,#climber').fadeOut();
+		}
+
+		if ( row.points != '' ) 	
+		{		
+			$('#sprinter').text( row.points ) ; 
+			$('#container-sprinter,#sprinter').fadeIn();
+		}
+		else
+		{
+			$('#container-sprinter,#sprinter').fadeOut();
+		}
+
+		if ( row.youth != '' ) 	
+		{	
+			$('#youth').text( row.youth ) ; 
+			$('#container-youth,#youth').fadeIn();
+		}
+		else
+		{
+			$('#container-youth,#youth').fadeOut();
+		}
+
 		gauge_chart.load({
-	        columns: [['speed', random ]]
+	        columns: [['speed', row.speed ]]
 	    });
+
+		distance_chart.load({
+	    	columns : [['distance', row.distance ]]	
+	    })
+
+		$('#nb-step').text(row.step);
+		$('ul#list-nb-step').html(' '); 
+		for( var i = 0 ; i < Math.abs(row.step); i++) $('ul#list-nb-step').append('<li><i class="fa fa-flag-checkered" aria-hidden="true"></i></li>');
+
+	    $('#nb-distance').text(row.distance+'m');
+
 	})
+
+	
+
 
   }); // end func
 
