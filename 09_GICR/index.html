@@ -1,0 +1,89 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>GICR MAP </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/nv.d3.min.css">
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <link rel="icon" type="image/png" href="favicon.png" />
+
+
+        <link href='https://fonts.googleapis.com/css?family=Cabin:400,600,700,500' rel='stylesheet' type='text/css'>
+        
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="header-container">
+            <header class="wrapper clearfix">
+                <h1 class="title">
+                    <img src="img/website-logo.gif" title="GICR" />
+                </h1>
+            </header>
+        </div>
+
+        <div class="main-container">
+            
+            <ul class="hubs-list">
+            </ul>
+
+            <ul class="breadcrumb">
+                <li><a href="javascript:void(0);" onclick="zoomRegion(undefined);writeHub(0);">GICR Hubs region</a></li>
+                <li><span class="hub-name"></span></li>
+                <li><span class="country-name"></span></li>
+            </ul>
+
+            <div id="hubPanel">
+                <h2 class="hub-name"></h2>
+                <h3>Regional hub center :</h3>
+                <h3>Hub PI :</h3>
+                <h3>Canreg "experts" :</h3>
+                <h3>Countries :</h3>
+                <p>
+                    <ul class="hubCountries"></ul>
+                </p>        
+            </div>  
+
+             <div id="countryPanel">
+                <h2 class="country-name"></h2>
+                <h3>Collaborators</h3>
+                <p id="collaborators"></p>
+                <h3>Description</h3>
+                <p id="description"></p>
+                <h3>Levels of engagement</h3>
+                <p id="chart"><svg></svg></p>
+                
+            </div>  
+
+            <div class="main wrapper clearfix" id="container">
+
+            
+            </div> <!-- #main -->
+        </div> <!-- #main-container -->
+
+        <div class="footer-container">
+            <footer class="wrapper">IARC, 150 Cours Albert Thomas, 69372 Lyon CEDEX 08, France - Tel: +33 (0)4 72 73 84 85 - Fax: +33 (0)4 72 73 85 75 - Privacy Policy  © IARC 2016 - All Rights Reserved.
+            </footer>
+        </div>
+
+        <script src="/js/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+        <script src="/js/nv.d3.min.js"></script>
+        <script src="/js/datamaps.world.hires.min.js"></script>
+
+        <script src="/js/app.datamaps.js"></script>
+
+    </body>
+</html>
