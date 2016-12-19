@@ -39,7 +39,7 @@ var countries = [] ;
   	}
 
 	// loading gicr map
-	d3.csv( "/data/gicr.csv" , function( data ){
+	d3.csv( "data/gicr.csv" , function( data ){
 
 		gicr_csv = data ; 
 
