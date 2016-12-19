@@ -9,7 +9,7 @@ Croatia,HR,0,0,45.1,10.80,13.9
 Cyprus All,CY,0,0,GRAY,GRAY,GRAY
 Cyprus Nicosia,CYP,1,0,42.2,,
 Cyprus Other,CYP,1,0,WHITE,,
-Czech Republic,CZ,0,0,59.1,GRAY,34.8
+Czech Republic,CZ,0,0,59.1,GRAY,30.7
 Denmark,DK,0,0,72.0,47.50,GRAY
 Estonia,EE,0,0,45.9,44.40,WHITE
 Finland,FI,0,0,76.1,66.00,15.9
@@ -43,16 +43,16 @@ Romania Other,RO,0,0,WHITE,,
 Slovakia,SK,0,0,WHITE,GRAY,WHITE
 Slovenia,SI,0,0,19.1,GRAY,47.1
 Spain,ES,0,0,59.7,WHITE,8.3
-Sweden All,SE,0,0,GRAY,
-Sweden Norra,SE,1,0,80.9,GRAY,WHITE
-Sweden Södra,SE,1,5,77.7,GRAY,WHITE
-Sweden Stockholm Gotland,SE,1,2,70.0,GRAY,11.9
-Sweden Sydöstra,SE,1,3,80.1,GRAY,WHITE
-Sweden Uppsala Örebro,SE,1,1,86.0,GRAY,WHITE
-Sweden Västra Götaland,SE,1,4,68.2,GRAY,WHITE
+Sweden All,SE,0,69.7,GRAY,
+Sweden Norra,SE,1,0,80.9,69.7,WHITE
+Sweden Södra,SE,1,5,77.7,69.7,WHITE
+Sweden Stockholm Gotland,SE,1,2,70.0,69.7,62.7
+Sweden Sydöstra,SE,1,3,80.1,69.7,WHITE
+Sweden Uppsala Örebro,SE,1,1,86.0,69.7,WHITE
+Sweden Västra Götaland,SE,1,4,68.2,69.7,WHITE
 UK All,UK,0,0,,,
-UK England,GB,1,ENG,86.4,GRAY,54.9
-UK Northern Ireland,GB,1,NIR,80.0,69.70,53.6
-UK Scotland,GB,1,SCT,72.5,44.00,62.8
-UK Wales,GB,1,WLS,74.4,63.50,54.3
+UK England,GB,1,ENG,85.5,61.2,54.9
+UK Northern Ireland,GB,1,NIR,80.0,44.0,53.6
+UK Scotland,GB,1,SCT,72.5,WHITE,62.8
+UK Wales,GB,1,WLS,74.4,63.5,54.3
 UK Ireland,GB,1,IRL,76.2,GRAY,11.5

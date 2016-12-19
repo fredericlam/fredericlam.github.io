@@ -10,6 +10,7 @@ var map_width 	= $(window).width();
 var map_height 	= $(window).height() - 120 ;
 var zoomed 		= false ; 
 var current_hub = undefined ; 
+var current_country = undefined ; 
 var hubs = {
 	1 : { 'name' : 'SS-Africa' , 'label' : 'Sub saharian Africa', 'color' : '#31505c' } , 
 	2 : { 'name' : 'NA,C-Africa, W.Asia' , 'label' : 'North Africa, Center Af. & Wester Asia', 'color' : '#edc84c' } , 
@@ -93,8 +94,16 @@ var countries = [] ;
 	        		// zoom on country 
 	        		if ( d.id != undefined ) 
 	        		{
+	        			if ( fill_countries[ d.id ] == undefined ) return ; 
+
+	        			// zoom on country selected
 	        			zoomRegion( d.id , 3 ) ; 
+	        			// open right panel 
 	        			writeCountry( d.id ) ; 
+	        			// redefine countries
+	        			refineCountriesPathColor(d.id) ; 
+
+	        			d3.select(this).style('opacity',1) ; 
 	        		}
 	        	}) ; 
 	        }, 
@@ -136,6 +145,15 @@ function checkCountry(cnt, value) {
     });
     return found ; 
 };
+
+function clearMap()
+{
+	zoomRegion(undefined);
+
+	writeHub(0);
+
+	refineRegionsPathColor();
+}
 
 function clickHub( hub_id )
 {	
@@ -182,9 +200,14 @@ function clickHub( hub_id )
 			break ; 
 	}
 
+	// zoome on region 
 	zoomRegion( codeCountry , scale , translateX , translateY , hub_id ) ; 
 
-   	writeHub( hub_id ) ; 
+	// write txt on right panel 
+   	writeHub( current_hub ) ; 
+
+   	// redefine colors for regions
+   	refineRegionsPathColor( hub_id );
 }
 
 function zoomRegion( codeCountry , scale , translateX , translateY , hub_id )
@@ -231,33 +254,72 @@ function zoomRegion( codeCountry , scale , translateX , translateY , hub_id )
   		.attr("transform", translate + "scale(" + scale + ")translate(" + -x + "," + -y + ")")
   	;
 
-  	datamap_g.svg.selectAll("path")
-  		.style("height",function(d){
+  	
+}
+
+function refineRegionsPathColor( hub_id )
+{
+	datamap_g.svg.selectAll("path")
+  		.style("fill",function(d){
 
   			// no hub associated 
-  			if ( fill_countries[ d.properties.iso ] == undefined ) return '' ; 
+  			if ( fill_countries[ d.properties.iso ] == undefined ) return '#ffffff' ; 
 
-  			// key of current hub
-  			for ( var h in hubs )
-			{				
-  				if( fill_countries[ d.properties.iso ].fillKey == hubs[h].name )  
-  				{
-  					var base_color 	= hubs[h].color ;
-  					var base_key 	= h ;
+  			// get hub information of path
+  			var path_hub = getHubByName( fill_countries[ d.properties.iso ].fillKey ) ; 
 
-  					if ( base_key == hub_id )
-  					{
-  						return base_color ; break ; 
-  					}
-  					else
-  					{
-  						return '#ffffff' ; 
-  					}
-  				}
-  			}
+  			// if hub_id is undefined, so no hub clicked
+  			if ( current_hub == undefined ) 
+  				return path_hub.color ; 
+
+  			// return hub color
+  			if( hubs[current_hub].color == path_hub.color ) return path_hub.color ; 
+
+  			// else return default color
   			return '#ffffff' ; 
   		}) ; 
 }
+
+
+function refineCountriesPathColor( country_id )
+{
+	datamap_g.svg.selectAll("path")
+  		.style("fill",function(d){
+
+  			// no hub associated 
+  			if ( fill_countries[ d.properties.iso ] == undefined ) return '#ffffff' ; 
+
+  			// get hub information of path
+  			var path_hub = getHubByName( fill_countries[ d.properties.iso ].fillKey ) ; 
+  			var country_selected = getHubByName( fill_countries[ country_id ].fillKey ) ; 
+
+  			if ( path_hub.color == country_selected.color ) 
+  				return path_hub.color ; 
+
+  			// else return default color
+  			return '#ffffff' ; 
+  		}) ; 
+
+  	datamap_g.svg.selectAll("path")
+  		.style("opacity",function(d){
+
+  			// no hub associated 
+  			if ( fill_countries[ d.properties.iso ] == undefined ) return '#ffffff' ; 
+
+  			// get hub information of path
+  			var path_hub = getHubByName( fill_countries[ d.properties.iso ].fillKey ) ; 
+  			var country_selected = getHubByName( fill_countries[ country_id ].fillKey ) ; 
+
+  			if ( path_hub.color == country_selected.color ) 
+  				return 0.7 ; 
+
+  			// else return default color
+  			return 1 ; 
+  		}) ; 
+}
+
+
+
 
 function getHubById(hub_id)
 {
@@ -279,21 +341,23 @@ function getHubByName(hub_name)
 
 function writeHub(hub_id)
 {	
+
 	if ( hub_id == undefined || hub_id == 0 )
 	{
-		$('ul.breadcrumb,#hubPanel').removeClass('show') ; 
+		$('ul.breadcrumb,#hubPanel,#countryPanel').removeClass('show') ; 
 		$('.hub-name').text( '' ) ; 
+		$('ul.breadcrumb li:first a').css('borderColor','#0b80b7');
 	}	
 	else
 	{
+		$('#countryPanel').removeClass("show") ; 
 		$('ul.breadcrumb,#hubPanel').addClass('show') ; 
 		$('span.hub-name').text( ' > ' + hubs[hub_id].label ) ; 
-		$('h2.hub-name').text( hubs[hub_id].label ) ; 
-
-		// add list of countries
+		$('h2.hub-name').html( '<span class="square" style="background-color:'+hubs[hub_id].color+'"></span>' +  hubs[hub_id].label ) ; 
+		$('ul.breadcrumb li:first a').css('borderColor', hubs[hub_id].color);
+		// build list of countries
 		$('ul.hubCountries').html(' ') ; 
 		var hub = getHubById(hub_id) ; 
-
 		for ( var g in gicr_csv )
 		{
 			if( gicr_csv[g].HUB == hub.name ) 
@@ -301,6 +365,8 @@ function writeHub(hub_id)
 				$('ul.hubCountries').append('<li>'+(gicr_csv[g].Country)+'</li>') ; 
 			}
 		}
+
+		// reset colors 
 	}
 }
 
@@ -311,9 +377,13 @@ function writeCountry(country_id,mode)
 		$('ul.breadcrumb,#countryPanel').removeClass('show') ; 
 		$('.country-name').text( '' ) ; 
 		$('span.hub-name').text( '' ) ; 
+		$('ul.breadcrumb li:first a').css('borderColor','#0b80b7');
+		codeCountry = undefined ; 
 	}	
 	else
 	{
+		codeCountry = country_id ; 
+
 		if ( countries[country_id] == undefined ) return ; 
 
 		var hub = getHubByName(countries[country_id].HUB);
@@ -322,8 +392,9 @@ function writeCountry(country_id,mode)
 		$('ul.breadcrumb,#countryPanel').addClass('show') ; 
 		$('span.hub-name').text( ' > ' + hub.label ) ; 
 		$('span.country-name').text( ' > ' + countries[country_id].Country ) ; 
-		$('h2.country-name').text( countries[country_id].Country ) ; 
-		
+		$('h2.country-name').html( '<span class="square" style="background-color:'+hub.color+'"></span>' +countries[country_id].Country ) ; 
+		$('ul.breadcrumb li:first a').css('borderColor', hub.color);
+
 		// write more informations for country panel
 		$('#collaborators').text( countries[country_id].Collaborators ); 
 		$('#description').text( countries[country_id].Description );
@@ -357,7 +428,7 @@ function writeCountry(country_id,mode)
 		  return chart;
 		});
 
-		chart.pie.valueFormat(d3.format('.0'));
+		// chart.valueFormat(d3.format('.0'));
 	}
 }
 

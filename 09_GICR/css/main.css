@@ -63,6 +63,7 @@ li{
 body {
     font: 16px/26px 'Cabin', sans-serif, Arial;
     background: #0b80b7 ; 
+    overflow-x: hidden;
 }
 
 .wrapper {
@@ -95,10 +96,10 @@ body {
 ul.breadcrumb{
     background-color: #fff ; 
     height: 20px ; 
-    padding: 10px 20px ; 
+    padding: 10px 20px 15px 20px ; 
     position: absolute ; 
     top : 80px ;
-    left: -180px ; 
+    left: -230px ; 
     transition: all 0.5s ease-in-out ;
     box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.3); 
 }
@@ -112,6 +113,11 @@ ul.breadcrumb li{
     display: inline-block ; 
 }
 
+ul.breadcrumb li:first-child a{
+    border-left: solid 5px #0b80b7;
+    padding-left: 5px;
+}
+
 div#hubPanel,div#countryPanel{
     box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.3); 
     position: absolute;
@@ -119,7 +125,7 @@ div#hubPanel,div#countryPanel{
     right: -700px ; 
     transition: all .7s ease-in-out;
     background-color: #fff ; 
-    padding: 0 50px ; 
+    padding: 0 25px ; 
     width: 600px ; 
     height: 650px ; 
     overflow-y: auto ;
@@ -153,7 +159,7 @@ a{
 }
 
 a:hover{
-    color: #fff ; 
+    color: #1e4273 ; 
     text-decoration: underline ; 
 }
 
@@ -216,6 +222,13 @@ h1{
     margin: 0.2em 0 ; 
     text-align: center ; 
     padding-top: 20px ;
+}
+
+h2 span.square{
+    display: inline-block;
+    height: 20px;
+    width: 35px;
+    margin-right: 5px;
 }
 
 /* ==============
@@ -308,7 +321,7 @@ ul.social li i{
 h2{
     width: 100% ; 
     display: block ; 
-    padding-top: 20px ; 
+    padding-top: 5px ; 
 }
 
 select{
