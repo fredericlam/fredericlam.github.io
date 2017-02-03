@@ -602,8 +602,8 @@ function buildLegend()
 
     var containerLegend = legend.append('rect')
         .attr('class','containerLegend')
-        .attr("x", 100 ) 
-        .attr("y", 400 )
+        .attr("x", 0 ) 
+        .attr("y", 350 )
         .style('width', 140 )
         .style('height', 200 )
         .style('fill','transparent') 
@@ -617,16 +617,21 @@ function buildLegend()
 
     var lastYRect = 0 , lastYText = 0 ; 
 
+    var xStartLegend = 20 ; 
+    var widthRect = 40 ; 
+    var heightRect = 20 ; 
+    var fontSize = "14px" ; 
+
     legendEntries
         .append('rect')
         .attr('class','rect_Legend')
-        .attr("x", 100 ) 
+        .attr("x", xStartLegend ) 
         .attr("y", function(d, i) {
-            lastYRect = (i * 15) + 2 + 450 ;
+            lastYRect = (i * 25) + 8 + 350 ;
             return lastYRect ; 
         })
-       .attr("width", 25 )
-       .attr("height", 10 )
+       .attr("width", widthRect )
+       .attr("height", heightRect )
        .style("stroke","#cccccc")
        .style("stroke-width", "0.5px")
        .attr('color', function(d){ return d;})
@@ -639,10 +644,10 @@ function buildLegend()
     legend
         .append('rect')
         .attr('class','rect_Legend no_click')
-        .attr("x", 100 ) 
-        .attr("y", lastYRect + 15 )
-        .attr("width", 25 )
-        .attr("height", 10 )
+        .attr("x", xStartLegend ) 
+        .attr("y", lastYRect + 25 )
+        .attr("width", widthRect )
+        .attr("height", heightRect )
         .style("stroke","#cccccc")
         .style("stroke-width", "0.5px")
         .style("fill", function(d){ return color_no_data ;})
@@ -650,10 +655,10 @@ function buildLegend()
     legend
         .append('rect')
         .attr('class','rect_Legend no_click')
-        .attr("x", 100 ) 
-        .attr("y", lastYRect + 30 )
-        .attr("width", 25 )
-        .attr("height", 10 )
+        .attr("x", xStartLegend ) 
+        .attr("y", lastYRect + 50 )
+        .attr("width", widthRect )
+        .attr("height", heightRect )
         .style("stroke","#cccccc")
         .style("stroke-width", "0.5px")
         .style("fill", function(d){ return color_no_programme ;})
@@ -661,10 +666,10 @@ function buildLegend()
     legend
         .append('rect')
         .attr('class','rect_Legend no_click')
-        .attr("x", 100 ) 
-        .attr("y", lastYRect + 75 )
-        .attr("width", 25 )
-        .attr("height", 10 )
+        .attr("x", xStartLegend ) 
+        .attr("y", lastYRect + 100 )
+        .attr("width", widthRect )
+        .attr("height", heightRect )
         .style("stroke","#cccccc")
         .style("stroke-width", "0.5px")
         .style("fill", function(d){ return color_extra_eu ;})
@@ -672,12 +677,12 @@ function buildLegend()
     legendEntries
         .append('text')
         .attr('class','text_Legend')
-        .attr("x",  140 )  // leave 5 pixel space after the <rect>
+        .attr("x",  xStartLegend + 45 )  // leave 5 pixel space after the <rect>
         .attr("y", function(d, i) {
-           lastYText =  (i * 15) + 450  ; // + (CanMapHeight - 200);
+           lastYText =  (i * 25) + 360  ; // + (CanMapHeight - 200);
            return lastYText ; 
         })
-        .style('font-size','12px')
+        .style('font-size',fontSize)
         .attr("dy", "0.9em") // place text one line *below* the x,y point
         .text(function(d,i) {
             
@@ -703,45 +708,45 @@ function buildLegend()
     legend
         .append('text')
         .attr('class','text_Legend no_click')
-        .attr("x",  140 )  // leave 5 pixel space after the <rect>
-        .attr("y", lastYText + 15 )  // + (CanMapHeight - 200);})
-        .style('font-size','12px')
+        .attr("x",  xStartLegend + 45 )  // leave 5 pixel space after the <rect>
+        .attr("y", lastYText + 25 )  // + (CanMapHeight - 200);})
+        .style('font-size',fontSize)
         .attr("dy", "0.9em") // place text one line *below* the x,y point
         .text("No data") ;
 
     legend
         .append('text')
         .attr('class','text_Legend no_click')
-        .attr("x",  140 )  // leave 5 pixel space after the <rect>
-        .attr("y", lastYText + 30 )  // + (CanMapHeight - 200);})
-        .style('font-size','12px')
+        .attr("x",  xStartLegend + 45 )  // leave 5 pixel space after the <rect>
+        .attr("y", lastYText + 50 )  // + (CanMapHeight - 200);})
+        .style('font-size',fontSize)
         .attr("dy", "0.9em") // place text one line *below* the x,y point
         .text("Planning population-based programme/") ;
 
     legend
         .append('text')
         .attr('class','text_Legend no_click')
-        .attr("x",  140 )  // leave 5 pixel space after the <rect>
-        .attr("y", lastYText + 45 )  // + (CanMapHeight - 200);})
-        .style('font-size','12px')
+        .attr("x",  xStartLegend + 45 )  // leave 5 pixel space after the <rect>
+        .attr("y", lastYText + 65 )  // + (CanMapHeight - 200);})
+        .style('font-size',fontSize)
         .attr("dy", "0.9em") // place text one line *below* the x,y point
         .text("non-population based programme/") ;
 
     legend
         .append('text')
         .attr('class','text_Legend no_click')
-        .attr("x",  140 )  // leave 5 pixel space after the <rect>
-        .attr("y", lastYText + 60 )  // + (CanMapHeight - 200);})
-        .style('font-size','12px')
+        .attr("x",  xStartLegend + 45 )  // leave 5 pixel space after the <rect>
+        .attr("y", lastYText + 80 )  // + (CanMapHeight - 200);})
+        .style('font-size',fontSize)
         .attr("dy", "0.9em") // place text one line *below* the x,y point
         .text("no programme") ;
 
     legend
         .append('text')
         .attr('class','text_Legend no_click')
-        .attr("x",  140 )  // leave 5 pixel space after the <rect>
-        .attr("y", lastYText + 75 )  // + (CanMapHeight - 200);})
-        .style('font-size','12px')
+        .attr("x",  xStartLegend + 45 )  // leave 5 pixel space after the <rect>
+        .attr("y", lastYText + 100 )  // + (CanMapHeight - 200);})
+        .style('font-size',fontSize)
         .attr("dy", "0.9em") // place text one line *below* the x,y point
         .text("Extra EU countries") ;
 }

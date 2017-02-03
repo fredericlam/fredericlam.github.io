@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en"> <!-- Set this to the main language of your site -->
+<head>
+    <meta charset="utf-8">
+    
+    <title>Agents Classified by the IARC Monographs, Volumes 1–117</title>
+    
+    <!-- Enter a brief description of your page -->
+    <meta name="description" content="EU Breast screening">
+    
+    <!-- Define a viewport to mobile devices to use - telling the browser to assume that the page is as wide as the device (width=device-width) and setting the initial page zoom level to be 1 (initial-scale=1.0) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Add normalize.css which enables browsers to render all elements more consistently and in line with modern standards as it only targets particular styles that need normalizing -->
+    <link href="css/normalize.css" rel="stylesheet" media="all">
+    <!-- For legacy support (IE 6/7, Firefox < 4, and Safari < 5) use normalize-legacy.css instead -->
+    <!--<link href="css/normalize-legacy.css" rel="stylesheet" media="all">-->
+    
+    <!-- Include the site stylesheet -->
+    <link href="css/nv.d3.min.css" rel="stylesheet" media="all">
+    <link href="css/colorbrewer.css" rel="stylesheet" media="all">
+    <link href="css/styles.css" rel="stylesheet" media="all">
+    <link href="css/extra-breast.css" rel="stylesheet" media="all" id="">
+    <link href="css/font-awesome.min.css" rel="stylesheet" media="all">
+
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
+    <!-- Include the HTML5 shiv print polyfill for Internet Explorer browsers 8 and below -->
+    <!--[if lt IE 9]><script src="js/html5shiv-printshiv.js" media="all"></script><![endif]-->
+
+</head>
+<body>
+
+
+
+	<div class="sb-slidebar sb-right">
+		
+	</div>
+
+	<div id="sb-site">
+    
+	    <!-- The page header typically contains items such as your site heading, logo and possibly the main site navigation -->
+	    <!-- ARIA: the landmark role "banner" is set as it is the prime heading or internal title of the page --> 
+	    <header role="banner">
+	    
+	        <h1>Agents Classified by the IARC Monographs, Volumes 1–117</h1>
+	        
+	        <!-- ARIA: the landmark role "navigation" is added here as the element contains site navigation
+	        NOTE: The <nav> element does not have to be contained within a <header> element, even though the two examples on this page are. -->
+	        <nav role="navigation">
+	        </nav>
+	        
+	    </header>
+	    
+	    <!-- If you want to use an element as a wrapper, i.e. for styling only, then <div> is still the element to use -->
+	    <div class="wrap">
+	    
+	        <!-- The <main> element is used to enclose the main content, i.e. that which contains the central topic of a document -->
+	        <!-- ARIA: the landmark role "main" is added here as it contains the main content of the document, and it is recommended to add it to the
+	        <main> element until user agents implement the required role mapping. -->
+	        <main role="main">
+	    
+	            <!-- The <section> element can be used to enclose content that comes under a related heading. 
+	            NOTE: The <section> element can contain <article> elements and vice versa, if you think the content warrants it. -->       
+	            <section>
+
+	                <!-- The <article> element can be used to enclose content that still makes sense on its own and is therefore "reusable" -->
+	                <article id="introduction">
+	                	<p>
+	                		Au sein de la série des Monographies, les critères d'évaluation du risque cancérogène pourl'homme sont soumis à une révision périodique pour tenir compte des progrès dans la compréhension de la cancérogenèse. Les critères initiaux établis en 1971 ont été revus unepremière fois en 1977, puis en 1978, 1979, 1982, 1983, 1987, 1988, 1991 et 1992. Des détails sur la façon dont est jugée l'information d'études individuelles sont donnés dans le Préambule qui parait dans chaque volume des Monographies et comme un fascicule séparé.
+						</p>
+						<p> 
+							Dans les 16 premiers volumes des séries de Monographies, l'évaluation de la preuve de cancérogénicité chez l'homme et chez les animaux était faite séparément. On ne faisait pas d'essai d'estimation de risque pour l'homme à partir de données animales, ni de présomption de pertinence prédictive de données animales pour le risque humain. En 1977, un groupe de travail du CIRC se réunit pour revoir et standardiser les évaluations de cancérogénicité des études à la fois humaines et animales. Un schéma de gradation du degré d’indications de cancérogénicité chez l'homme et les animaux était développé, utilisant les termes "suffisant", "limité", "insuffisant" et plus tard, "évidence suggérant une absence de cancérogénicité".
+						</p>
+						<p> 
+							C'est dans le supplément 1 des Monographies, en 1979, que furent réalisées pour la première fois des évaluations globales de cancérogénicité pour l'homme, et ceci a été poursuivi dans les suppléments 4 et 7 en 1982 et 1987. Depuis 1988 (volumes 43 à 117), les évaluations globales de cancérogénicité pour l'homme sont faites par les groupes de travail individuels préparant les volumes de la série des Monographies.
+	                	</p>
+
+	                 	<div id="dataviz">
+	                 	</div>
+
+	                </article>
+	               	
+	            </section>
+	            
+	        </main>
+	        
+	        <!-- An <aside> is used to enclose content that is additional to the main content but not essential. If it were removed, the meaning of the main content should not be lost, but the content of the <aside> also retains its meaning.
+	        NOTE: the aside is placed outside of the <main> element as while its content is related to the content that is within the <main>
+	        element, it is not part of it -->
+	        <!-- ARIA: the landmark role "complementary" is added here as it contains supporting information for the main content that remains meaningful even when separated from it -->
+	        <aside role="complementary">
+	           <!--<h2> About the data </h2>
+	           <h3> </h3>-->
+               <p> </p> 
+	        </aside>
+	        
+	    </div>
+        
+        <div class="description">
+            
+            
+        </div>
+
+	</div>
+    
+    <!-- The main page footer can contain items such as copyright and contact information. It can also contain a duplicated navigation of your site which is not usually contained within a <nav> -->
+    <!-- ARIA: the landmark role "contentinfo" is added here as it contains metadata that applies to the parent document -->
+    <footer role="contentinfo">
+    
+        <!-- Copyright information can be contained within the <small> element. The <time> element is used here to indicate that the '2015' is a date -->
+        <small></small>
+        
+    </footer>
+    
+    <!-- Include d3js -->
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v0.min.js"></script>
+    <script src="js/queue.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/nv.d3.min.js"></script>
+    <script src="js/colorbrewer.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

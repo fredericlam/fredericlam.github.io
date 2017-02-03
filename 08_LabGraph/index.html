@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="viewport" content="width=device-width">
+<meta name="description" content="Die Bevölkerungspyramide (Alterspyramide) des Statistischen Bundesamtes zeigt die Altersstruktur Deutschlands von 1950 bis 2060.">
+<meta name="format-detection" content="telephone=no">
+<title>Experiment</title>
+
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<style type="text/css" src="css/nv.d3.css"></style>
+<style type="text/css">
+	svg{
+		width: 1700px ; 
+		height: 300px ; 
+	}
+	text{
+		font-family: 'Raleway', sans-serif;
+	}
+</style>
+
+<!--
+
+	This borrows heavily from Mike Bostock's take on the population pyramid
+	Many thanks and see http://bl.ocks.org/mbostock/4062085 for details
+	
+-->
+</head>
+
+<body>
+
+<div id="dataviz">
+	<svg></svg>
+</div>
+</body>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/d3.v3.js"></script>
+<script src="js/nv.d3.js"></script>
+<script>
+var cancers = [22,16,6,17,8,21,10,28,1,7,11,2,4,9,19,5,24,3] ; // ,
+var dataset = [
+	{ 'key' : '2012' , 'color' : '#d8b365' , 'values' : [] } , 
+	{ 'key' : '2035' , 'color' : '#5ab4ac' , 'values' : [] }
+] ; 
+
+for (var c in cancers )
+{
+	var cancer_id = cancers[c] ; 
+
+	$.get( "http://www.gco.local:8080/api/predictions/cases/900/"+cancer_id+"/", function( data ) {
+		
+		var cancer_data = data.dataset[0] ; 
+		var values = cancer_data.final ; 
+		
+		var all_2012 = values[0].values[0].sum ; 
+		var all_2035 = values[0].values[5].sum ; 
+
+    var percent = Math.round( (all_2035-all_2012) * 100 / all_2012 ) ; 
+
+    // if ( percent < 80 ) return ; 
+		// if ( all_2012 < 1000000 ) return; 
+
+		console.log(" ------------- " + cancer_data.cancer + "("+all_2012+" > "+all_2035+")------------ "  ) ; 
+
+		dataset[0].values.push({ 'label' : cancer_data.cancer , 'value' : all_2012 }) ; 
+		dataset[1].values.push({ 'label' : cancer_data.cancer , 'value' : all_2035 }) ; 
+
+		console.log( "Both => + " +(all_2035-all_2012) ,  percent +'%' );
+		// console.log(  "2012" , values[1].values[0].sum , values[2].values[0].sum , "|" , round(values[1].values[0].sum * 100 / all_2012) , round(values[2].values[0].sum * 100 / all_2012 ));
+		// console.log( "2035" , values[1].values[5].sum , values[2].values[5].sum , round(values[1].values[5].sum * 100 / all_2035) , round(values[2].values[5].sum * 100 / all_2035));
+	
+	});
+
+	// break ; 
+}
+
+console.info( dataset ) ; 
+
+nv.addGraph(function() {
+    var chart = nv.models.multiBarChart()
+      .x(function(d) { return d.label ; })
+      .y(function(d) { return d.value ; })
+      .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
+      .rotateLabels(0)      //Angle to rotate x-axis labels.
+      //.showControls(true)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
+      //.groupSpacing(0.2)    //Distance between each group of bars.
+    ;
+
+    d3.select('#dataviz svg')
+        .datum( dataset )
+        .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+});
+
+function exampleData() {
+  return stream_layers(3,10+Math.random()*100,.1).map(function(data, i) {
+    return {
+      key: 'Stream #' + i,
+      values: data
+    };
+  });
+}
+
+function round( val ){
+  return Math.round( val ) ; 
+}
+
+
+/* Inspired by Lee Byron's test data generator. */
+function stream_layers(n, m, o) {
+  if (arguments.length < 3) o = 0;
+  function bump(a) {
+    var x = 1 / (.1 + Math.random()),
+        y = 2 * Math.random() - .5,
+        z = 10 / (.1 + Math.random());
+    for (var i = 0; i < m; i++) {
+      var w = (i / m - y) * z;
+      a[i] += x * Math.exp(-w * w);
+    }
+  }
+  return d3.range(n).map(function() {
+      var a = [], i;
+      for (i = 0; i < m; i++) a[i] = o + o * Math.random();
+      for (i = 0; i < 5; i++) bump(a);
+      return a.map(stream_index);
+    });
+}
+
+/* Another layer generator using gamma distributions. */
+function stream_waves(n, m) {
+  return d3.range(n).map(function(i) {
+    return d3.range(m).map(function(j) {
+        var x = 20 * j / m - i / 3;
+        return 2 * x * Math.exp(-.5 * x);
+      }).map(stream_index);
+    });
+}
+
+function stream_index(d, i) {
+  return {x: i, y: Math.max(0, d)};
+}
+
+
+</script>
+</html>
