@@ -3,6 +3,31 @@
 	var source = [] , dataset = [] , teamsets = [] ; 
 	var y , x ; 
 
+	var myDay = new Date();
+	var today = { 'day' : myDay.getUTCDate() , 'month' : myDay.getMonth() + 1  }
+	
+
+	var timelines = [
+		{
+			'name' : 'Week 1' , 
+			'days' : [[13,3],[14,3],[15,3],[16,3],[17,3]]
+		},
+		{
+			'name' : 'Week 2', 
+			'days' : [[20,3],[21,3],[22,3],[23,3],[24,3]]
+		},
+		{
+			'name' : 'Week 3', 
+			'days' : [[27,3],[28,3],[29,3],[30,3],[31,3]]
+		},
+		{
+			'name' : 'Week 4', 
+			'days' : [[3,4],[4,4],[5,4],[6,4],[7,4]]
+		}
+	] ; 
+
+	// console.info( timelines ); 
+
 	$(document).ready( function(){
 
 		var makeBaseAuth =  function(user, pswd){ 
@@ -14,9 +39,30 @@
 	      return "Basic " + hash;
 	   	}
 
+	   	$('[data-toggle="tooltip"]').tooltip() ; 
+
+	   	// Weekds
+	   	var cpt = 1 ; 
+	   	for ( var i in timelines )
+	   	{	
+	   		var sub_days_html = '' ; 
+
+	   		for( var j in timelines[i].days )
+	   		{
+	   			var day =  timelines[i].days[j] ; 
+	   			var class_day 	= ( today.day > day[0] && today.month == (day[1]) ) ? 'active' : 'inactive' ; 
+	   			var col_offset 	= ( j == 0 ) ? 'col-md-offset-1' : '' ; 
+	   			sub_days_html 	+= ' <div class="col-md-2 '+col_offset+'"><span class="'+class_day+'">Day '+cpt+'</span></div>' ;
+	   			cpt++ ; 
+	   		}
+
+	   		var week_html = '<div class="col-md-3"><h3>'+timelines[i].name+'</h3><div class="row">'+sub_days_html+'</div></div>' ;
+	   		$('.weeks').append( week_html ) ; 
+	   	}
+
 		$.ajax({
          
-          // url		: "http://intra.iarc.fr/vie-pratique/healthandsafety/_api/lists('%7B1adfaedf-0985-473d-bac0-a435aa0ca88f%7D')/items?$select=Participant/Id,Participant/Team,Week,Nb_x0020_steps&$expand=Participant&$top=10000",
+          url		: "http://intra.iarc.fr/vie-pratique/healthandsafety/_api/lists('%7B1adfaedf-0985-473d-bac0-a435aa0ca88f%7D')/items?$select=Participant/Id,Participant/Team,Week,Nb_x0020_steps&$expand=Participant&$top=10000",
           url 		: "/data/data.xml" , 
           headers	: { "Accept": "application/json; odata=verbose" },
           beforeSend: function (xhr) {
@@ -32,10 +78,14 @@
 
 			var source = json.feed.entry ;
 
+			
+
 			for ( var i in source )
 			{
 				var item = source[i] ; 
 				
+				var the_day = new Date( item.content.properties.Date_x0020_of_x0020_measurement.__text ) ; 
+
 				var row = {
 					
 					'src'  : item , 
@@ -44,7 +94,8 @@
 					'id'   : Math.round(item.link[1].inline.entry.content.properties.Id.__text) , 
 					'team' : item.link[1].inline.entry.content.properties.Team.__text , 
 					'week' : Math.round(item.content.properties.Week.__text.replace('Week #','')) , 
-					'step' : Math.round( item.content.properties.Nb_x0020_steps.__text )
+					'step' : Math.round( item.content.properties.Nb_x0020_steps.__text ) , 
+					'date' : { 'day' : the_day.getUTCDate() , 'month' : the_day.getMonth() + 1  }
 				
 				} ;
 
@@ -53,6 +104,8 @@
 				// break ; 
 
 			}
+
+			console.info( dataset ) ; 
 
 			var sum = d3.sum( dataset , function(d){ return d.step }) ; 
 
