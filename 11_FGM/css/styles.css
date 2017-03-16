@@ -19,11 +19,11 @@
    Author's styles
    ---------------------------------------------------------*/
     body {
-   		padding: 20px ;
       font-family: 'Lora', serif;
     }
 
     h1{
+      padding: 20px ;
       margin-top: 0px ; 
     }
 
@@ -36,40 +36,11 @@
       stroke-width: 0.5px ;
     }
 
-
+    footer{
+      text-align: center;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      height: 25px;
+    }
     
-/* ---------------------------------------------------------
-   Print styles
-   ---------------------------------------------------------*/
-@media print {
-    * {
-        color:#000 !important;
-        box-shadow:none !important;
-        text-shadow:none !important;
-        background:transparent !important;
-    }
-    html { background-color:#fff; }
-    /* Hide navigation */
-    nav { display:none; }
-
-    /* Show link destinations in brackets after the link text */
-    a[href]:after { content: " (" attr(href) ") "; }
-    a[href] {
-        font-weight:bold;
-        text-decoration:underline;
-        color:#06c;
-        border:none;
-    }
-    /* Don't show link destinations for JavaScript or internal links */ 
-    a[href^="javascript:"]:after, a[href^="#"]:after { content:""; }
-    
-    /* Show abbr title value in brackets after the text */
-    abbr[title]:after { content: " (" attr(title) ")"; }
-
-    figure { 
-        margin-bottom:1em; 
-        overflow:hidden;
-    }
-
-    figure img { border:1px solid #000; }
-}

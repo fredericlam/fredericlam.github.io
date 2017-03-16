@@ -192,6 +192,7 @@ a.circle{
     text-align: center ; 
     width: 100% ; 
     margin: 0;
+    padding: 15px 0px;
 }
 
 header,footer{

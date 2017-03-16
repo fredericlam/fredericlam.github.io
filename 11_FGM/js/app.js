@@ -1,14 +1,22 @@
     
-    var width   = 900;
-    var height  = 750;
-    var scale0 = (width - 1) / 2 / Math.PI; 
+    var width     = $(window).width() ;
+    var height    = $(window).height() - 150  ;
+    var margin    = { 'top' : 100 , 'right' : 50 , 'bottom' : 100 , 'left' : 50 } ; 
+    var center    = [2.454071, 46.279229] ; 
+    var map_scale = width / 2 ;
+    map_scale     = ( map_scale > max_scale ) ? max_scale : map_scale ; 
+    var max_scale = 550 ; 
+
+    var translate = [width / 3, -50] ;
+
+    var scale0    = (width - 1) / 2 / Math.PI; 
     var div_datas = '#datas' ; 
     var cumul ; 
 
     var projection = d3.geoMercator() 
-        .center([2.454071, 46.279229])
-        .scale(500)
-        .translate([width / 3, -50]);
+        .center(center)
+        .scale(map_scale)
+        .translate( translate );
       
     var svg = d3.select("#map").append("svg")
           .attr("width", width)
@@ -32,16 +40,16 @@
 
             if (error) throw error ;
 
-            console.log( geojson );
+            /*console.log( geojson );
             console.log( daughter_prevalence );
             console.log( women_prevalence );
-            console.log( women_attitudes );
+            console.log( women_attitudes );*/
         }
     );
 
     d3.json( "data/map.geojson", function(error, geojson) {
 
-        console.info( geojson.features );
+        // console.info( geojson.features );
         /*
          * On "bind" un élément SVG path pour chaque entrée
          * du tableau features de notre objet geojson
@@ -65,7 +73,7 @@
          */
         features.enter()
             .append("path")
-                .attr('class', 'item')
+                .attr('class', 'land')
                 .attr('fill', function(d) { 
                     // console.log( d ) ; 
                     return '#ccc'
@@ -73,3 +81,30 @@
               .attr("d", path) ; 
 
     });
+
+    d3.select(window).on('resize', resizeMap);
+
+    function resizeMap() {
+        // adjust things when the window size changes
+        var width     = $(window).width() ;
+        var height    = $(window).height() - 150  ;
+        
+        // height = width * mapRatio;
+
+        // update projection
+        translate = [width / 3, -50] ;
+        map_scale = width / 2 ;
+        map_scale = ( map_scale > max_scale ) ? max_scale : map_scale ; 
+        
+        projection
+            .translate(translate)
+            .scale(map_scale);
+
+        // resize the map container
+        svg
+            .style('width', width + 'px')
+            .style('height', height + 'px');
+
+        // resize the map
+        svg.selectAll('.land').attr('d', path);
+    }
