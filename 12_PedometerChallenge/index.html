@@ -30,12 +30,13 @@
         <div class="header-container">
             <header class="wrapper clearfix">
                 <img src="/img/logo.jpg" id="logo">
-                <h1 class="title" id="title-map">Pedometer Challenge IARC: from Monday 13 March to Friday 7 April 2017  </h1>
+                <h1 class="title" id="title-map">Pedometer Challenge IARC: last update (17/03 - 3pm)  </h1>
                  <ul id="links">
                     <li><a href="http://intra.iarc.fr/vie-pratique/healthandsafety/Lists/Pedometer%20Challenge/NewForm.aspx?RootFolder=" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Add your steps"><i class="fa fa-plus-circle"></i></a></li>
                     <li><a href="http://intra.iarc.fr/vie-pratique/healthandsafety/Documents/Pedometer%20challenge/GameRules.pdf" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Challenge rules"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
                     <li><a href="http://intra.iarc.fr/vie-pratique/healthandsafety/Documents/Pedometer%20challenge/challengeObjective.pdf" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Objective of the challenge"><i class="fa fa-rocket" aria-hidden="true"></i></a></li>
-                    <li><a href="#"><i class="fa fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Made by lamf@iarc.fr"></i></a></li>
+                    <li><a href=" http://intra.iarc.fr/vie-pratique/healthandsafety/Lists/Pedometer%20Chat/AllItems.aspx" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Chat on the challenge"><i class="fa fa-weixin" aria-hidden="true"></i></a></li>                   
+                    <li><a href="mailto:lamf@iarc.fr?subject=[Pedometer challenge webapp]"><i class="fa fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Find an error ? Contact lamf@iarc.fr"></i></a></li>
                 </ul>
             </header>
 
@@ -51,58 +52,44 @@
 
             
 
-            <h2>Last ranking </h2>
+            <h2>Last ranking from the begnning to today </h2>
             <!--<div class="row">
                 <div class="col-md-2 filter"><select onchange="sortTeams(this.value)"><option value="step">Number of total steps</option><option value="team">Team name</option></select><label> Sorty by </label></div>
             </div>-->
 
             <div id="bars"></div>
 
-            <h2>Weekly/daily statistic </h2>
+            <h2>Daily statistic </h2>
 
 
-            <div class="row weeks">
+            <div id="weeks" class="row weeks">
                 
-                <!--<div class="col-md-3">
-                    <h3>Week 1</h3>
-                    <div class="row">
-                        <div class="col-md-2 col-md-offset-1"><span>Day 1</span></div>
-                        <div class="col-md-2"><span>Day 2</span></div>
-                        <div class="col-md-2"><span>Day 3</span></div>
-                        <div class="col-md-2"><span>Day 4</span></div>
-                        <div class="col-md-2"><span>Day 5</span></div>
+            </div>
+
+            <div id="weeks_data" class="row">
+                
+                <h3 id="daily_stat" class="daily"></h3>
+                <div class="col-md-3" id="top_team">
+                    <h4>Top best 10 teams</h4>
+                    <div id="top_team_svg">
+                        <table width="90%" border="1" border-collapse="collapse">
+                        </table>    
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <h3>Week 2</h3>
-                    <div class="row">
-                        <div class="col-md-2 col-md-offset-1"><span>Day 6</span></div>
-                        <div class="col-md-2"><span>Day 7</span></div>
-                        <div class="col-md-2"><span>Day 8</span></div>
-                        <div class="col-md-2"><span>Day 9</span></div>
-                        <div class="col-md-2"><span>Day 10</span></div>
+
+                <div class="col-md-6" id="all_team">
+                    <h4>Proportions of steps among all the teams</h4>
+                     <div id="proportions_pie">
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <h3>Week 3</h3>
-                    <div class="row">
-                        <div class="col-md-2 col-md-offset-1"><span>Day 11</span></div>
-                        <div class="col-md-2"><span>Day 12</span></div>
-                        <div class="col-md-2"><span>Day 13</span></div>
-                        <div class="col-md-2"><span>Day 14</span></div>
-                        <div class="col-md-2"><span>Day 15</span></div>
+
+                <div class="col-md-3" id="top_players">
+                    <h4>Top best 10 participants</h4>
+                    <div id="top_participant_svg">
+                        <table width="90%" border="1" border-collapse="collapse">
+                        </table>   
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <h3>Week 4</h3>
-                    <div class="row">
-                        <div class="col-md-2 col-md-offset-1"><span>Day 16</span></div>
-                        <div class="col-md-2"><span>Day 17</span></div>
-                        <div class="col-md-2"><span>Day 18</span></div>
-                        <div class="col-md-2"><span>Day 19</span></div>
-                        <div class="col-md-2"><span>Day 20</span></div>
-                    </div>
-                </div>-->
 
             </div>
 
@@ -123,6 +110,7 @@
         <script src="js/vendor/x2js.js"></script>
         <script src="js/vendor/d3.min.js"></script>
         <script src="js/vendor/colorbrewer.js"></script>
+        <script src="js/vendor/queue.v1.min.js"></script>
 
         <!-- app -->
         <script src="js/app.js"></script>

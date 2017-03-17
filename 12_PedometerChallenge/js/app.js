@@ -1,11 +1,12 @@
-	
 
-	var source = [] , dataset = [] , teamsets = [] ; 
+
+	var source = [] , dataset = [] , teamsets = [], players = [] , daily = [] , weekly = [] , users = [] ; 
 	var y , x ; 
 
 	var myDay = new Date();
 	var today = { 'day' : myDay.getUTCDate() , 'month' : myDay.getMonth() + 1  }
-	
+		
+	var numDayToday = 0 ;
 
 	var timelines = [
 		{
@@ -51,8 +52,19 @@
 	   		{
 	   			var day =  timelines[i].days[j] ; 
 	   			var class_day 	= ( today.day > day[0] && today.month == (day[1]) ) ? 'active' : 'inactive' ; 
+
+	   			if( (today.day-1) == day[0] && today.month == (day[1])) 
+	   			{
+	   				var class_active = 'current' ;
+	   				numDayToday = cpt ; 
+	   			}
+	   			else
+	   			{
+	   				var class_active = '' ;
+	   			} 
+
 	   			var col_offset 	= ( j == 0 ) ? 'col-md-offset-1' : '' ; 
-	   			sub_days_html 	+= ' <div class="col-md-2 '+col_offset+'"><span class="'+class_day+'">Day '+cpt+'</span></div>' ;
+	   			sub_days_html 	+= ' <div class="col-md-2 '+col_offset+'"><a href="javascript:void(0);" attr-day="'+cpt+'" class="day_stat '+class_day+' '+class_active+'">Day '+cpt+'</a></div>' ;
 	   			cpt++ ; 
 	   		}
 
@@ -60,9 +72,112 @@
 	   		$('.weeks').append( week_html ) ; 
 	   	}
 
-		$.ajax({
+
+	   	$('#daily_stat').html('Statistics on '+today.day+'/0'+today.month) ;
+
+	   	$('a.day_stat').click( function(){
+
+	   		if ( $(this).hasClass('inactive') == true ) return ; 
+
+	   		$('a.day_stat').removeClass('current') ; 
+	   		$(this).addClass('current') ;
+
+	   		var num_day = $(this).attr('attr-day') ; 
+	   		var dataset = daily[num_day-1] ; 
+
+	   		var d = dataset.key.split('-') ; 
+
+	   		$('#daily_stat').html('Statistics on '+d[0]+'/0'+d[1]) ;
+
+	   		// top 10 team
+	   		var daily_team = d3.nest()
+	   			.key(function(d){ return d.team; })
+	   			.rollup(function(team) { 
+					return {
+						"length": team.length, 
+						"total": d3.sum(team, function(d) {
+							return parseFloat(d.step);
+						})
+					} 
+				})
+				.entries( dataset.values ) ;
+
+			daily_team.sort(function(a, b) { return b.values.total - a.values.total; });
+			daily_team = daily_team.slice(0,10); 
+
+			$('#top_team_svg table').html('<thead><th>Position</th><th>Team</th><th>Entries</th><th>Steps</th></thead>');
+			for ( var t in daily_team )
+			{
+				$('#top_team_svg table').append('<tr><td>'+(Math.abs(t)+1)+'</td><td>'+daily_team[t].key+'</td><td>'+daily_team[t].values.length+'</td><td>'+formatNum(daily_team[t].values.total)+'</td></tr>') ;
+			}
+
+			// top 10 participants
+	   		var daily_participants = d3.nest()
+	   			.key(function(d){ return d.id; })
+	   			.rollup(function(team) { 
+					return {
+						"length": team.length, 
+						"total": d3.sum(team, function(d) {
+							return parseFloat(d.step);
+						})
+					} 
+				})
+				.entries( dataset.values ) ;
+
+			daily_participants.sort(function(a, b) { return b.values.total - a.values.total; });
+			daily_participants = daily_participants.slice(0,10); 
+
+			$('#top_participant_svg table').html('<thead><th>Position</th><th>Participant</th><th>Entries</th><th>Steps</th></thead>');
+			for ( var t in daily_participants )
+			{
+				$('#top_participant_svg table').append('<tr><td>'+(Math.abs(t)+1)+'</td><td>'+users[daily_participants[t].key].title+'</td><td>'+daily_participants[t].values.length+'</td><td>'+formatNum(daily_participants[t].values.total)+'</td></tr>') ;
+			}
+
+			// multiple pie charts
+			var pie_data = [
+			  [ 11975,  5871, 8916, 2868],
+			  [ 1951, 10048, 2060, 6171],
+			  [ 8010, 16145, 8090, 8045],
+			  [ 1013,   990,  940, 6907]
+			];
+
+			// Define the margin, radius, and color scale. The color scale will be
+			// assigned by index, but if you define your data using objects, you could pass
+			// in a named field from the data object instead, such as `d.name`. Colors
+			// are assigned lazily, so if you want deterministic behavior, define a domain
+			// for the color scale.
+			var m = 10,
+			    r = 25,
+			    z = d3.scale.category20c();
+
+			// Insert an svg element (with margin) for each row in our dataset. A child g
+			// element translates the origin to the pie center.
+			var svg = d3.select("body #proportions_pie").selectAll("svg")
+			    .data( pie_data )
+			  	.enter().append("svg")
+			    .attr("width", (r + m) * 2)
+			    .attr("height", (r + m) * 2)
+			  	.append("g")
+			    .attr("transform", "translate(" + (r + m) + "," + (r + m) + ")");
+
+			// The data for each svg element is a row of numbers (an array). We pass that to
+			// d3.layout.pie to compute the angles for each arc. These start and end angles
+			// are passed to d3.svg.arc to draw arcs! Note that the arc radius is specified
+			// on the arc, not the layout.
+			svg.selectAll("path")
+			    .data(d3.layout.pie())
+			  	.enter().append("path")
+			  	.attr('class','pie')
+			    .attr("d", d3.svg.arc()
+			    .innerRadius(r / 2)
+			    .outerRadius(r))
+			    .style("fill", function(d, i) { return z(i); });
+
+	   	});
+
+		/*$.ajax({
          
-          url		: "http://intra.iarc.fr/vie-pratique/healthandsafety/_api/lists('%7B1adfaedf-0985-473d-bac0-a435aa0ca88f%7D')/items?$select=Participant/Id,Participant/Team,Week,Nb_x0020_steps&$expand=Participant&$top=10000",
+          // url		: "http://intra.iarc.fr/vie-pratique/healthandsafety/_api/lists('%7B1adfaedf-0985-473d-bac0-a435aa0ca88f%7D')/items?$select=Participant/Id,Participant/Team,Week,Nb_x0020_steps&$expand=Participant&$top=10000",
           url 		: "/data/data.xml" , 
           headers	: { "Accept": "application/json; odata=verbose" },
           beforeSend: function (xhr) {
@@ -70,15 +185,41 @@
           },
           type 		: "GET" 
 
-        }).done( function( xml ) {
-		  
-			var xmlString = (new XMLSerializer()).serializeToString(xml);
-			var x2js      = new X2JS();
-			var json  	= x2js.xml_str2json( xmlString );
+        }).done( function( xml ) {*/
 
-			var source = json.feed.entry ;
+        queue()
+	       	.defer( d3.xml, "/data/data.xml")
+		    .defer( d3.xml, "/data/users.xml")
+		    .defer( d3.xml, "/data/participants.xml")
+		    //.defer( d3.xml, "/data/participants_list.xml")
 
-			
+		    .await(function( error , xml_data , xml_users , xml_participants ) {
+
+		  	var x2js     		= new X2JS();
+
+			var xmlString 		= (new XMLSerializer()).serializeToString(xml_data);
+			var json  			= x2js.xml_str2json( xmlString );
+			var source 			= json.feed.entry ;
+
+			var xmlString_u 	= (new XMLSerializer()).serializeToString(xml_users);
+			var json_u  		= x2js.xml_str2json( xmlString_u );
+			var source_users 	= json_u.feed.entry ; 
+
+
+			for ( var u in source_users )
+			{
+				var user 	= source_users[u] ; 
+				var user_id = Math.abs( user.content.properties.Id.__text ) ; 
+
+				var row 	= {
+					'id' : user_id , 
+					'title' : user.content.properties.Title.__text
+				} ; 
+
+				users[ user_id ] = row  ; 
+			}
+
+			console.info( source ) ;  
 
 			for ( var i in source )
 			{
@@ -95,20 +236,17 @@
 					'team' : item.link[1].inline.entry.content.properties.Team.__text , 
 					'week' : Math.round(item.content.properties.Week.__text.replace('Week #','')) , 
 					'step' : Math.round( item.content.properties.Nb_x0020_steps.__text ) , 
-					'date' : { 'day' : the_day.getUTCDate() , 'month' : the_day.getMonth() + 1  }
+					'date' : { 'day' : the_day.getUTCDate() , 'month' : the_day.getMonth() + 1  } ,
+					'date_entry' : the_day.getUTCDate() +'-'+ ( the_day.getMonth() + 1 )
 				
 				} ;
 
 				dataset.push( row ) ;  
 				
 				// break ; 
-
 			}
 
-			console.info( dataset ) ; 
-
 			var sum = d3.sum( dataset , function(d){ return d.step }) ; 
-
 
 			teamsets = d3.nest()
 				.key(function(d){ return d.team })
@@ -123,6 +261,15 @@
 				})
 				.entries( dataset ) ;
 
+			players  = d3.nest()
+				.key(function(d){ return d.id })
+				.entries( dataset ) ;
+
+			daily = d3.nest()
+				.key(function(d){ return d.date_entry ; })
+				.entries( dataset ) ; 
+
+			// console.info( teamsets ) ; console.info( daily ) ; 
 
 			$("#total_steps span").prop('Counter', 0 ).animate({
 				Counter: sum
@@ -134,9 +281,11 @@
 				}
 			});
 
-			var m = [30, 10, 10, 180],
-			    w = 1480 - m[1] - m[3],
-			    h = 930 - m[0] - m[2];
+			var width = ( $(window).width() - 50 )  ;
+
+			var m = [30, 10, 10, 230],
+			    w = width - m[1] - m[3],
+			    h = 800 - m[0] - m[2];
 
 			var format = d3.format(",.0f");
 
@@ -156,15 +305,23 @@
 			//teamsets.forEach(function(d) { d.values.total = +d.values.total; });
 			teamsets.sort(function(a, b) { return b.values.total - a.values.total; });
 
+			var rank = function(i){
+				i++ ; 
+				if(i == 1) return '1st: ' ; 
+				if(i == 2) return '2nd: ' ; 
+				if(i == 3) return '3rd: ' ; 
+				return i+'th: '; 
+			}
+
 			// Set the scale domain.
 			x.domain([0, d3.max(teamsets, function(d) { return d.values.total; })]);
-			y.domain(teamsets.map(function(d) { return d.key; }));
+			y.domain(teamsets.map(function(d,i) { return rank(i)+d.key; }));
 
 			var bar = svg.selectAll("g.bar")
 			  .data(teamsets)
 			.enter().append("g")
 			  .attr("class", "bar")
-			  .attr("transform", function(d,i) { return "translate(0," + y(d.key) + ")"; });
+			  .attr("transform", function(d,i) { return "translate(0," + y(rank(i)+d.key) + ")"; });
 
 			bar.append("rect")
 			  .attr("width", function(d) { return x(d.values.total); })
@@ -177,7 +334,7 @@
 			  .attr("dx", -3)
 			  .attr("dy", ".35em")
 			  .attr("text-anchor", "end")
-			  .text( function(d) { return formatNum(d.values.total); });
+			  .text( function(d,i) { return formatNum(d.values.total); });
 
 			svg.append("g")
 			  .attr("class", "x axis")
@@ -185,7 +342,12 @@
 
 			svg.append("g")
 			  .attr("class", "y axis")
-			  .call(yAxis);
+			  //.attr("transform","translate(-150,0)")
+			  .call(yAxis)
+			  /*.selectAll("text")
+    		  .attr("x", 6)
+              .style("text-anchor", "start")*/
+			;
 
 
 		});

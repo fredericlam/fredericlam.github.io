@@ -145,11 +145,11 @@ ul#links{
 
 ul#links li{
     display: inline ; 
-    margin-right: 10px ; 
+    margin-right: 5px ; 
 }
 
 ul#links li i{
-    font-size: 1.2em ;
+    font-size: 1.em ;
 }
 
 .bar rect {
@@ -433,20 +433,57 @@ section.container-statistics{
     float: left ; 
 }
 
-h3{
+h3.daily{
     text-align: left ; 
+    width: 100% ; 
+    display: block ; 
+    padding: 0px 35px ; 
+    color: #d86422 ; 
+    font-size: 1em ; 
+    text-decoration: underline; 
+
+}
+
+#weeks_data table{
+    margin: 0 20px ; 
+    border: solid 1px #ddd ;
+    font-size: 0.7em; 
+}
+
+#weeks_data table th, #weeks_data table td{
+    padding: 0px 5px ; 
+    text-align: left ; 
+    vertical-align: top ; 
+}
+
+#weeks_data table th{
+    color: #fff ; 
+    background: #d86422 ; 
+}
+
+#weeks_data table td:first-child,#weeks_data table td:nth-child(3){
+    width: 40px ; 
+}
+
+#weeks_data table tr:nth-child(odd){
+    background: #F5F5F5 ; 
+}
+
+#weeks_data table td:last-child{
+    width: 50px ; 
 }
 
 h4{
-    text-align: center ; 
+    text-align: left ; 
+    font-size: 0.8em ; 
+    padding-left: 20px ; 
 }
 
 
 .main-container{
-    width: 1480px ; 
     margin: auto ; 
     margin-top: 30px ; 
-    padding-top: 100px ; 
+    padding: 100px 15px 0 10px ; 
 }
 
 .dataviz{
@@ -622,7 +659,7 @@ ol.legend li{
     text-align: center ; 
 }
 
-.weeks span{
+.weeks a{
     display: block; 
     width: 100% ; 
     background: #5892C4;
@@ -632,9 +669,14 @@ ol.legend li{
     font-weight: 800;
 }
 
-.weeks span.inactive{
+.weeks a.inactive{
     background: #F5F5F5  ; 
     color: #ccc ; 
+    cursor: not-allowed;  
+}
+
+.weeks a.current{
+    background: #d86422; 
 }
 
 .weeks .col-md-2{
