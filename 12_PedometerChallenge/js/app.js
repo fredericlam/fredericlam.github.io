@@ -83,6 +83,7 @@
 	   		$(this).addClass('current') ;
 
 	   		var num_day = $(this).attr('attr-day') ; 
+
 	   		var dataset = daily[num_day-1] ; 
 
 	   		var d = dataset.key.split('-') ; 
@@ -101,9 +102,22 @@
 					} 
 				})
 				.entries( dataset.values ) ;
-
 			daily_team.sort(function(a, b) { return b.values.total - a.values.total; });
 			daily_team = daily_team.slice(0,10); 
+
+			var total_team = d3.nest()
+	   			.key(function(d){ return d.team; })
+	   			.rollup(function(team) { 
+					return {
+						"length": team.length, 
+						"src" : team , 
+						"total": d3.sum(team, function(d) {
+							return parseFloat(d.step);
+						})
+					} 
+				})
+				.entries( dataset.values ) ; ; 
+			total_team.sort(function(a, b) { return b.values.total - a.values.total; });
 
 			$('#top_team_svg table').html('<thead><th>Position</th><th>Team</th><th>Entries</th><th>Steps</th></thead>');
 			for ( var t in daily_team )
@@ -130,16 +144,21 @@
 			$('#top_participant_svg table').html('<thead><th>Position</th><th>Participant</th><th>Entries</th><th>Steps</th></thead>');
 			for ( var t in daily_participants )
 			{
-				$('#top_participant_svg table').append('<tr><td>'+(Math.abs(t)+1)+'</td><td>'+users[daily_participants[t].key].title+'</td><td>'+daily_participants[t].values.length+'</td><td>'+formatNum(daily_participants[t].values.total)+'</td></tr>') ;
+				$('#top_participant_svg table').append('<tr><td>'+(Math.abs(t)+1)+'</td><td>'+daily_participants[t].key+'</td><td>'+daily_participants[t].values.length+'</td><td>'+formatNum(daily_participants[t].values.total)+'</td></tr>') ;
 			}
 
 			// multiple pie charts
-			var pie_data = [
-			  [ 11975,  5871, 8916, 2868],
+			var pie_data = [] ;
+			 /* [ 11975,  5871, 8916, 2868],
 			  [ 1951, 10048, 2060, 6171],
 			  [ 8010, 16145, 8090, 8045],
 			  [ 1013,   990,  940, 6907]
-			];
+			];*/
+
+			for ( var t in total_team )
+			{
+				pie_data.push( total_team[t].values.src ) ;
+			}
 
 			// Define the margin, radius, and color scale. The color scale will be
 			// assigned by index, but if you define your data using objects, you could pass
@@ -174,6 +193,7 @@
 			    .style("fill", function(d, i) { return z(i); });
 
 	   	});
+
 
 		/*$.ajax({
          
@@ -218,8 +238,6 @@
 
 				users[ user_id ] = row  ; 
 			}
-
-			console.info( source ) ;  
 
 			for ( var i in source )
 			{
@@ -269,7 +287,7 @@
 				.key(function(d){ return d.date_entry ; })
 				.entries( dataset ) ; 
 
-			// console.info( teamsets ) ; console.info( daily ) ; 
+			$('a.day_stat[attr-day="'+numDayToday+'"]').trigger('click');
 
 			$("#total_steps span").prop('Counter', 0 ).animate({
 				Counter: sum
