@@ -73,7 +73,7 @@
 	   	}
 
 
-	   	$('#daily_stat').html('Statistics on '+today.day+'/0'+today.month) ;
+	   	$('#daily_stat').html('Statistics on '+(today.day-1)+'/0'+today.month) ;
 
 	   	$('a.day_stat').click( function(){
 
@@ -88,7 +88,7 @@
 
 	   		var d = dataset.key.split('-') ; 
 
-	   		$('#daily_stat').html('Statistics on '+d[0]+'/0'+d[1]) ;
+	   		$('#daily_stat').html('Statistics on '+(Math.abs(d[0])+1)+'/0'+d[1]) ;
 
 	   		// top 10 team
 	   		var daily_team = d3.nest()
@@ -131,9 +131,8 @@
 	   			.rollup(function(team) { 
 					return {
 						"length": team.length, 
-						"total": d3.sum(team, function(d) {
-							return parseFloat(d.step);
-						})
+						"team": team[0].team , 
+						"total" : parseFloat(team[0].step)
 					} 
 				})
 				.entries( dataset.values ) ;
@@ -141,10 +140,11 @@
 			daily_participants.sort(function(a, b) { return b.values.total - a.values.total; });
 			daily_participants = daily_participants.slice(0,10); 
 
-			$('#top_participant_svg table').html('<thead><th>Position</th><th>Participant</th><th>Entries</th><th>Steps</th></thead>');
+			// console.info( users );
+			$('#top_participant_svg table').html('<thead><th>Position</th><th>Participant</th><th>Steps</th></thead>');
 			for ( var t in daily_participants )
 			{
-				$('#top_participant_svg table').append('<tr><td>'+(Math.abs(t)+1)+'</td><td>'+daily_participants[t].key+'</td><td>'+daily_participants[t].values.length+'</td><td>'+formatNum(daily_participants[t].values.total)+'</td></tr>') ;
+				$('#top_participant_svg table').append('<tr><td>'+(Math.abs(t)+1)+'</td><td>'+users[daily_participants[t].key]+' ('+daily_participants[t].values.team+')</td><td>'+formatNum(daily_participants[t].values.total)+'</td></tr>') ;
 			}
 
 			// multiple pie charts
@@ -184,7 +184,7 @@
 			// are passed to d3.svg.arc to draw arcs! Note that the arc radius is specified
 			// on the arc, not the layout.
 			svg.selectAll("path")
-			    .data(d3.layout.pie())
+			    .data(d3.layout.pie().value(function(d){ return d.step ; }))
 			  	.enter().append("path")
 			  	.attr('class','pie')
 			    .attr("d", d3.svg.arc()
@@ -209,11 +209,11 @@
 
         queue()
 	       	.defer( d3.xml, "/data/data.xml")
-		    .defer( d3.xml, "/data/users.xml")
-		    .defer( d3.xml, "/data/participants.xml")
-		    //.defer( d3.xml, "/data/participants_list.xml")
+		    //.defer( d3.xml, "/data/users.xml")
+		    //.defer( d3.xml, "/data/participants.xml")
+		    .defer( d3.json , "/data/users.json")
 
-		    .await(function( error , xml_data , xml_users , xml_participants ) {
+		    .await(function( error , xml_data , users_json ) {
 
 		  	var x2js     		= new X2JS();
 
@@ -221,11 +221,9 @@
 			var json  			= x2js.xml_str2json( xmlString );
 			var source 			= json.feed.entry ;
 
-			var xmlString_u 	= (new XMLSerializer()).serializeToString(xml_users);
+			/*var xmlString_u 	= (new XMLSerializer()).serializeToString(xml_users);
 			var json_u  		= x2js.xml_str2json( xmlString_u );
 			var source_users 	= json_u.feed.entry ; 
-
-
 			for ( var u in source_users )
 			{
 				var user 	= source_users[u] ; 
@@ -237,7 +235,11 @@
 				} ; 
 
 				users[ user_id ] = row  ; 
-			}
+			}*/
+
+			
+			for ( var u in users_json ) 
+				users[ users_json[u].ID ] = users_json[u].name ; 
 
 			for ( var i in source )
 			{
