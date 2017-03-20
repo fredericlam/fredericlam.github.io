@@ -166,31 +166,45 @@
 			// are assigned lazily, so if you want deterministic behavior, define a domain
 			// for the color scale.
 			var m = 10,
-			    r = 25,
-			    z = d3.scale.category20c();
+			    r = 45,
+			    z = d3.scale.category10();
+
+			// z = colorbrewer['Set1'][6] ; 
 
 			// Insert an svg element (with margin) for each row in our dataset. A child g
 			// element translates the origin to the pie center.
-			var svg = d3.select("body #proportions_pie").selectAll("svg")
+			d3.select("body #proportions_pie").html(" ");
+
+			var svg_pies = d3.select("body #proportions_pie").selectAll("svg")
 			    .data( pie_data )
 			  	.enter().append("svg")
-			    .attr("width", (r + m) * 2)
+			    .attr("width", ( (r + m) * 2 ) )
 			    .attr("height", (r + m) * 2)
 			  	.append("g")
-			    .attr("transform", "translate(" + (r + m) + "," + (r + m) + ")");
+			    .attr("transform", "translate(" + (r + m) + "," + (r + m) + ")")
+			
+			svg_pies
+				.append("text")
+			    .attr("transform", "translate(0," + (r + m) + ")")
+			    .attr("text-anchor","middle")
+			    .attr("class","title-pie")
+			    .text(function(d){ return formatTeam(d[0].team) ; })
+			;
 
 			// The data for each svg element is a row of numbers (an array). We pass that to
 			// d3.layout.pie to compute the angles for each arc. These start and end angles
 			// are passed to d3.svg.arc to draw arcs! Note that the arc radius is specified
 			// on the arc, not the layout.
-			svg.selectAll("path")
-			    .data(d3.layout.pie())
+			svg_pies.selectAll("path")
+			    .data(d3.layout.pie().value(function(d) { return d.step; }))
 			  	.enter().append("path")
 			  	.attr('class','pie')
 			    .attr("d", d3.svg.arc()
 			    .innerRadius(r / 2)
 			    .outerRadius(r))
-			    .style("fill", function(d, i) { return z(i); });
+			    .attr("fill-opacity",0.7)
+			    .style("fill", function(d, i) { return z(i); })
+			  ;
 
 	   	});
 
@@ -367,6 +381,65 @@
               .style("text-anchor", "start")*/
 			;
 
+			// ranking / progression 
+			// set the dimensions and margins of the graph
+			var margin = {top: 20, right: 20, bottom: 30, left: 50},
+			    width = 960 - margin.left - margin.right,
+			    height = 500 - margin.top - margin.bottom;
+
+			// parse the date / time
+			var parseTime = d3.timeParse("%d-%b-%y");
+
+			// set the ranges
+			var x = d3.scaleTime().range([0, width]);
+			var y = d3.scaleLinear().range([height, 0]);
+
+			// define the line
+			var valueline = d3.line()
+			    .x(function(d) { return x(d.date); })
+			    .y(function(d) { return y(d.close); });
+
+			// append the svg obgect to the body of the page
+			// appends a 'group' element to 'svg'
+			// moves the 'group' element to the top left margin
+			var svg = d3.select("body ").append("svg")
+			    .attr("width", width + margin.left + margin.right)
+			    .attr("height", height + margin.top + margin.bottom)
+			  .append("g")
+			    .attr("transform",
+			          "translate(" + margin.left + "," + margin.top + ")");
+
+			// Get the data
+			d3.csv("data.csv", function(error, data) {
+			  if (error) throw error;
+
+			  // format the data
+			  data.forEach(function(d) {
+			      d.date = parseTime(d.date);
+			      d.close = +d.close;
+			  });
+
+			  // Scale the range of the data
+			  x.domain(d3.extent(data, function(d) { return d.date; }));
+			  y.domain([0, d3.max(data, function(d) { return d.close; })]);
+
+			  // Add the valueline path.
+			  svg.append("path")
+			      .data([data])
+			      .attr("class", "line")
+			      .attr("d", valueline);
+
+			  // Add the X Axis
+			  svg.append("g")
+			      .attr("transform", "translate(0," + height + ")")
+			      .call(d3.axisBottom(x));
+
+			  // Add the Y Axis
+			  svg.append("g")
+			      .call(d3.axisLeft(y));
+
+			});
+
 
 		});
 
@@ -401,6 +474,16 @@ function sortTeams(type){
 	  .attr("x", function(d) { return x(d.values.total); })
 	  .attr("y", y.rangeBand() / 2) ;
 
+}
+
+function formatTeam( team_name )
+{
+	if ( team_name == undefined ) return ""; 
+
+	if ( team_name.length >= 10 )
+		return team_name.substr(0,10) + '.' ; 
+
+	return team_name ; 
 }
 
 function formatNum( val )

@@ -473,6 +473,10 @@ h3.daily{
     width: 50px ; 
 }
 
+#proportions_pie .title-pie{
+    font-size: 0.6em ; 
+}
+
 h4{
     text-align: left ; 
     font-size: 0.8em ; 
@@ -517,6 +521,10 @@ span.figure{
 
 .viz,.cycler{
     display: none ; 
+}
+
+path.pie:hover{
+    fill-opacity: 1 ;
 }
 
 .step ul li i{

@@ -52,12 +52,16 @@
 
             
 
-            <h2>Last ranking from the begnning to today </h2>
+            <h2>Overview </h2>
             <!--<div class="row">
                 <div class="col-md-2 filter"><select onchange="sortTeams(this.value)"><option value="step">Number of total steps</option><option value="team">Team name</option></select><label> Sorty by </label></div>
             </div>-->
 
+            <h3>Ranking from the begnning (per number of steps)</h3>
             <div id="bars"></div>
+
+            <h3>Progression per team</h3>
+            <div id="lines"></div>
 
             <h2>Daily statistic </h2>
 
@@ -75,19 +79,16 @@
                         <table width="90%" border="1" border-collapse="collapse">
                         </table>    
                     </div>
-                </div>
-
-                <div class="col-md-6" id="all_team">
-                    <h4>Proportions of steps among all the teams</h4>
-                     <div id="proportions_pie">
-                    </div>
-                </div>
-
-                <div class="col-md-3" id="top_players">
                     <h4>Top best 10 participants</h4>
                     <div id="top_participant_svg">
                         <table width="90%" border="1" border-collapse="collapse">
                         </table>   
+                    </div>
+                </div>
+
+                <div class="col-md-9" id="all_team">
+                    <h4>Proportions of steps among all the teams</h4>
+                     <div id="proportions_pie">
                     </div>
                 </div>
 
