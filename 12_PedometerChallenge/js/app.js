@@ -2,6 +2,8 @@
 
 	var source = [] , dataset = [] , teamsets = [], players = [] , daily = [] , weekly = [] , users = [] ; 
 	var y , x , tooltip ; 
+	var total_pie = 0 ; 
+
 
 	var myDay = new Date();
 	var today = { 'day' : myDay.getUTCDate() , 'month' : myDay.getMonth() + 1  }
@@ -149,12 +151,7 @@
 
 			// multiple pie charts
 			var pie_data = [] ;
-			 /* [ 11975,  5871, 8916, 2868],
-			  [ 1951, 10048, 2060, 6171],
-			  [ 8010, 16145, 8090, 8045],
-			  [ 1013,   990,  940, 6907]
-			];*/
-
+			total_pie = 0 ; 
 			for ( var t in total_team )
 			{
 				pie_data.push( total_team[t].values.src ) ;
@@ -196,7 +193,7 @@
 			// are passed to d3.svg.arc to draw arcs! Note that the arc radius is specified
 			// on the arc, not the layout.
 			svg_pies.selectAll("path")
-			    .data(d3.layout.pie().value(function(d){ return d.step ; }))
+			    .data( d3.layout.pie().value(function(d){ return d.step ; }) )
 			  	.enter().append("path")
 			  	.attr('class','pie')
 			    .attr("d", d3.svg.arc()
@@ -204,6 +201,34 @@
 			    .outerRadius(r))
 			    .attr("fill-opacity",0.7)
 			    .style("fill", function(d, i) { return z(i); })
+			    .on("mousemove", function(d){
+
+			  		var mousePos = getMousePos();
+
+			  		// console.info(d , (100 * d.value) , total_pie );
+
+	                tooltip.style('display', 'block');
+	                tooltip.html(" ");
+	                tooltip.append("div").attr('class','tooltip_pie');
+
+	                var html = '<h5>'+users[d.data.id]+'</h5><p><span> '+formatNum( d.value )+' steps </span></p>' ;
+
+	                $('div.tooltip_pie').append( html ) ; 
+
+
+	                tooltip
+	                	.style('left', (mousePos.x ) + 'px')
+	                	.style('top', (mousePos.y + 20 ) + 'px');
+
+		        })
+		        // mouseout function            
+		        .on("mouseout", function(d){
+
+		            document.body.style.cursor = 'auto';
+		            tooltip.style('display','none');
+		            d3.select(this).style('fill-opacity',1) ; 
+
+		        })  
 			  ;
 
 	   	});
@@ -222,10 +247,10 @@
         }).done( function( xml ) {*/
 
         queue()
-	       	.defer( d3.xml, "/data/data.xml")
+	       	.defer( d3.xml, "data/data.xml")
 		    //.defer( d3.xml, "/data/users.xml")
 		    //.defer( d3.xml, "/data/participants.xml")
-		    .defer( d3.json , "/data/users.json")
+		    .defer( d3.json , "data/users.json")
 
 		    .await(function( error , xml_data , users_json ) {
 
@@ -295,6 +320,23 @@
 				})
 				.entries( dataset ) ;
 
+			var teamsets_lines = d3.nest()
+				.key(function(d){ return d.team })
+				.key(function(d){ return d.date_entry })
+				.rollup(function(team) { 
+					return {
+						"length": team.length, 
+						"total": d3.sum(team, function(d) {
+							return parseFloat(d.step);
+						}),
+						"team" : team 
+					} 
+				})
+				.entries( dataset ) ;
+
+			// for each team, each day, calculate
+
+
 			players  = d3.nest()
 				.key(function(d){ return d.id })
 				.entries( dataset ) ;
@@ -353,7 +395,7 @@
 
 			tooltip = d3.select('body')            
 	          .append('div')                             
-	          .attr('class', 'canTooltip');                 
+	          .attr('class', 'tooltip_pedo');                 
 	        ;  
 
 			var bar = svg.selectAll("g.bar")
@@ -363,13 +405,40 @@
 			  	.attr("transform", function(d,i) { return "translate(0," + y(rank(i)+d.key) + ")"; })
 			  	.on("mousemove", function(d){
 
-	                tooltip.style('display', 'block');
+			  		var mousePos = getMousePos();
 
-	                var coords = d3.mouse(this);
+			  		var team_values = d3.nest()
+			  			.key(function(d){ return d.id; })
+			  			.rollup(function(team) { 
+							return {
+								"length": team.length, 
+								"total": d3.sum(team, function(d) {
+									return parseFloat(d.step);
+								})
+							} 
+						})
+			  			.entries( d.values.team ) ; 
+
+	                team_values.sort(function(a, b) { return b.values.total - a.values.total; });
+
+	                tooltip.style('display', 'block');
+	                tooltip.html(" ");
+
+	                tooltip.append("h5").text(d.key) ;
+	                var table = tooltip.append("table").attr('class','table_bars').attr('border',1).attr('border-collapse','collapse');
+	                var table_inside = '' ; 
+
+	                for ( var t in team_values )
+	                {
+	                	table_inside += "<tr><td align='right'>"+users[team_values[t].key]+"</td><td align='right'>"+formatNum(team_values[t].values.total)+"</td></tr>" ;
+	                }
+
+	                $('.tooltip_pedo table').append("<tr><td align='right'>Participant</td><td align='right'>Total steps</td></tr>" + table_inside ) ;
+
 
 	                tooltip
-	                	.style('top', (coords[1] - 60 ) + 'px')
-	                	.style('left', (coords[0] - 80 ) + 'px');
+	                	.style('left', (mousePos.x ) + 'px')
+	                	.style('top', (mousePos.y + 20 ) + 'px');
 
 		        })
 		        // mouseout function            
@@ -404,10 +473,108 @@
 			  .call(yAxis);
 
 			// ranking / progression 
+			// Set the dimensions of the canvas / graph
+			var margin = {top: 30, right: 20, bottom: 30, left: 50},
+			    width_line = width - margin.left - margin.right,
+			    height = 270 - margin.top - margin.bottom;
+
+			// Parse the date / time
+			var parseDate = d3.time.format("%b %Y").parse;
+
+			// Set the ranges
+			var x = d3.time.scale().range([0, width_line]);
+			var y = d3.scale.linear().range([height, 0]);
+
+			// Define the axes
+			var xAxis = d3.svg.axis().scale(x)
+			    .orient("bottom").ticks(5);
+
+			var yAxis = d3.svg.axis().scale(y)
+			    .orient("left").ticks(5);
+
+			// Define the line
+			var priceline = d3.svg.line()	
+			    .x(function(d) { return x(d.date); })
+			    .y(function(d) { return y(d.price); });
+			    
+			// Adds the svg canvas
+			var svg_lines = d3.select("body #lines")
+			    .append("svg")
+			        .attr("width", width_line + margin.left + margin.right)
+			        .attr("height", height + margin.top + margin.bottom)
+			    	.append("g")
+			        .attr("transform", 
+			              "translate(" + margin.left + "," + margin.top + ")");
+
+			// Get the data
+			d3.csv("data/stocks.csv", function(error, data) {
+
+			    data.forEach(function(d) {
+					d.date = parseDate(d.date);
+					d.price = +d.price;
+			    });
+
+			    // Scale the range of the data
+			    x.domain(d3.extent(data, function(d) { return d.date; }));
+			    y.domain([0, d3.max(data, function(d) { return d.price; })]);
+
+			    // Nest the entries by symbol
+			    var dataNest = d3.nest()
+			        .key(function(d) {return d.symbol;})
+			        .entries(data);
+
+			    var color = d3.scale.category20b();  // set the colour scale
+
+			    // Loop through each symbol / key
+			    dataNest.forEach(function(d) {
+
+			        svg_lines.append("path")
+			            .attr("class", "line")
+			            .style("stroke", function() { // Add dynamically
+			                return d.color = color(d.key); })
+			            .attr("d", priceline(d.values));
+
+			    });
+
+			    // Add the X Axis
+			    svg_lines.append("g")
+			        .attr("class", "x axis")
+			        .attr("transform", "translate(0," + height + ")")
+			        .call(xAxis);
+
+			    // Add the Y Axis
+			    svg_lines.append("g")
+			        .attr("class", "y axis")
+			        .call(yAxis);
+
+			});
+
 		});
 
 	}) ; 
 
+function getMousePos(){
+	var mousePos ; 
+
+	event = event || window.event; // IE-ism
+    if (event.pageX == null && event.clientX != null) {
+        eventDoc = (event.target && event.target.ownerDocument) || document;
+        doc = eventDoc.documentElement;
+        body = eventDoc.body;
+
+        event.pageX = event.clientX +
+          (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+          (doc && doc.clientLeft || body && body.clientLeft || 0);
+        event.pageY = event.clientY +
+          (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
+          (doc && doc.clientTop  || body && body.clientTop  || 0 );
+    }
+
+    return mousePos = {
+        x: event.pageX,
+        y: event.pageY
+    };
+}
 function sortTeams(type){
 
 	switch( type )

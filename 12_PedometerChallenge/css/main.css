@@ -182,7 +182,7 @@ ul#links li i{
   stroke: black;
 }
 
-#bars svg .tick text{
+#bars svg .tick text,#lines svg .tick text{
     font-size: .7em ; 
 }
 
@@ -215,18 +215,63 @@ div.line-hub{
 }
 
 
-.tooltip {
-  background: #eee;
+.tooltip_pedo{
+  background: #fff;
   color: #333;
   display: none;
   left: 130px;
-  padding: 5px 5px 5px 10px ;
+  padding: 0 10px 10px 10px ;
   position: absolute;
   text-align: center;
   top: 95px;
   z-index: 10;
   width: auto ; 
+  opacity: 1;
+  box-shadow: -1px 2px 5px 1px rgba(0, 0, 0, 0.3); 
 }
+
+.tooltip_pedo h5,.tooltip_pie h5{
+    font-size:0.8em ; 
+}
+
+table.table_bars{
+    font-size: 0.7em ; 
+}
+
+table.table_bars td{
+    padding: 1px 5px ; 
+}
+
+table.table_bars tr:first-child{
+    background: #d86422 ; 
+    color: #fff ; 
+    font-weight: 700 ; 
+}
+
+table.table_bars tr:nth-child(even){
+    background: #eee ; 
+}
+
+.tooltip_pie p{
+    font-size: 0.7em ; 
+    padding: 0 ; 
+    margin: 0; 
+}
+
+#lines path { 
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+#lines .axis path,
+#lines .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
 footer h3{
     color: white ; 
 }
