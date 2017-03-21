@@ -154,6 +154,11 @@ ul#links li i{
 
 .bar rect {
   fill: #5892C4;
+  fill-opacity: 0.8 ;
+}
+
+.bar rect:hover{
+  fill : #d86422 ;
 }
 
 .bar text.value {
@@ -209,6 +214,19 @@ div.line-hub{
     font-family: 'Cabin', sans-serif, Arial ; 
 }
 
+
+.tooltip {
+  background: #eee;
+  color: #333;
+  display: none;
+  left: 130px;
+  padding: 5px 5px 5px 10px ;
+  position: absolute;
+  text-align: center;
+  top: 95px;
+  z-index: 10;
+  width: auto ; 
+}
 footer h3{
     color: white ; 
 }
