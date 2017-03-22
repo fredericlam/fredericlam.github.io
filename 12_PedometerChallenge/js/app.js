@@ -13,15 +13,15 @@
 	var timelines = [
 		{
 			'name' : 'Week 1' , 
-			'days' : [[13,3],[14,3],[15,3],[16,3],[17,3]]
+			'days' : [[12,3],[13,3],[14,3],[15,3],[16,3]]
 		},
 		{
 			'name' : 'Week 2', 
-			'days' : [[20,3],[21,3],[22,3],[23,3],[24,3]]
+			'days' : [[19,3],[20,3],[21,3],[22,3],[23,3]]
 		},
 		{
 			'name' : 'Week 3', 
-			'days' : [[27,3],[28,3],[29,3],[30,3],[31,3]]
+			'days' : [[24,3],[25,3],[26,3],[27,3],[28,3]]
 		},
 		{
 			'name' : 'Week 4', 
@@ -66,7 +66,7 @@
 	   			} 
 
 	   			var col_offset 	= ( j == 0 ) ? 'col-md-offset-1' : '' ; 
-	   			sub_days_html 	+= ' <div class="col-md-2 '+col_offset+'"><a href="javascript:void(0);" attr-day="'+cpt+'" class="day_stat '+class_day+' '+class_active+'">Day '+cpt+'</a></div>' ;
+	   			sub_days_html 	+= ' <div class="col-md-2 '+col_offset+'"><a href="javascript:void(0);" attr-day="'+cpt+'" attr-date-entry="'+day[0]+'-'+day[1]+'" class="day_stat '+class_day+' '+class_active+'">Day '+cpt+'</a></div>' ;
 	   			cpt++ ; 
 	   		}
 
@@ -85,8 +85,20 @@
 	   		$(this).addClass('current') ;
 
 	   		var num_day = $(this).attr('attr-day') ; 
+	   		var the_date = $(this).attr('attr-date-entry') ; 
 
-	   		var dataset = daily[num_day-1] ; 
+	   		// console.info( num_day-1 , daily ) ; 
+	   		// var dataset = daily[num_day-1] ; 
+
+	   		for ( var d in daily )
+	   		{
+	   			if( daily[d].key == the_date )
+	   			{
+	   				//console.info( daily[d] );
+	   				var dataset = daily[d] ; 
+	   				break ; 
+	   			}
+	   		}
 
 	   		var d = dataset.key.split('-') ; 
 
@@ -296,8 +308,8 @@
 					'week' : Math.round(item.content.properties.Week.__text.replace('Week #','')) , 
 					'step' : Math.round( item.content.properties.Nb_x0020_steps.__text ) , 
 					'date' : { 'day' : the_day.getUTCDate() , 'month' : the_day.getMonth() + 1  } ,
-					'date_entry' : the_day.getUTCDate() +'-'+ ( the_day.getMonth() + 1 )
-				
+					'date_entry' : the_day.getUTCDate() +'-'+ ( the_day.getMonth() + 1 ) , 	
+					'timestamp' : item.content.properties.Date_x0020_of_x0020_measurement.__text	
 				} ;
 
 				dataset.push( row ) ;  
@@ -340,6 +352,10 @@
 			players  = d3.nest()
 				.key(function(d){ return d.id })
 				.entries( dataset ) ;
+
+			var time_day = daily = d3.nest()
+				.key(function(d){ return d.timestamp ; })
+				.entries( dataset ) ; 
 
 			daily = d3.nest()
 				.key(function(d){ return d.date_entry ; })
