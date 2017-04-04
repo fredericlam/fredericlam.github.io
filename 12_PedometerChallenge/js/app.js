@@ -21,7 +21,7 @@
 		},
 		{
 			'name' : 'Week 3', 
-			'days' : [[24,3],[25,3],[26,3],[27,3],[28,3]]
+			'days' : [[27,3],[28,3],[29,3],[30,3],[31,3]]
 		},
 		{
 			'name' : 'Week 4', 
@@ -53,7 +53,15 @@
 	   		for( var j in timelines[i].days )
 	   		{
 	   			var day =  timelines[i].days[j] ; 
-	   			var class_day 	= ( today.day > day[0] && today.month == (day[1]) ) ? 'active' : 'inactive' ; 
+
+	   			if ( today.month == 3 )
+	   			{
+	   				var class_day 	= ( today.day > day[0] && today.month == (day[1]) ) ? 'active' : 'inactive' ; 
+	   			}
+	   			else
+	   			{
+	   				// var class_day 	= ( today.day > day[0] && today.month == (day[1]) ) ? 'active' : 'inactive' ; 
+	   			}
 
 	   			if( (today.day-1) == day[0] && today.month == (day[1])) 
 	   			{
@@ -117,7 +125,7 @@
 				})
 				.entries( dataset.values ) ;
 			daily_team.sort(function(a, b) { return b.values.total - a.values.total; });
-			daily_team = daily_team.slice(0,10); 
+			// daily_team = daily_team.slice(0,10); 
 
 			var total_team = d3.nest()
 	   			.key(function(d){ return d.team; })
@@ -243,6 +251,8 @@
 		        })  
 			  ;
 
+
+			
 	   	});
 
 
@@ -347,6 +357,24 @@
 				.entries( dataset ) ;
 
 			// for each team, each day, calculate
+
+			var participants_total = d3.nest()
+				.key(function(d){ return d.id })
+				.rollup(function(team) { 
+					return {
+						"name" : users[team.id] , 
+						"length": team.length, 
+						"team" : team 
+					} 
+				})
+				.entries( dataset ) ;
+			participants_total.sort(function(a, b) { return b.values.length - a.values.length; });
+
+			/*var p_tot = [] ; 
+			for ( var p in participants_total )
+			{
+				console.info( users[ participants_total[p].key ] , participants_total[p].values.length ) ; 
+			}*/
 
 
 			players  = d3.nest()
