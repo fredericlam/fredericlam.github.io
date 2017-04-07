@@ -13,11 +13,11 @@
 	var timelines = [
 		{
 			'name' : 'Week 1' , 
-			'days' : [[12,3],[13,3],[14,3],[15,3],[16,3]]
+			'days' : [[13,3],[14,3],[15,3],[16,3],[17,3]]
 		},
 		{
 			'name' : 'Week 2', 
-			'days' : [[19,3],[20,3],[21,3],[22,3],[23,3]]
+			'days' : [[20,3],[21,3],[22,3],[23,3],[24,3]]
 		},
 		{
 			'name' : 'Week 3', 
@@ -46,6 +46,7 @@
 
 	   	// Weekds
 	   	var cpt = 1 ; 
+
 	   	for ( var i in timelines )
 	   	{	
 	   		var sub_days_html = '' ; 
@@ -83,7 +84,7 @@
 	   	}
 
 
-	   	$('#daily_stat').html('Statistics the '+(today.day-1)+'/0'+today.month) ;
+	   	$('#daily_stat').html('Statistics the '+(today.day)+'/0'+today.month) ;
 
 	   	$('a.day_stat').click( function(){
 
@@ -95,8 +96,10 @@
 	   		var num_day = $(this).attr('attr-day') ; 
 	   		var the_date = $(this).attr('attr-date-entry') ; 
 
-	   		// console.info( num_day-1 , daily ) ; 
+	   		// console.info( num_day , the_date , daily ) ; 
 	   		// var dataset = daily[num_day-1] ; 
+
+	   		// console.info( daily ) ; 
 
 	   		for ( var d in daily )
 	   		{
@@ -110,7 +113,7 @@
 
 	   		var d = dataset.key.split('-') ; 
 
-	   		$('#daily_stat').html('Statistics the '+(Math.abs(d[0])+1)+'/0'+d[1]) ;
+	   		$('#daily_stat').html('Statistics the '+(Math.abs(d[0]))+'/0'+d[1]) ;
 
 	   		// top 10 team
 	   		var daily_team = d3.nest()
@@ -306,6 +309,8 @@
 			{
 				var item = source[i] ; 
 				
+				console.info( item.content.properties.Date_x0020_of_x0020_measurement.__text ) ; 
+				
 				var the_day = new Date( item.content.properties.Date_x0020_of_x0020_measurement.__text ) ; 
 
 				var row = {
@@ -322,10 +327,14 @@
 					'timestamp' : item.content.properties.Date_x0020_of_x0020_measurement.__text	
 				} ;
 
+				// console.info( the_day.getUTCDate() , the_day.getMonth() + 1 ) ; 
+
 				dataset.push( row ) ;  
 				
 				// break ; 
 			}
+
+			console.info( dataset ); 
 
 			var sum = d3.sum( dataset , function(d){ return d.step }) ; 
 
