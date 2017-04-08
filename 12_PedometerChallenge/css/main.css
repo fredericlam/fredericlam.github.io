@@ -507,32 +507,39 @@ h3.daily{
 
 }
 
-#weeks_data table{
+table{
     margin: 0 20px ; 
     border: solid 1px #ddd ;
     font-size: 0.7em; 
 }
 
-#weeks_data table th, #weeks_data table td{
+table th, table td{
     padding: 0px 5px ; 
     text-align: left ; 
     vertical-align: top ; 
 }
 
-#weeks_data table th{
+table th{
     color: #fff ; 
     background: #d86422 ; 
 }
-
-#weeks_data table td:first-child,#weeks_data table td:nth-child(3){
+table td:first-child,table td:nth-child(3){
     width: 40px ; 
 }
 
-#weeks_data table tr:nth-child(odd){
+table tr:nth-child(odd){
     background: #F5F5F5 ; 
 }
 
-#weeks_data table td:last-child{
+table td.green{
+    color: green ; 
+}
+
+table td.red{
+    color: red ; 
+}
+
+table td:last-child{
     width: 50px ; 
 }
 

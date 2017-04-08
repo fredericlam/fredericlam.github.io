@@ -356,6 +356,81 @@
 				})
 				.entries( dataset ) ;
 
+			var teamsets_tmp_weekly = d3.nest()
+				.key(function(d){ return d.team })
+				.key(function(d){ return d.week })
+				.rollup(function(team) { 
+					return {
+						"length": team.length, 
+						"total": d3.sum(team, function(d) {
+							return parseFloat(d.step);
+						}),
+						"team" : team 
+					} 
+				})
+				.entries( dataset ) ;
+
+			var teamsets_weekly = [] ; 
+
+			for ( var t in teamsets_tmp_weekly )
+			{
+				var team = teamsets_tmp_weekly[t] ; 
+				var max = team.values.length - 1 ; 
+				var progress = team.values[2].values.total - team.values[0].values.total ; 
+
+				teamsets_weekly.push({
+					'team' 	: team.key , 
+					'week1' : team.values[0].values.total , 
+					'week2' : team.values[1].values.total , 
+					'week3' : team.values[2].values.total , 
+					'week4' : team.values[max].values.total ,  
+					'progress_abs' :  progress , 
+					'progress_percent' : ( progress ) * 100 / team.values[0].values.total
+				}); 
+			}
+
+			var teamsets_weekly_absolute = clone( teamsets_weekly ) ; 
+			teamsets_weekly_absolute.sort(function(a, b) { return b.progress_abs - a.progress_abs; });
+
+			$('#progression_absolute table').html('<thead><th>Position</th><th>Team</th><th>Week 1</th><th>Week 2</th><th>Week 3</th><th>Week 4</th><th>Progression (steps)</th></thead>');
+			for ( var t in teamsets_weekly_absolute )
+			{
+				var row = teamsets_weekly_absolute[t] ; 
+				if( row.progress_percent > 0 )
+				{
+					var class_color = "green" ;
+					var sign = '+' ; 
+				}
+				else
+				{
+					var class_color = "red" ; 
+					var sign = '' ; 
+				}
+				var absolute = sign + ' '+ parseFloat( Math.round( row.progress_abs )) ; 
+				$('#progression_absolute table').append('<tr><td>'+(Math.abs(t)+1)+'</td><td>'+row.team+'</td><td>'+row.week1+'</td><td>'+row.week2+'</td><td>'+row.week3+'</td><td>'+row.week4+'</td><td class="'+class_color+'">'+absolute+'</td></tr>') ;
+			}
+
+			var teamsets_weekly_relative = clone( teamsets_weekly ) ; 
+			teamsets_weekly_absolute.sort(function(a, b) { return b.progress_percent - a.progress_percent; });
+
+			$('#progression_relative table').html('<thead><th>Position</th><th>Team</th><th>Week 1</th><th>Week 2</th><th>Week 3</th><th>Week 4</th><th>Progression (%)</th></thead>');
+			for ( var t in teamsets_weekly_absolute )
+			{
+				var row = teamsets_weekly_absolute[t] ; 
+				if( row.progress_percent > 0 )
+				{
+					var class_color = "green" ;
+					var sign = '+' ; 
+				}
+				else
+				{
+					var class_color = "red" ; 
+					var sign = '' ; 
+				}
+				var percent = sign + ' '+ parseFloat( Math.round( row.progress_percent * 100 ) / 100 ) + '%' ; 
+				$('#progression_relative table').append('<tr><td>'+(Math.abs(t)+1)+'</td><td>'+row.team+'</td><td>'+row.week1+'</td><td>'+row.week2+'</td><td>'+row.week3+'</td><td>'+row.week4+'</td><td class="'+class_color+'">'+percent+'</td></tr>') ;
+			}
+
 			// for each team, each day, calculate
 
 			var participants_total = d3.nest()
@@ -658,6 +733,15 @@ function formatTeam( team_name )
 		return team_name.substr(0,10) + '.' ; 
 
 	return team_name ; 
+}
+
+function clone(obj){
+    try{
+        var copy = JSON.parse(JSON.stringify(obj));
+    } catch(ex){
+      
+    }
+    return copy;
 }
 
 function formatNum( val )
