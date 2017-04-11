@@ -309,8 +309,9 @@
 
 			for ( var i in source )
 			{
-				var item = source[i] ; 
-								
+				var item = source[i] ; 				
+				// console.info( item.content.properties.Date_x0020_of_x0020_measurement.__text ) ; 
+				
 				var the_day = new Date( item.content.properties.Date_x0020_of_x0020_measurement.__text ) ; 
 
 				var row = {
@@ -381,21 +382,38 @@
 
 			var teamsets_weekly = [] ; 
 
+			// console.info( teamsets_tmp_weekly ) ; 
+
 			for ( var t in teamsets_tmp_weekly )
 			{
 				var team = teamsets_tmp_weekly[t] ; 
 				var max = team.values.length - 1 ; 
-				var progress = team.values[2].values.total - team.values[0].values.total ; 
+			
+				var week1 = team.values[0].values.total ; 
+				var week2 = team.values[1].values.total ; 
+				var week3 = team.values[2].values.total ; 
+				var week4 = ( team.values[3] == undefined ) ? 0 : team.values[3].values.total ; 
+
+				var progress1_2 	= week2 - week1 ;
+				var progress1_2_perc= (( week2 - week1 ) * 100 ) / week1 ; 
+
+				var progress2_3 = week3 - week2 ;
+				var progress2_3_perc= (( week3 - week2 ) * 100 ) / week2 ; 
+
+				var progress3_4 = week4 - week3 ;
+				var progress3_4_perc= (( week4 - week3 ) * 100 ) / week3 ; 
 
 				teamsets_weekly.push({
 					'team' 	: team.key , 
-					'week1' : team.values[0].values.total , 
-					'week2' : team.values[1].values.total , 
-					'week3' : team.values[2].values.total , 
-					'week4' : team.values[max].values.total ,  
-					'progress_abs' :  progress , 
-					'progress_percent' : ( progress ) * 100 / team.values[0].values.total
+					'week1' : week1 , 
+					'week2' : week2 , 
+					'week3' : week3 , 
+					'week4' : week4  ,  
+					'progress_abs' :  ( progress1_2 + progress2_3 + progress3_4 ) / 3 , 
+					'progress_percent' : ( progress1_2_perc + progress2_3_perc + progress3_4_perc ) / 3 
 				}); 
+
+				// console.info( team.key , progress1_2_perc , progress2_3_perc , progress3_4_perc  , ( progress1_2_perc + progress2_3_perc + progress3_4_perc ) ) ; 
 			}
 
 			var teamsets_weekly_absolute = clone( teamsets_weekly ) ; 
