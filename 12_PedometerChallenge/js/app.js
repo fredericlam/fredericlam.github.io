@@ -84,9 +84,11 @@
 	   	}
 
 
-	   	$('#daily_stat').html('Statistics the '+(today.day)+'/0'+today.month) ;
+	   	// $('#daily_stat').html('Statistics the '+(today.day)+'/0'+today.month) ;
 
 	   	$('a.day_stat').click( function(){
+
+	   		return ; 
 
 	   		if ( $(this).hasClass('inactive') == true ) return ; 
 
@@ -308,9 +310,7 @@
 			for ( var i in source )
 			{
 				var item = source[i] ; 
-				
-				console.info( item.content.properties.Date_x0020_of_x0020_measurement.__text ) ; 
-				
+								
 				var the_day = new Date( item.content.properties.Date_x0020_of_x0020_measurement.__text ) ; 
 
 				var row = {
@@ -334,7 +334,7 @@
 				// break ; 
 			}
 
-			console.info( dataset ); 
+			// console.info( dataset ); 
 
 			var sum = d3.sum( dataset , function(d){ return d.step }) ; 
 
