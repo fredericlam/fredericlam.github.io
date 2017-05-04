@@ -557,7 +557,7 @@ h4{
 .main-container{
     margin: auto ; 
     margin-top: 30px ; 
-    padding: 100px 15px 0 10px ; 
+    padding: 0px 15px 0 10px ; 
 }
 
 .dataviz{
@@ -868,9 +868,21 @@ form .filter select[name="geography"] option.hub-country{
     padding-left: 15px ; 
 }
 
+#proportions_pie svg{
+    margin: 0 ;
+    padding: 15px 10px 20px 0; 
+    border: solid 1px #cccccc ;
+    border-bottom: none ;
+}
 
+#proportions_pie svg#svg-50,#proportions_pie svg#svg-51,#proportions_pie svg#svg-52,#proportions_pie svg#svg-53{
+    border-bottom: solid 1px #cccccc ;
+}
 
- 
+.legend rect {
+    fill: white;
+    stroke: none;
+}
 
 /* ==========================================================================
    Print styles

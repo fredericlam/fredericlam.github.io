@@ -88,7 +88,7 @@
 
 	   	$('a.day_stat').click( function(){
 
-	   		return ; 
+	   		// return ; 
 
 	   		if ( $(this).hasClass('inactive') == true ) return ; 
 
@@ -196,6 +196,8 @@
 			// Insert an svg element (with margin) for each row in our dataset. A child g
 			// element translates the origin to the pie center.
 			d3.select("body #proportions_pie").html(" ");
+
+			console.info( pie_data );
 
 			var svg_pies = d3.select("body #proportions_pie").selectAll("svg")
 			    .data( pie_data )
