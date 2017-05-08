@@ -83,198 +83,6 @@
 	   		$('.weeks').append( week_html ) ; 
 	   	}
 
-
-	   	// $('#daily_stat').html('Statistics the '+(today.day)+'/0'+today.month) ;
-
-	   	$('a.day_stat').click( function(){
-
-	   		// return ; 
-
-	   		if ( $(this).hasClass('inactive') == true ) return ; 
-
-	   		$('a.day_stat').removeClass('current') ; 
-	   		$(this).addClass('current') ;
-
-	   		var num_day = $(this).attr('attr-day') ; 
-	   		var the_date = $(this).attr('attr-date-entry') ; 
-
-	   		// console.info( num_day , the_date , daily ) ; 
-	   		// var dataset = daily[num_day-1] ; 
-
-	   		// console.info( daily ) ; 
-
-	   		for ( var d in daily )
-	   		{
-	   			if( daily[d].key == the_date )
-	   			{
-	   				//console.info( daily[d] );
-	   				var dataset = daily[d] ; 
-	   				break ; 
-	   			}
-	   		}
-
-	   		var d = dataset.key.split('-') ; 
-
-	   		$('#daily_stat').html('Statistics the '+(Math.abs(d[0]))+'/0'+d[1]) ;
-
-	   		// top 10 team
-	   		var daily_team = d3.nest()
-	   			.key(function(d){ return d.team; })
-	   			.rollup(function(team) { 
-					return {
-						"length": team.length, 
-						"total": d3.sum(team, function(d) {
-							return parseFloat(d.step);
-						})
-					} 
-				})
-				.entries( dataset.values ) ;
-			daily_team.sort(function(a, b) { return b.values.total - a.values.total; });
-			// daily_team = daily_team.slice(0,10); 
-
-			var total_team = d3.nest()
-	   			.key(function(d){ return d.team; })
-	   			.rollup(function(team) { 
-					return {
-						"length": team.length, 
-						"src" : team , 
-						"total": d3.sum(team, function(d) {
-							return parseFloat(d.step);
-						})
-					} 
-				})
-				.entries( dataset.values ) ; ; 
-			total_team.sort(function(a, b) { return b.values.total - a.values.total; });
-
-			$('#top_team_svg table').html('<thead><th>Position</th><th>Team</th><th>Entries</th><th>Steps</th></thead>');
-			for ( var t in daily_team )
-			{
-				$('#top_team_svg table').append('<tr><td>'+(Math.abs(t)+1)+'</td><td>'+daily_team[t].key+'</td><td>'+daily_team[t].values.length+'</td><td>'+formatNum(daily_team[t].values.total)+'</td></tr>') ;
-			}
-
-			// top 10 participants
-	   		var daily_participants = d3.nest()
-	   			.key(function(d){ return d.id; })
-	   			.rollup(function(team) { 
-					return {
-						"length": team.length, 
-						"team": team[0].team , 
-						"total" : parseFloat(team[0].step)
-					} 
-				})
-				.entries( dataset.values ) ;
-
-			daily_participants.sort(function(a, b) { return b.values.total - a.values.total; });
-			daily_participants = daily_participants.slice(0,10); 
-
-			// console.info( users );
-			$('#top_participant_svg table').html('<thead><th>Position</th><th>Participant</th><th>Steps</th></thead>');
-			for ( var t in daily_participants )
-			{
-				$('#top_participant_svg table').append('<tr><td>'+(Math.abs(t)+1)+'</td><td>'+users[daily_participants[t].key]+' ('+daily_participants[t].values.team+')</td><td>'+formatNum(daily_participants[t].values.total)+'</td></tr>') ;
-			}
-
-			// multiple pie charts
-			var pie_data = [] ;
-			total_pie = 0 ; 
-			for ( var t in total_team )
-			{
-				pie_data.push( total_team[t].values.src ) ;
-			}
-
-			// Define the margin, radius, and color scale. The color scale will be
-			// assigned by index, but if you define your data using objects, you could pass
-			// in a named field from the data object instead, such as `d.name`. Colors
-			// are assigned lazily, so if you want deterministic behavior, define a domain
-			// for the color scale.
-			var m = 10,
-			    r = 45,
-			    z = d3.scale.category10();
-
-			// z = colorbrewer['Set1'][6] ; 
-
-			// Insert an svg element (with margin) for each row in our dataset. A child g
-			// element translates the origin to the pie center.
-			d3.select("body #proportions_pie").html(" ");
-
-			console.info( pie_data );
-
-			var svg_pies = d3.select("body #proportions_pie").selectAll("svg")
-			    .data( pie_data )
-			  	.enter().append("svg")
-			    .attr("width", ( (r + m) * 2 ) )
-			    .attr("height", (r + m) * 2)
-			  	.append("g")
-			    .attr("transform", "translate(" + (r + m) + "," + (r + m) + ")")
-			
-			svg_pies
-				.append("text")
-			    .attr("transform", "translate(0," + (r + m) + ")")
-			    .attr("text-anchor","middle")
-			    .attr("class","title-pie")
-			    .text(function(d){ return formatTeam(d[0].team) ; })
-			;
-
-			// The data for each svg element is a row of numbers (an array). We pass that to
-			// d3.layout.pie to compute the angles for each arc. These start and end angles
-			// are passed to d3.svg.arc to draw arcs! Note that the arc radius is specified
-			// on the arc, not the layout.
-			svg_pies.selectAll("path")
-			    .data( d3.layout.pie().value(function(d){ return d.step ; }) )
-			  	.enter().append("path")
-			  	.attr('class','pie')
-			    .attr("d", d3.svg.arc()
-			    .innerRadius(r / 2)
-			    .outerRadius(r))
-			    .attr("fill-opacity",0.7)
-			    .style("fill", function(d, i) { return z(i); })
-			    .on("mousemove", function(d){
-
-			  		var mousePos = getMousePos();
-
-			  		// console.info(d , (100 * d.value) , total_pie );
-
-	                tooltip.style('display', 'block');
-	                tooltip.html(" ");
-	                tooltip.append("div").attr('class','tooltip_pie');
-
-	                var html = '<h5>'+users[d.data.id]+'</h5><p><span> '+formatNum( d.value )+' steps </span></p>' ;
-
-	                $('div.tooltip_pie').append( html ) ; 
-
-
-	                tooltip
-	                	.style('left', (mousePos.x ) + 'px')
-	                	.style('top', (mousePos.y + 20 ) + 'px');
-
-		        })
-		        // mouseout function            
-		        .on("mouseout", function(d){
-
-		            document.body.style.cursor = 'auto';
-		            tooltip.style('display','none');
-		            d3.select(this).style('fill-opacity',1) ; 
-
-		        })  
-			  ;
-
-
-			
-	   	});
-
-
-		/*$.ajax({
-         
-          // url		: "http://intra.iarc.fr/vie-pratique/healthandsafety/_api/lists('%7B1adfaedf-0985-473d-bac0-a435aa0ca88f%7D')/items?$select=Participant/Id,Participant/Team,Week,Nb_x0020_steps&$expand=Participant&$top=10000",
-          url 		: "/data/data.xml" , 
-          headers	: { "Accept": "application/json; odata=verbose" },
-          beforeSend: function (xhr) {
-          	xhr.setRequestHeader("Authorization", "Basic username:password in encode form");
-          },
-          type 		: "GET" 
-
-        }).done( function( xml ) {*/
-
         queue()
 	       	.defer( d3.xml, "data/data.xml")
 		    //.defer( d3.xml, "/data/users.xml")
@@ -288,22 +96,6 @@
 			var xmlString 		= (new XMLSerializer()).serializeToString(xml_data);
 			var json  			= x2js.xml_str2json( xmlString );
 			var source 			= json.feed.entry ;
-
-			/*var xmlString_u 	= (new XMLSerializer()).serializeToString(xml_users);
-			var json_u  		= x2js.xml_str2json( xmlString_u );
-			var source_users 	= json_u.feed.entry ; 
-			for ( var u in source_users )
-			{
-				var user 	= source_users[u] ; 
-				var user_id = Math.abs( user.content.properties.Id.__text ) ; 
-
-				var row 	= {
-					'id' : user_id , 
-					'title' : user.content.properties.Title.__text
-				} ; 
-
-				users[ user_id ] = row  ; 
-			}*/
 
 			
 			for ( var u in users_json ) 
@@ -354,113 +146,183 @@
 				})
 				.entries( dataset ) ;
 
-			var teamsets_lines = d3.nest()
-				.key(function(d){ return d.team })
-				.key(function(d){ return d.date_entry })
-				.rollup(function(team) { 
-					return {
-						"length": team.length, 
-						"total": d3.sum(team, function(d) {
-							return parseFloat(d.step);
-						}),
-						"team" : team 
-					} 
-				})
-				.entries( dataset ) ;
 
-			var teamsets_tmp_weekly = d3.nest()
-				.key(function(d){ return d.team })
+			var teamsets_weeks = d3.nest()
 				.key(function(d){ return d.week })
-				.rollup(function(team) { 
+				.key(function(d){ return d.team; })
+	   			.rollup(function(player) { 
 					return {
-						"length": team.length, 
-						"total": d3.sum(team, function(d) {
+						"length": player.length, 
+						"team" : player[0].team, 
+						"total": d3.sum(player, function(d) {
 							return parseFloat(d.step);
-						}),
-						"team" : team 
+						})
 					} 
 				})
 				.entries( dataset ) ;
 
-			var teamsets_weekly = [] ; 
+			var data_pie_multi = [] ; 
 
-			// console.info( teamsets_tmp_weekly ) ; 
-
-			for ( var t in teamsets_tmp_weekly )
+			for ( var tw in teamsets_weeks )
 			{
-				var team = teamsets_tmp_weekly[t] ; 
-				var max = team.values.length - 1 ; 
+				var week = { key : 'Week '+(Math.abs(tw)+1) , 'values' : [] } ; 
+				var values = [] ; 
+
+				for ( var row in teamsets_weeks[tw].values )
+				{
+					week.values.push( {
+						'label' : teamsets_weeks[tw].values[row].values.team , 
+						'value' : teamsets_weeks[tw].values[row].values.total 
+					} ) ; 
+				}
+
+				data_pie_multi.push( week ) ; 
+			}
+
+			console.info( data_pie_multi ) ; 
+
+			nv.addGraph(function() {
+			    var chart = nv.models.multiBarHorizontalChart()
+			    	.height(800)
+			        .x(function(d) { return d.label })
+			        .y(function(d) { return d.value })
+			        .margin({top: 30, right: 20, bottom: 20, left: 200})
+			        .showValues(true)           //Show bar value next to each bar.
+			        //.tooltips(true)             //Show tooltips on hover.
+			        //.transitionDuration(350)
+			        .stacked(true)
+			        .showControls(true);        //Allow user to switch between "Grouped" and "Stacked" mode.
+
+			    chart.yAxis
+			        .tickFormat(d3.format("s"));
+
+			    d3.select('#multibars svg')
+			        .datum(data_pie_multi)
+			        .call(chart);
+
+			    nv.utils.windowResize(chart.update);
+
+			    return chart;
+			  });
+
+			var teamsets_pie = d3.nest()
+				.key(function(d){ return d.team })
+				.key(function(d){ return d.id; })
+	   			.rollup(function(player) { 
+					return {
+						"length": player.length, 
+						"src" : player , 
+						"total": d3.sum(player, function(d) {
+							return parseFloat(d.step);
+						})
+					} 
+				})
+				.entries( dataset ) ;
+
+			// console.info( teamsets ) ; 
+
+			teamsets_pie.sort(function(a, b) { 
+				if(a.key < b.key) return -1;
+			    if(a.key > b.key) return 1;
+			    return 0;
+			});
+
+			var pie_data = [] ; 
+
+			var toPercent = d3.format("0.1%");
+
+			for ( var t in teamsets_pie )
+			{
+				var team = [] ;
+				var total = d3.sum( teamsets_pie[t].values , function(d){ return d.values.total ; }) 
+				for ( var p in teamsets_pie[t].values )
+				{
+					team.push({ 
+						'team' : teamsets_pie[t].key , 
+						'step' : teamsets_pie[t].values[p].values.total , 
+						'id' : teamsets_pie[t].values[p].key , 
+						'user' : users[ teamsets_pie[t].values[p].key ] , 
+						'percent' : toPercent( teamsets_pie[t].values[p].values.total / total ) 
+					})
+				}
+
+				team.sort(function(a, b) { 
+					if(a.user < b.user) return -1;
+				    if(a.user > b.user) return 1;
+				    return 0;
+				});
+
+				pie_data.push( team ) ; 
+			}
+
+			// Define the margin, radius, and color scale. The color scale will be
+			// assigned by index, but if you define your data using objects, you could pass
+			// in a named field from the data object instead, such as `d.name`. Colors
+			// are assigned lazily, so if you want deterministic behavior, define a domain
+			// for the color scale.
+			var m = 40,
+			    r = 75 ,
+			    z = d3.scale.category10();
+
+			// z = colorbrewer['Set1'][6] ; 
+
+			// Insert an svg element (with margin) for each row in our dataset. A child g
+			// element translates the origin to the pie center.
+			d3.select("body #proportions_pie").html(" ");
+
+			var svg_pies = d3.select("body #proportions_pie").selectAll("svg")
+			    .data( pie_data )
+			  	.enter().append("svg")
+			  	.attr("id",function(d,i){ return "svg-"+i; })
+			    .attr("width", ( (r + m) * 2 ) + 123 )
+			    .attr("height", (r + m) * 2)
+			  	.append("g")
+			    .attr("transform", "translate(" + (r + m) + "," + (r + m) + ")")
 			
-				var week1 = team.values[0].values.total ; 
-				var week2 = team.values[1].values.total ; 
-				var week3 = team.values[2].values.total ; 
-				var week4 = ( team.values[3] == undefined ) ? 0 : team.values[3].values.total ; 
+			svg_pies
+				.append("text")
+			    .attr("transform", "translate(50," + -((r + m)-15) + ")")
+			    .attr("text-anchor","middle")
+			    .attr("class","title-pie")
+			    .style("font-size","16px")
+			    .style("font-weight","bold")
+			    .text(function(d){ return formatTeam(d[0].team) ; })
+			;
 
-				var progress1_2 	= week2 - week1 ;
-				var progress1_2_perc= (( week2 - week1 ) * 100 ) / week1 ; 
+			svg_pies
+				.append("text")
+			    .attr("transform", "translate(50," + -((r + m)-30) + ")")
+			    .attr("text-anchor","middle")
+			    .attr("class","title-pie")
+			    .style("font-size","13px")
+			    .text(function(d){ 
+			    	var total = formatNum( d3.sum( d , function(i){ return i.step ; }) ) ; 
+			    	return total+" steps" ; 
+			    })
+			;
 
-				var progress2_3 = week3 - week2 ;
-				var progress2_3_perc= (( week3 - week2 ) * 100 ) / week2 ; 
+			// The data for each svg element is a row of numbers (an array). We pass that to
+			// d3.layout.pie to compute the angles for each arc. These start and end angles
+			// are passed to d3.svg.arc to draw arcs! Note that the arc radius is specified
+			// on the arc, not the layout.
+			svg_pies.selectAll("path")
+			    .data( d3.layout.pie().value( function(d){ return d.step ; }) )
+			  	.enter().append("path")
+			  	.attr('class','pie')
+			  	.attr("data-legend",function(d) { return d.data.user + " ("+d.data.percent+')'; })
+			    .attr("d", d3.svg.arc()
+			    .innerRadius(r / 2)
+			    .outerRadius(r))
+			    .attr("fill-opacity",0.7)
+			    .style("fill", function(d, i) { return z(i); })
+			  ;
 
-				var progress3_4 = week4 - week3 ;
-				var progress3_4_perc= (( week4 - week3 ) * 100 ) / week3 ; 
-
-				teamsets_weekly.push({
-					'team' 	: team.key , 
-					'week1' : week1 , 
-					'week2' : week2 , 
-					'week3' : week3 , 
-					'week4' : week4  ,  
-					'progress_abs' :  ( progress1_2 + progress2_3 + progress3_4 ) / 3 , 
-					'progress_percent' : ( progress1_2_perc + progress2_3_perc + progress3_4_perc ) / 3 
-				}); 
-
-				// console.info( team.key , progress1_2_perc , progress2_3_perc , progress3_4_perc  , ( progress1_2_perc + progress2_3_perc + progress3_4_perc ) ) ; 
-			}
-
-			var teamsets_weekly_absolute = clone( teamsets_weekly ) ; 
-			teamsets_weekly_absolute.sort(function(a, b) { return b.progress_abs - a.progress_abs; });
-
-			$('#progression_absolute table').html('<thead><th>Position</th><th>Team</th><th>Week 1</th><th>Week 2</th><th>Week 3</th><th>Week 4</th><th>Progression (steps)</th></thead>');
-			for ( var t in teamsets_weekly_absolute )
-			{
-				var row = teamsets_weekly_absolute[t] ; 
-				if( row.progress_percent > 0 )
-				{
-					var class_color = "green" ;
-					var sign = '+' ; 
-				}
-				else
-				{
-					var class_color = "red" ; 
-					var sign = '' ; 
-				}
-				var absolute = sign + ' '+ parseFloat( Math.round( row.progress_abs )) ; 
-				$('#progression_absolute table').append('<tr><td>'+(Math.abs(t)+1)+'</td><td>'+row.team+'</td><td>'+row.week1+'</td><td>'+row.week2+'</td><td>'+row.week3+'</td><td>'+row.week4+'</td><td class="'+class_color+'">'+absolute+'</td></tr>') ;
-			}
-
-			var teamsets_weekly_relative = clone( teamsets_weekly ) ; 
-			teamsets_weekly_absolute.sort(function(a, b) { return b.progress_percent - a.progress_percent; });
-
-			$('#progression_relative table').html('<thead><th>Position</th><th>Team</th><th>Week 1</th><th>Week 2</th><th>Week 3</th><th>Week 4</th><th>Progression (%)</th></thead>');
-			for ( var t in teamsets_weekly_absolute )
-			{
-				var row = teamsets_weekly_absolute[t] ; 
-				if( row.progress_percent > 0 )
-				{
-					var class_color = "green" ;
-					var sign = '+' ; 
-				}
-				else
-				{
-					var class_color = "red" ; 
-					var sign = '' ; 
-				}
-				var percent = sign + ' '+ parseFloat( Math.round( row.progress_percent * 100 ) / 100 ) + '%' ; 
-				$('#progression_relative table').append('<tr><td>'+(Math.abs(t)+1)+'</td><td>'+row.team+'</td><td>'+row.week1+'</td><td>'+row.week2+'</td><td>'+row.week3+'</td><td>'+row.week4+'</td><td class="'+class_color+'">'+percent+'</td></tr>') ;
-			}
-
-			// for each team, each day, calculate
+			 var padding = 20,
+			    legend = svg_pies.append("g")
+			    .attr("class", "legend")
+			    .attr("transform", "translate(" + (r+20) + ", 0)")
+			    .style("font-size", "11px")
+			    .call(d3.legend);
 
 			var participants_total = d3.nest()
 				.key(function(d){ return d.id })
@@ -653,49 +515,6 @@
 			    	.append("g")
 			        .attr("transform", 
 			              "translate(" + margin.left + "," + margin.top + ")");
-
-			// Get the data
-			d3.csv("data/stocks.csv", function(error, data) {
-
-			    data.forEach(function(d) {
-					d.date = parseDate(d.date);
-					d.price = +d.price;
-			    });
-
-			    // Scale the range of the data
-			    x.domain(d3.extent(data, function(d) { return d.date; }));
-			    y.domain([0, d3.max(data, function(d) { return d.price; })]);
-
-			    // Nest the entries by symbol
-			    var dataNest = d3.nest()
-			        .key(function(d) {return d.symbol;})
-			        .entries(data);
-
-			    var color = d3.scale.category20b();  // set the colour scale
-
-			    // Loop through each symbol / key
-			    dataNest.forEach(function(d) {
-
-			        svg_lines.append("path")
-			            .attr("class", "line")
-			            .style("stroke", function() { // Add dynamically
-			                return d.color = color(d.key); })
-			            .attr("d", priceline(d.values));
-
-			    });
-
-			    // Add the X Axis
-			    svg_lines.append("g")
-			        .attr("class", "x axis")
-			        .attr("transform", "translate(0," + height + ")")
-			        .call(xAxis);
-
-			    // Add the Y Axis
-			    svg_lines.append("g")
-			        .attr("class", "y axis")
-			        .call(yAxis);
-
-			});
 
 		});
 

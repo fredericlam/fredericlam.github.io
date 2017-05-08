@@ -884,6 +884,11 @@ form .filter select[name="geography"] option.hub-country{
     stroke: none;
 }
 
+.nvd3 text{
+    font-size: .7em;
+    font-family: sans-serif;
+}
+
 /* ==========================================================================
    Print styles
    ========================================================================== */

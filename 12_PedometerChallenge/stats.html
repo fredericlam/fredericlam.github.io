@@ -30,7 +30,7 @@
         <div class="header-container">
             <header class="wrapper clearfix">
                 <img src="img/logo.jpg" id="logo">
-                <h1 class="title" id="title-map">Pedometer Challenge IARC: last update (10/04 - 10am)  </h1>
+                <h1 class="title" id="title-map">Pedometer Challenge IARC </h1>
                  <ul id="links">
                     <li><a href="http://intra.iarc.fr/vie-pratique/healthandsafety/Lists/Pedometer%20Challenge/NewForm.aspx?RootFolder=" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Add your steps"><i class="fa fa-plus-circle"></i></a></li>
                     <li><a href="http://intra.iarc.fr/vie-pratique/healthandsafety/Documents/Pedometer%20challenge/GameRules.pdf" target="_blank" data-toggle="tooltip" data-placement="bottom" title="Challenge rules"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
@@ -54,10 +54,13 @@
                 <div class="col-md-2 filter"><select onchange="sortTeams(this.value)"><option value="step">Number of total steps</option><option value="team">Team name</option></select><label> Sorty by </label></div>
             </div>-->
 
-            <h3>Ranking from the begnning (per number of steps)</h3>
+            <h3>Ranking </h3>
             <div id="bars"></div>
 
-            <h2>Progression per team</h2>
+            <h3>Ranking grouped by weeks </h3>
+            <div id="multibars"><svg height="800" width="100%"></svg></div>
+
+            <!--<h2>Progression per team</h2>
             
             <div class="row">
                 <div class="col-md-6">
@@ -107,7 +110,10 @@
                     </div>
                 </div>
 
-            </div>
+            </div>-->
+
+            <h3>Proportions per team</h3>
+            <div id="proportions_pie"></div>
 
 
         </div> <!-- #main-container -->
@@ -127,6 +133,8 @@
         <script src="js/vendor/d3.min.js"></script>
         <script src="js/vendor/colorbrewer.js"></script>
         <script src="js/vendor/queue.v1.min.js"></script>
+        <script src="js/vendor/d3.legend.js"></script>
+        <script src="js/vendor/nv.d3.min.js"></script>
 
         <!-- app -->
         <script src="js/app.js"></script>
