@@ -6,9 +6,12 @@
 	       	.defer( d3.csv, "data/lieux_2015.csv" )
 	       	.defer( d3.csv, "data/usagers_2015.csv" )
 	       	.defer( d3.csv, "data/vehicules_2015.csv" )
-	       	.await( function( error , caracteristiques , lieux, usagers, vehicules ) {
+	       	.await( function( error , caracteristiques , lieux , usagers , vehicules ) {
 
-	       		console.info( caracteristiques ) ;
+	       		// console.info( caracteristiques ) ;
+	       		// console.info( lieux ) ;
+	       		// console.info( usagers ) ;
+	       		// console.info( vehicules ) ;
 
 	       	} ); 	
 	    ; 
