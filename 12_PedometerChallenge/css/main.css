@@ -886,7 +886,34 @@ form .filter select[name="geography"] option.hub-country{
 
 .nvd3 text{
     font-size: .7em;
-    font-family: sans-serif;
+    font-family: 'Cabin', sans-serif;
+}
+
+.nvtooltip{
+    color: rgba(0,0,0,1);
+    padding: 1px;
+    z-index: 10000;
+    display: block;
+    font-family: 'Cabin', sans-serif;
+    font-size: 16px;
+    text-align: left;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: #ffffff ; 
+    border-radius: 4px;
+}
+
+.nvtooltip table {
+    margin: 6px;
+    border-spacing: 0;
+    background-color: #fff ; 
+}
+
+#lines svg{
+    height: 350px!important;
 }
 
 /* ==========================================================================

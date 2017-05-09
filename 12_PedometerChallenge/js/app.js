@@ -129,7 +129,63 @@
 				// break ; 
 			}
 
-			// console.info( dataset ); 
+			var per_day = d3.nest()
+				.key(function(d){ return d.date_entry })
+				.rollup(function(day) { 
+					return {
+						"length": day.length, 
+						"total": d3.sum(day, function(d) {
+							return parseFloat(d.step);
+						}),
+						"team" : day 
+					} 
+				})
+				.entries( dataset ) ;
+
+
+			nv.addGraph(function() {
+			var chart = nv.models.lineChart()
+				.height(350)
+                .margin({left: 220})  //Adjust chart margins to give the x-axis some breathing room.
+                .x(function(d,i) { return d.x; })
+                //.useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
+                //.transitionDuration(350)  //how fast do you want the lines to transition?
+                //.showLegend(true)       //Show the legend, allowing users to turn on/off line series.
+                .showYAxis(true)        //Show the y-axis
+                .showXAxis(true)        //Show the x-axis
+			;
+
+			var daysName = ['12/03','13/03','14/03','15/03','16/03','19/03','20/03','21/03','22/03','23/03','26/03','27/03','28/03','29/03','30/03','02/04','03/04','04/04','05/04','06/04'] ; 
+
+			chart.xAxis     //Chart x-axis settings
+			    .axisLabel('Day')
+			    .tickFormat(function(d,i) { return daysName[d] ;});
+			;
+
+			chart.yAxis     //Chart y-axis settings
+			    .axisLabel('Number of steps')
+			    .tickFormat(d3.format('s'))
+			;
+
+			/* Done setting the chart up? Time to render it!*/
+			var lines_data = [{ 'key' : 'Steps' , 'color' : '#CB7E94' , 'values' : [] }] ; 
+
+			for ( var l in per_day )
+			{
+				lines_data[0].values.push({ 'x' : l , 'y' : per_day[l].values.total }) ; 
+			}
+
+			console.info( lines_data );
+
+			d3.select('#lines svg')    //Select the <svg> element you want to render the chart in.   
+			    .datum( lines_data )         //Populate the <svg> element with chart data...
+			    .call(chart);          //Finally, render the chart!
+
+			//Update the chart when window resizes.
+			nv.utils.windowResize(function() { chart.update() });
+			  return chart;
+			});
+
 
 			var sum = d3.sum( dataset , function(d){ return d.step }) ; 
 
@@ -146,6 +202,7 @@
 				})
 				.entries( dataset ) ;
 
+			teamsets.sort(function(a, b) { return b.values.total - a.values.total; });
 
 			var teamsets_weeks = d3.nest()
 				.key(function(d){ return d.week })
@@ -163,38 +220,56 @@
 
 			var data_pie_multi = [] ; 
 
+			var colors = ['#B576AD','#E04644','#FDE47F','#7CCCE5'] ;
+
 			for ( var tw in teamsets_weeks )
 			{
-				var week = { key : 'Week '+(Math.abs(tw)+1) , 'values' : [] } ; 
+				var week = { key : 'Week '+(Math.abs(tw)+1) , 'color' : colors[tw] , 'values' : [] } ; 
 				var values = [] ; 
+				var tmp_values = teamsets_weeks[tw].values ; 
 
-				for ( var row in teamsets_weeks[tw].values )
+				// sorting values 
+				var sorted_values = [] ; 
+				for ( var tm in teamsets )
+				{
+					for( var tmp in tmp_values )
+					{
+						if ( tmp_values[tmp].key == teamsets[tm].key )
+						{
+							sorted_values.push( tmp_values[tmp] ) ; 
+							break ; 
+						}
+					}
+				}
+
+				for ( var row in sorted_values )
 				{
 					week.values.push( {
-						'label' : teamsets_weeks[tw].values[row].values.team , 
-						'value' : teamsets_weeks[tw].values[row].values.total 
+						'label' : sorted_values[row].values.team , 
+						'value' : sorted_values[row].values.total 
 					} ) ; 
 				}
 
 				data_pie_multi.push( week ) ; 
 			}
 
-			console.info( data_pie_multi ) ; 
-
 			nv.addGraph(function() {
 			    var chart = nv.models.multiBarHorizontalChart()
 			    	.height(800)
 			        .x(function(d) { return d.label })
 			        .y(function(d) { return d.value })
-			        .margin({top: 30, right: 20, bottom: 20, left: 200})
+			        .margin({top: 30, right: 20, bottom: 20, left: 225})
 			        .showValues(true)           //Show bar value next to each bar.
 			        //.tooltips(true)             //Show tooltips on hover.
 			        //.transitionDuration(350)
 			        .stacked(true)
-			        .showControls(true);        //Allow user to switch between "Grouped" and "Stacked" mode.
+			        .valueFormat(function(d){
 
-			    chart.yAxis
-			        .tickFormat(d3.format("s"));
+			          return d +' steps' ; 
+			        })
+			        .showControls(false);        //Allow user to switch between "Grouped" and "Stacked" mode.
+
+			    chart.yAxis.tickFormat( d3.format("s") );
 
 			    d3.select('#multibars svg')
 			        .datum(data_pie_multi)
@@ -389,7 +464,7 @@
 
 			// Parse numbers, and sort by value.
 			//teamsets.forEach(function(d) { d.values.total = +d.values.total; });
-			teamsets.sort(function(a, b) { return b.values.total - a.values.total; });
+			
 
 			var rank = function(i){
 				i++ ; 
