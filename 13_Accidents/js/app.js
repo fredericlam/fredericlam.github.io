@@ -47,6 +47,25 @@
 			4  : 'Blessé léger',
 		}
 
+		var obstacles = {
+			1 : 'Véhicule en stationnement',
+			2 : 'Arbre',
+			3 : 'Glissière métallique',
+			4 : 'Glissière béton',
+			5 : 'Autre glissière',
+			6 : 'Bâtiment, mur, pile de pont',
+			7 : 'Support de signalisation verticale ou poste d’appel d’urgence',
+			8 : 'Poteau',
+			9 : 'Mobilier urbain',
+			10 : 'Parapet',
+			11 : 'Ilot, refuge, borne haute',
+			12 : 'Bordure de trottoir',
+			13 : 'Fossé, talus, paroi rocheuse',
+			14 : 'Autre obstacle fixe sur chaussée',
+			15 : 'Autre obstacle fixe sur trottoir ou accotement',
+			16 : 'Sortie de chaussée sans obstacle ',
+		}
+
 		var obstacles_m = {
 			1 : 'Piéton' , 
 			2 : 'Véhicule' , 
@@ -61,6 +80,20 @@
 			2 : 'Passager', 
 			3 : 'Piéton', 
 			4 : 'Piéton en roller ou en trottinette'
+		}
+
+		var sexes = {
+			1 : 'Homme', 
+			2 : 'Femme'
+		}
+
+		var trajets = {
+			1 : 'Domicile <-> travail',
+			2 : 'Domicile <-> école',
+			3 : 'Courses <-> achats',
+			4 : 'Utilisation professionnelle',
+			5 : 'Promenade <-> loisirs',
+			9 : 'Autre' 
 		}
 
 		queue()
@@ -89,17 +122,26 @@
 	       			.entries( usagers_csv ) ; 
 
 	       		var usagers_per_key = [] ; 
+	       		var caracteristiques = [] ; 
 
 	       		for ( var u in usagers )
 	       		{
 	       			usagers_per_key[ usagers[u].key ] = usagers[u] ; 
 	       		}
 
+	       		for ( var c in caracteristiques_csv )
+	       		{
+	       			caracteristiques[ caracteristiques_csv[c].Num_Acc ] = caracteristiques_csv[c] ; 
+	       		}
+
+
 	       		for ( var v in accidents )
 	       		{
 	       			accidents[v].lieu 		= lieux[ accidents[v].values[0].Num_Acc ] ; 
 	       			accidents[v].usagers 	= usagers_per_key[ accidents[v].values[0].Num_Acc ].values ; 
+	       			accidents[v].caracteristiques = caracteristiques[ accidents[v].values[0].Num_Acc ] ; 
 	       		}
+
 
 	       		// console.info( accidents ) ; 
 
@@ -107,22 +149,37 @@
 	       		for ( var c in accidents ) 
 	       		{
 	       			var row = accidents[c] ;
+	       			var values = row.values[0]; 
 	       			
-	       			// console.info( row.usagers ) ; 
+	       			// console.info( values ) ; 
 
 	       			var line = '<tr>' ; 
 	       			line += '<td>'+row.key+'</td>'; // row.key
-	       			line += '<td>'+row.values[0].num_veh+'</td>'; // row.key
+	       			line += '<td>'+row.caracteristiques.com+'</td>'; 
+	       			line += '<td>'+row.caracteristiques.lat+'</td>';
+	       			line += '<td>'+row.caracteristiques.long+'</td>'; 
+	       			line += '<td>'+values.num_veh+'</td>'; 
 	       			line += '<td>'+situation[ row.lieu.situ ]+'</td>'; 
-	       			line += '<td>'+categories_routes[row.lieu.catr]+'</td>'; 
+	       			line += '<td>'+row.caracteristiques.mois+'</td>'; 
+
+	       			var dd = row.caracteristiques.hrmn ; 
+	       			if ( dd.length == 3 ) dd ='0'+dd ; 
+	       			else if ( dd.length == 2 ) dd ='00'+dd ; 
+	       			else if ( dd.length == 1 ) dd = '000'+dd ; 
+
+	       			var tmp =  Array.from(dd) ;
+	       			var time = tmp[0]+tmp[1]+':'+tmp[2]+tmp[3]; 
+
+	       			line += '<td>'+time+'</td>'; 
 	       			line += '<td>'+circulation[ row.lieu.circ ]+'</td>'; 
+	       			line += '<td>'+obstacles[row.values[0].obs] +'</td>'; 
 	       			line += '<td>'+obstacles_m[ row.values[0].obsm ]+'</td>'; 
 
 	       			// usagers 
 	       			var usager_html = '<ol>';
 	       			for ( var u in row.usagers )
 	       			{
-	       				usager_html += '<li>'+cat_usagers[row.usagers[u].catu]+' - '+row.usagers[u].num_veh+' - ('+gravite[row.usagers[u].grav]+')</li>'
+	       				usager_html += '<li>'+cat_usagers[row.usagers[u].catu]+' - '+row.usagers[u].num_veh+' - '+sexes[row.usagers[u].sexe]+' né en '+row.usagers[u].an_nais+' ['+trajets[row.usagers[u].trajet]+'] - ('+gravite[row.usagers[u].grav]+')</li>'
 	       			}
 	       			usager_html += '</ol>';
 
@@ -136,7 +193,11 @@
 
 	       		}
 
-	       		$('#accidents').DataTable();
+	       		var table = $('#accidents').DataTable({
+	       			buttons: ['excel','csv']
+	       		});
+
+	       		table.buttons().container().appendTo( "#download" );
 
 	       	} ); 	
 	    ; 

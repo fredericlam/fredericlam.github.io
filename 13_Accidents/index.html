@@ -14,7 +14,18 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="css/buttons.dataTables.min.css" rel="stylesheet">
 
+    <style type="text/css">
+    body{
+      font-size: 12px ; 
+    }
+    #download{
+      position: absolute;
+      right: 35px;
+      margin-top: -50px;
+    }
+    </style>
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
@@ -55,15 +66,21 @@
           <p><a href="https://www.data.gouv.fr/fr/datasets/base-de-donnees-accidents-corporels-de-la-circulation/" target="_blank">Voir la source des données</a></p>
 
           <h2 class="sub-header">Jeu de données </h2>
+          <div id="download"></div>
           <div class="table-responsive">
             <table class="table table-striped" id="accidents">
               <thead>
                 <tr>
                   <th>Accident</th>
+                  <th>Commune</th>
+                  <th>Long.</th>
+                  <th>Lat.</th>
                   <th>Bicyclette</th>
                   <th>Situation</th>
-                  <th>Catégorie</th>
-                  <th>Circulation</th>                  
+                  <th>Mois</th>
+                  <th>H:min</th>
+                  <th>Circulation</th>      
+                  <th>Obstacle fixe</th>            
                   <th>Obstacle mobile</th>
                   <th>Usagers</th>
                 </tr>
@@ -86,6 +103,8 @@
     <script src="js/d3.min.js"></script>
     <script src="js/underscore.js"></script>
     <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/dataTables.buttons.min.js"></script>
+    <script src="js/buttons.flash.min.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>
