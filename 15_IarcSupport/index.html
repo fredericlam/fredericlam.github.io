@@ -466,7 +466,7 @@ var show_print = '';
 		Globally, more than 8 million people died due to cancer in 2012, and it is estimated that more than 50% of all cancer cases could be prevented based on current knowledge (<a href="http://publications.iarc.fr/Non-Series-Publications/World-Cancer-Reports/World-Cancer-Report-2014" target="_blank">Stewart &amp; Wild, 2014</a>). Cancer can be prevented by minimizing exposure to risk factors and by implementing effective prevention strategies. The cancer burden can also be reduced through screening and early detection. Many cancers have a high rate of cure when they are diagnosed early and treated adequately.
 	</p>
 
-    <h2> Predictions in <span class="year">2012</span>(*)</h2>
+    <h2> Global predictions of new cancer cases and cancer deaths (millions) from 2012 to 2035</h2>
 
     <div class="row">
         <div class="col-md-6 bloc clickable">
@@ -482,9 +482,10 @@ var show_print = '';
         </div>
         <div class="col-md-12" style="text-align:right; ">
         
-            <br/><i class="fa fa-user icon-2" aria-hidden="true" style="color:#cccccc;"></i> = 1000K cases in 2012
-            <br><i class="fa fa-user icon-3" aria-hidden="true"></i> = 1000K cases in 2030
-            <br><i>(*) Source: Globocan 2012 </i> 
+            <!--<br/><i class="fa fa-user icon-2" aria-hidden="true" style="color:#cccccc;"></i> = 1000K cases in 2012
+            <br><i class="fa fa-user icon-3" aria-hidden="true"></i> = 1000K cases in 2030-->
+            <i>(*) Source: Globocan 2012 </i> 
+            <br><i>All cancers excl. non-melanoma skin cancer</i>
         </div>
     </div>
 
@@ -719,8 +720,8 @@ $(document).ready(function () {
     $cancers_predictions = [23000000,14000000] ; 
 
     $cancers = [
-      { 'cancer' : 'Incidence' , 'color' : '#d3eeff', 'color_prediction' : '#3e6c87' ,  'start' : $cancers_start[0] , 'prediction' : $cancers_predictions[0] },
-      { 'cancer' : 'Mortality' , 'color' : '#f0ccd7' , 'color_prediction' :  '#ad000e', 'start' : $cancers_start[1]   , 'prediction' : $cancers_predictions[1] }
+      { 'cancer' : 'New cancer cases' , 'color' : '#d3eeff', 'color_prediction' : '#3e6c87' ,  'start' : $cancers_start[0] , 'prediction' : $cancers_predictions[0] },
+      { 'cancer' : 'Cancer deaths' , 'color' : '#f0ccd7' , 'color_prediction' :  '#ad000e', 'start' : $cancers_start[1]   , 'prediction' : $cancers_predictions[1] }
     ] ;
 
     $icon_base = 1000000 ;  
@@ -791,7 +792,7 @@ $(document).ready(function () {
           $('.year').each(function(){
 
             var start = int( $(this).text() ) ;
-            var prediction = 2030 ; 
+            var prediction = 2035  ; 
 
             $(this).prop('Counter', start ).animate({
                 Counter: prediction
@@ -838,20 +839,22 @@ $(document).ready(function () {
     $(document).ready(function(){
 
         var data = [
-            { 'key' : 'Incidence' , 'values' : [
-                {'label':'2012','value':14000000},
-                {'label':'2015','value':15206036},
-                {'label':'2020','value':19279722},
-                {'label':'2025','value':21645658},
-                {'label':'2030','value':23980858}
-                ] , 'color' : $cancers[0].color_prediction},
-            { 'key' : 'Mortality' , 'values' : [
-                {'label':'2012','value':8201575},
-                {'label':'2015','value':8885195},
-                {'label':'2020','value':10046745},
-                {'label':'2025','value':11443722},
-                {'label':'2030','value':13040545}
-                ] , 'color' : $cancers[1].color_prediction }
+            { 'key' : 'Less developed regions' , 'values' : [
+                {'label':'2012','value':8000000},
+                {'label':'2015','value':8700000},
+                {'label':'2020','value':10000000},
+                {'label':'2025','value':11400000},
+                {'label':'2030','value':13000000},
+                {'label':'2035','value':14700000}
+                ] , 'color' : '#ffbf00'},
+            { 'key' : 'More developed regions' , 'values' : [
+                {'label':'2012','value':6000000},
+                {'label':'2015','value':6400000},
+                {'label':'2020','value':6800000},
+                {'label':'2025','value':7200000},
+                {'label':'2030','value':76000000},
+                {'label':'2035','value':79000000}
+                ] , 'color' : '#32869c' }
         ];
 
         nv.addGraph(function() {
