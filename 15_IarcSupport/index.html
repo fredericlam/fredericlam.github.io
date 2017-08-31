@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 		<title>About IARC - Donations</title>
-
+<base href="http://www.iarc.fr/">
 <meta http-equiv="content-type" content="text/html;charset=windows-1252"/>
 
 <!-- MOBILE VIEWPORT -->
@@ -29,12 +29,67 @@
 
 <link rel="stylesheet" href="/stylesheets/iarc-compiled-v3.css"/>
 <link rel="stylesheet" href="/stylesheets/print.css" type="text/css" media="print"/>
+<link rel="stylesheet" href="http://gcodev.nanga.iarc.lan/today/css/nv.d3.min.css" type="text/css"/>
 
+
+<style type="text/css">
+    h3{
+
+    }
+    .bloc {
+      outline: 0;
+    }
+    /* line 1280, ../sass/pages/_home.scss */
+    .bloc h3 {
+      font-size: 18px;
+      display: block;
+      text-align: center;
+      font-weight: bold;
+      color: #333;
+    }
+    /* line 1288, ../sass/pages/_home.scss */
+    .bloc i {
+      font-size: 2em;
+      margin: 2px;
+    }
+    /* line 1293, ../sass/pages/_home.scss */
+    .bloc .grid-icons {
+      padding: 20px 0px;
+      min-height: 125px;
+      position: relative;
+      width: 40%;
+      margin: auto;
+    }
+    /* line 1299, ../sass/pages/_home.scss */
+    /*.bloc .grid-icons i.pos1-6 {
+      margin-left: 69px;
+    }
+    .bloc .grid-icons i.pos2-2 {
+      margin-left: 52px;
+    }
+    .bloc .grid-icons i.pos3-51 {
+      margin-left: 19px;
+    }*/
+    /* line 1309, ../sass/pages/_home.scss */
+    .bloc .clickable {
+      cursor: pointer;
+    }
+    span.figures {
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 2.4em;
+        font-weight: 700;
+    }
+</style>
 
 <script type="text/javascript">
 var show_print = '';
 </script>
+
 <script src="/javascript/iarc-compiled-v3.js" type="text/javascript"></script>
+<script src="http://gcodev.nanga.iarc.lan/cangraph/vendor/d3.v3.min.js"></script>
+<script src="http://gcodev.nanga.iarc.lan/today/bower_components/nvd3/build/nv.d3.js"></script>
 
 <!--[if lt IE 9]>
 <link rel="stylesheet" href="http://www.iarc.fr/stylesheets/iarc-v3-ie.css"/>
@@ -410,6 +465,37 @@ var show_print = '';
 	<p class="text-justify">
 		Globally, more than 8 million people died due to cancer in 2012, and it is estimated that more than 50% of all cancer cases could be prevented based on current knowledge (<a href="http://publications.iarc.fr/Non-Series-Publications/World-Cancer-Reports/World-Cancer-Report-2014" target="_blank">Stewart &amp; Wild, 2014</a>). Cancer can be prevented by minimizing exposure to risk factors and by implementing effective prevention strategies. The cancer burden can also be reduced through screening and early detection. Many cancers have a high rate of cure when they are diagnosed early and treated adequately.
 	</p>
+
+    <h2> Predictions in <span class="year">2012</span>(*)</h2>
+
+    <div class="row">
+        <div class="col-md-6 bloc clickable">
+            <h3><span class="cancer_name"></span></h3>
+            <div id="home-cancer-1" class="grid-icons"></div>
+            <span class="figures" attr-future=""></span>
+        </div>
+
+        <div class="col-md-6 bloc clickable">
+            <h3><span class="cancer_name"></span></h3>
+            <div id="home-cancer-2" class="grid-icons"></div>
+            <span class="figures" attr-future=""></span>
+        </div>
+        <div class="col-md-12" style="text-align:right; ">
+        
+            <br/><i class="fa fa-user icon-2" aria-hidden="true" style="color:#cccccc;"></i> = 1000K cases in 2012
+            <br><i class="fa fa-user icon-3" aria-hidden="true"></i> = 1000K cases in 2030
+            <br><i>(*) Source: Globocan 2012 </i> 
+        </div>
+    </div>
+
+    <h2> Predictions from 2012 to 2030</h2>
+
+    <div class="row">
+
+        <div id="bars"><svg style="height:550px;"></svg></div>
+
+    </div>
+
 	<br/>
 	<h2>The International Agency for Research on Cancer</h2>
 	<p class="text-justify">
@@ -627,345 +713,227 @@ var show_print = '';
 
 <script type="text/javascript">
 $(document).ready(function () {
-	/* TODO OYA to be uncommented after
-	$("#francefiscal").hide();		
-	$('#francefiscal').attr('checked', false);		
-	*/
-	populateCountries("countrylits", "state");
-	$("#donations_title-error").hide();
-	$("#FirstName-error").hide();
-	$("#FromName-error").hide();
-	$("#FromEmail-error").hide();
-	$("#Address1-error").hide();
-	$("#City-error").hide();
-	$("#postalcode-error").hide();
-	$("#countrylits-error").hide();
-	$("#disclaimerdaf-error").hide();
-	$("#recaptcha-error").hide();
-	$("#otheramountmessage").hide();
-});
-</script>
-<script type="text/javascript">
-	function validateForm() {
-		/* OYA Check required fields */
-		var errormessage = "0";
-		if ($("#donationamount").val() > 5000 || $("#donationamount").val() < 20) {
-			$("#otheramountmessage").text("We can currently accept donation amounts of 20 euros to 5000 euros.");
-			$("#otheramountmessage").show();
-			errormessage = "1";
-		}
-		else {
-			$("#otheramountmessage").hide();
-			
-		}	
-
-		if ($("#donations_title").val() == null || $("#donations_title").val() == "") {
-			$("#donations_title-error").show();			
-			errormessage = "1";
-		} else {
-			$("#donations_title-error").hide();						
-		}
-
-		if ($("#FirstName").val() == null || $("#FirstName").val() == "") {
-			$("#FirstName-error").show();			
-			errormessage = "1";
-		} else {
-			$("#FirstName-error").hide();						
-		}
-
-		if ($("#FromName").val() == null || $("#FromName").val() == "") {
-			$("#FromName-error").show();			
-			errormessage = "1";
-		} else {
-			$("#FromName-error").hide();						
-		}
-		
-		var x = $("#FromEmail").val();
-		var atpos = x.indexOf("@");
-		var dotpos = x.lastIndexOf(".");
-		if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
-			$("#FromEmail-error").show();			
-			errormessage = "1";
-		} else {
-			$("#FromEmail-error").hide();						
-		}
-		
-		if ($("#Address1").val() == null || $("#Address1").val() == "") {
-			$("#Address1-error").show();			
-			errormessage = "1";
-		} else {
-			$("#Address1-error").hide();						
-		}
-		
-		if ($("#City").val() == null || $("#City").val() == "") {
-			$("#City-error").show();			
-			errormessage = "1";
-		} else {
-			$("#City-error").hide();						
-		}
-		
-		if ($("#postalcode").val() == null || $("#postalcode").val() == "") {
-			$("#postalcode-error").show();			
-			errormessage = "1";
-		} else {
-			$("#postalcode-error").hide();						
-		}
-		
-		if ($("#countrylits").val() == null || $("#countrylits").val() == "") {
-			$("#countrylits-error").show();			
-			errormessage = "1";
-		} else {
-			$("#countrylits-error").hide();						
-		}
-		
-		if ($("#disclaimerdaf").is(":checked")) {
-			$("#disclaimerdaf-error").hide();						
-		} else {
-			$("#disclaimerdaf-error").show();			
-			errormessage = "1";
-		}
-
-		var response = grecaptcha.getResponse();
-		//recaptcha failed validation
-		if (response.length == 0) {
-			$("#recaptcha-error").text("Please fill in im not robot");
-			$('#recaptcha-error').css('display', 'inline');
-			errormessage = "1";
-		} else {
-			$('#recaptcha-error').hide();			
-		}
-		
-		
-		if (errormessage == "1") {
-			return false;			
-		}
-		form.submit();	
-		return true;
-	}
-
-
-
-function updateAmount()
-{
-    var price = $("#otheramount").val();
-    $("#donationamount").val(price);
-}
 	
-$('#countrylits').on('change', function() {
-	if (this.value != "-1" && (this.value == "France" || this.value == "French Guiana" || this.value == "French Polynesia" || this.value == "French Southern and Antarctic Lands")) {
-		/* TODO OYA to be uncommented after $("#francefiscal").show();*/
-	}	
-	if (this.value != "France" && this.value != "French Guiana" && this.value != "French Polynesia" && this.value != "French Southern and Antarctic Lands") {
-		/* TODO OYA to be uncommented after $("#francefiscal").hide();*/
-		$('input[name=receipt]').attr('checked', false);
-	}	
-})
+    $highest = 14000000 ; 
+    $cancers_start = [14000000,8000000] ; 
+    $cancers_predictions = [23000000,14000000] ; 
 
-$('.donationsbutton').on('click', function() {
-	$('.donationsbutton').addClass("btn-default");
-	$('.donationsbutton').removeClass("btn-primary");
-	$(this).removeClass("btn-default");
-	$(this).addClass("btn-primary");
-	$("#otheramountmessage").hide();
+    $cancers = [
+      { 'cancer' : 'Incidence' , 'color' : '#d3eeff', 'color_prediction' : '#3e6c87' ,  'start' : $cancers_start[0] , 'prediction' : $cancers_predictions[0] },
+      { 'cancer' : 'Mortality' , 'color' : '#f0ccd7' , 'color_prediction' :  '#ad000e', 'start' : $cancers_start[1]   , 'prediction' : $cancers_predictions[1] }
+    ] ;
 
-	
-	var montant = $(this).text();
-	if ($(this).text() == "OTHER") {
-		$("#donationamount").val("0");
-	} else {
-		$("#donationamount").val(montant.substr(1));		
-	}
-	if ($(this).text() == "OTHER") {
-		$("#otheramount").addClass("required");
-		$('#otheramount').focus()
-	} else {
-		$("#otheramount").removeClass("required");		
-		$("#otheramount").val("");		
-	}
-});
+    $icon_base = 1000000 ;  
+    $icon_base_tpl = $icon_base / 1000 ; 
+    $max_per_lign = 10 ; 
+    $starts = [] ; 
 
-$("#otheramount").focus(function(){
-		$('.donationsbutton').addClass("btn-default");
-		$('.donationsbutton').removeClass("btn-primary");
-		$("#btnother").removeClass("btn-default");
-		$("#btnother").addClass("btn-primary");	
-		$("#otheramount").addClass("required");
-		$("#donationamount").val("0");
-});
-
-$(document).on("change, keyup", "#otheramount", updateAmount);
-
-/* Allow only number for other amount */
-$('#otheramount').keyup(function(e) {
-  if (/\D/g.test(this.value))
-  {
-    // Filter non-digits from input value.
-    this.value = this.value.replace(/\D/g, '');
-	$("#donationamount").val("0");
-  }
-});
+    $('.bloc').each(function(i){
+      var children = $(this).children()  ; 
+      // $(children[0]).html( $scope.cancers[i].cancer + ' in <span class="year">2012</span>' ) ; 
+      $(children[0]).html( $cancers[i].cancer ) ; 
+      $(children[2]).css("color", $cancers[i].color_prediction ) ; 
+      $(children[2]).attr("attr-future", $cancers[i].prediction ) ; 
+      $(children[2]).text( formatNum( $cancers[i].start ) ) ; 
+    }); 
 
 
-/* OYA BEGIN on change on required fields, check the value and display or hide error message depending on the value entered */
-$('#otheramount').change(function() {
-    $('#donationamount').val($(this).val());
-	if ($("#donationamount").val() > 5000 || $("#donationamount").val() < 20) {
-		$("#otheramountmessage").text("We can currently accept donation amounts of 20 euros to 5000 euros.");
-		$("#otheramountmessage").show();
-	}
-	else {
-		$("#otheramountmessage").hide();		
-	}	
-});
+      var color_desactivated = '#ffffff' ; 
+        
+      var width_widget  = 200 ; 
+      var height_widget = 150 ; 
 
-$('#FirstName').change(function() {
-	if ($("#FirstName").val() == null || $("#FirstName").val() == "") {
-		$("#FirstName-error").show();			
-	} else {
-		$("#FirstName-error").hide();						
-	}
-});
+      // one ico = 1M 
+      var ftas = 'user';
+      var icon = '<i class="fa fa-'+ftas+'" aria-hidden="true"></i>' ; 
+      
+      for ( var s in $cancers )
+      {
+        var index = Math.abs(s) + 1 ; 
+        var item = $cancers[s] ; 
+        var nb_icon_start = Math.round( item.start / $icon_base ) ; 
 
-$('#FromName').change(function() {
-	if ($("#FromName").val() == null || $("#FromName").val() == "") {
-		$("#FromName-error").show();			
-	} else {
-		$("#FromName-error").hide();						
-	}
-});
+        $starts.push(nb_icon_start) ; 
 
-$('#FromEmail').change(function() {
-	var x = $("#FromEmail").val();
-	var atpos = x.indexOf("@");
-	var dotpos = x.lastIndexOf(".");
-	if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length) {
-		$("#FromEmail-error").show();			
-	} else {
-		$("#FromEmail-error").hide();						
-	}
-});
+        var line_cpt = 0 ; 
+        for ( var n = 0 ; n < nb_icon_start ; n++ )
+        {
+          line_cpt++ ; 
+          var return_br = '' , before_last_css = '' ;
 
-
-$('#Address1').change(function() {
-	if ($("#Address1").val() == null || $("#Address1").val() == "") {
-		$("#Address1-error").show();			
-	} else {
-		$("#Address1-error").hide();						
-	}
-});
-
-$('#City').change(function() {
-	if ($("#City").val() == null || $("#City").val() == "") {
-		$("#City-error").show();			
-	} else {
-		$("#City-error").hide();						
-	}
-});
-
-$('#postalcode').change(function() {
-	if ($("#postalcode").val() == null || $("#postalcode").val() == "") {
-		$("#postalcode-error").show();			
-	} else {
-		$("#postalcode-error").hide();						
-	}
-});
-
-$('#donations_title').change(function() {
-	if ($("#donations_title").val() == null || $("#donations_title").val() == "") {
-		$("#donations_title-error").show();			
-	} else {
-		$("#donations_title-error").hide();						
-	}
-});
-
-$('#countrylits').change(function() {
-	if ($("#countrylits").val() == null || $("#countrylits").val() == "") {
-		$("#countrylits-error").show();			
-	} else {
-		$("#countrylits-error").hide();						
-	}
-});
-
-var checkbox = $("#disclaimerdaf");
-
-checkbox.change(function(event) {
-    var checkbox = event.target;
-    if (checkbox.checked) {
-		$("#disclaimerdaf-error").hide();						
-        //Checkbox has been checked
-    } else {
-		$("#disclaimerdaf-error").show();						
-        //Checkbox has been unchecked
-    }
-});
-
-var imNotARobot = function() {
-    $('#recaptcha-error').hide();
-};
-/* OYA END on change on required fields, check the value and display or hide error message depending on the value entered */
-/*
-$('#postalcode').keyup(function(e) {
-  if (/\D/g.test(this.value))
-  {
-    // Filter non-digits from input value.
-    this.value = this.value.replace(/\D/g, '');
-  }
-});
-*/
-$('#Phonenumber').keyup(function(e) {
-  if (/\D/g.test(this.value))
-  {
-    // Filter non-digits from input value.
-    this.value = this.value.replace(/\D/g, '');
-  }
-});
-
-/*
-How to get visitor's location (i.e. country) using javascript geolocation
-var requestUrl = "http://ip-api.com/json";
-
-$.ajax({
-  url: requestUrl,
-  type: 'GET',
-  success: function(json)
-  {
-    console.log("My country is: " + json.country);
-  },
-  error: function(err)
-  {
-    console.log("Request failed, error= " + err);
-  }
-});
-*/
-
-$('#otheramount').each(function() {
-    var $me = $(this);
-    var min = 20;
-    var max = 5000;
-    $me.blur(function() {
-        var val = parseInt($me.val());
-        if(!$.isNumeric(val) || val < min || val > max) {
-			var message = "We can currently accept donation amounts of 20 euros to 5000 euros.";
-			$("#otheramountmessage").text(message);
-			$("#otheramountmessage").show();
+          $('#home-cancer-' + index ).append( '<i class="fa fa-'+ftas+' '+before_last_css+'" aria-hidden="true" style="color:'+item.color+';"></i>' + return_br ) ; 
         }
-    });
-});
- 
+       }
 
-$('#resetBtn').on('click', function(e){
-	grecaptcha.reset();
-	$("#otheramountmessage").hide();
-	$("label.error").hide();
-	$('.donationsbutton').addClass("btn-default");
-	$('.donationsbutton').removeClass("btn-primary");
-	$('#btn20').addClass("btn-primary");
-	$('#btn20').removeClass("btn-default");
-	$("#donationamount").val("20");
-});
 
+       setTimeout(function(){
+
+        // console.info("launch"); 
+
+        var prediction_duration = 8000 ; 
+
+          $('.figures').each(function(){
+
+            var start = int( $(this).text() ) ;
+            var prediction = int(  $(this).attr('attr-future') ) ; 
+
+            $(this).prop('Counter', start ).animate({
+                Counter: prediction
+            }, {
+                duration: prediction_duration ,
+                easing: 'linear',
+                step: function (now) {
+                    $(this).text( formatNum( Math.ceil(now) ) ) ;
+                }
+            });
+          }); 
+
+          $('.year').each(function(){
+
+            var start = int( $(this).text() ) ;
+            var prediction = 2030 ; 
+
+            $(this).prop('Counter', start ).animate({
+                Counter: prediction
+            }, {
+                duration: prediction_duration ,
+                easing: 'swing',
+                step: function (now) {
+                    $(this).text( Math.round(now) ) ;
+                }
+            });
+          }) ; 
+
+          var item = $cancers[0] ; 
+          var icon_step = 700 ; 
+
+          var nb_icon = Math.round( (item.prediction - item.start) / $icon_base ) ; 
+
+          var i1 = 0 , i2 = 0 ; 
+          var interval1 = setInterval( function() {
+            
+            $('#home-cancer-1')
+              .append( '<i class="fa fa-'+ftas+' icon-1 pos1-'+i1+'" aria-hidden="true" style="color:'+item.color_prediction+'; display:none ; "></i>' )
+              .find('i.icon-1').fadeIn('slow') ;
+            ;
+            i1++;
+            if (i1 == nb_icon) clearInterval(interval1);
+
+          } , icon_step , nb_icon ) ;
+
+          var item2 = $cancers[1] ; 
+          var nb_icon2 = Math.round( (item2.prediction - item2.start) / $icon_base ) ; 
+          var interval2 = setInterval( function() {
+
+            $('#home-cancer-2')
+            .append( '<i class="fa fa-'+ftas+' icon-2 pos2-'+i2+'" aria-hidden="true" style="color:'+item2.color_prediction+'; display:none ; "></i>' )
+            .find('i.icon-2').fadeIn('slow') ;
+            i2++;
+            if (i2 == nb_icon2) clearInterval(interval2);
+
+          } , icon_step , nb_icon2  ) ;
+
+       },1000);
+
+    $(document).ready(function(){
+
+        var data = [
+            { 'key' : 'Incidence' , 'values' : [
+                {'label':'2012','value':14000000},
+                {'label':'2015','value':15206036},
+                {'label':'2020','value':19279722},
+                {'label':'2025','value':21645658},
+                {'label':'2030','value':23980858}
+                ] , 'color' : $cancers[0].color_prediction},
+            { 'key' : 'Mortality' , 'values' : [
+                {'label':'2012','value':8201575},
+                {'label':'2015','value':8885195},
+                {'label':'2020','value':10046745},
+                {'label':'2025','value':11443722},
+                {'label':'2030','value':13040545}
+                ] , 'color' : $cancers[1].color_prediction }
+        ];
+
+        nv.addGraph(function() {
+            var chart = nv.models.multiBarChart()
+                .x( function(d) { return d.label.toString() ; })
+                .y( function(d) { return d.value ; })
+              .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
+              .rotateLabels(0)      //Angle to rotate x-axis labels.
+              .showControls(false)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
+              .groupSpacing(0.1)    //Distance between each group of bars.
+              .yDomain([ 0, 25000000 ])
+            ;
+            chart.yAxis
+                .tickFormat(d3.format('s'));
+
+
+            d3.select('#bars svg')
+                .datum(data)
+                .call(chart);
+
+            nv.utils.windowResize(chart.update);
+
+            return chart;
+        });
+
+    })
+    
+
+    function int( val ){
+      return Math.abs( val ) ; 
+    }
+
+    function formatNum( val )
+    {   
+        if ( val == undefined ) 
+            return "[error]"; 
+        else
+        {       
+            if ( typeof( VAL_ROUNDED ) != 'undefined' ) 
+            {
+                if ( Math.abs( val ) == 0 ) return 0 ; 
+                
+                if ( VAL_ROUNDED != undefined && VAL_ROUNDED == true )
+                {
+                    // val rounded 
+                    val     = Math.round( val ) ; 
+                    
+                    var ln  = val.toString().length ; 
+
+                    if ( ln > 2 )
+                    {
+                        var first_number = 2 ; 
+
+                        // divide number into 2 sub values
+                        var first = val.toString().substr( 0 , first_number ) ;
+                        var last  = val.toString().substr( first_number, ln ) ;
+                        var first_rounded = last.substr( 0 , 1 ) ; 
+
+                        var end_of_number = 0 ; 
+                        for ( var j = 0 ; j < (last.length-1) ; j++ ) end_of_number += '0'; 
+
+                        // if first number rounded is upper to 5, then the 2 first number ar 
+                        if ( first_rounded >= 5 ) first++ ; 
+
+                        val = first.toString() + end_of_number.toString() ; 
+
+                        // console.info( val , last.length , first , end_of_number ); 
+
+                    }
+                    else
+                    {
+                         
+                    }
+                }
+            }
+            
+            return val.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1\xa0") ; 
+        }
+    }
+
+});
 </script>
-
 
 
                         <!-- PAGE CONTENT: END -->
