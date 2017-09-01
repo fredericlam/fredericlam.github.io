@@ -84,8 +84,8 @@ var show_print = '';
 </script>
 
 <script src="/javascript/iarc-compiled-v3.js" type="text/javascript"></script>
-<script src="http://gcodev.nanga.iarc.lan/cangraph/vendor/d3.v3.min.js"></script>
-<script src="http://gcodev.nanga.iarc.lan/today/bower_components/nvd3/build/nv.d3.js"></script>
+<script src="http://gco.iarc.fr/cangraph/vendor/d3.v3.min.js"></script>
+<script src="http://gco.iarc.fr/today/bower_components/nvd3/build/nv.d3.js"></script>
 
 <!--[if lt IE 9]>
 <link rel="stylesheet" href="http://www.iarc.fr/stylesheets/iarc-v3-ie.css"/>
@@ -467,7 +467,7 @@ var show_print = '';
 
             </div>
 	       <div class="col-md-9">
-                <h3 style="text-decoration:underline; color: #0b80b7;"> Global predictions of new cancer cases and cancer deaths (<span class="millions">millions</span>) from 2012 to 2035</h3>
+                <h3 style="text-decoration:underline; color: #0b80b7;"> Global predictions of new cancer cases and cancer deaths (<span class="millions">millions</span>) from 2012 to 2030</h3>
                 
                
                     <div class="col-md-6 bloc clickable">
@@ -733,7 +733,7 @@ $(document).ready(function () {
 	
     $highest = 14000000 ; 
     $cancers_start = [14000000,8000000] ; 
-    $cancers_predictions = [23000000,14000000] ; 
+    $cancers_predictions = [22000000,13000000] ; 
 
     $cancers = [
       { 'cancer' : 'New cancer cases' , 'color' : '#3aafe0', 'color_prediction' : '#3aafe0' ,  'start' : $cancers_start[0] , 'prediction' : $cancers_predictions[0] },
