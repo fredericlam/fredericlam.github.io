@@ -77,6 +77,42 @@
         font-size: 2.4em;
         font-weight: 700;
     }
+    span.hightlight{
+        font-size: 1.4em;
+        font-weight: 700;
+        color: #0b80b7; 
+    }
+    .nv-legendWrap{
+        display: none ; 
+    }
+
+    #row_bars{
+        position: relative ; 
+    }
+    .legend{
+        position: absolute;
+        right: 40px;
+        top: -40px;
+        font-size: 0.9em;
+        width: 215px;
+    }
+    .legend li{
+        width: 100%; 
+        float: left ; 
+    }
+    .legend span.square{
+        display: block;
+        width: 30px;
+        height: 10px;
+        background: #ccc;
+        float: left;
+        margin: 4px;
+    }
+    .legend span.text{
+        display: block;
+        float: left;
+        color: #000 ;
+    }
 </style>
 
 <script type="text/javascript">
@@ -467,7 +503,7 @@ var show_print = '';
 
             </div>
 	       <div class="col-md-9">
-                <h3 style="text-decoration:underline; color: #0b80b7;"> Global predictions of new cancer cases and cancer deaths (<span class="millions">millions</span>) from 2012 to 2030</h3>
+                <h3 style="color: #0b80b7;"> Global predictions of new cancer cases and cancer deaths (<span class="millions">millions</span>) from 2012 to 2030</h3>
                 
                
                     <div class="col-md-6 bloc clickable">
@@ -491,17 +527,23 @@ var show_print = '';
      </div>   
             
 
-
-
+     <br/>
+     <p>
+     “Along with an increasing NCD burden, more than <span class="hightlight">21 million</span> new cases of cancer are predicted worldwide in <span class="hightlight">2030</span>, with around <span class="hightlight">62%</span> of the burden falling on less developed regions.That will be one case diagnosed every <span class="hightlight">2 seconds</span>!”
+     </p>
         
 
-
-    
-
     <br/>
-    <h3 style="text-decoration:underline; color: #0b80b7; width: 50%; text-align: center;"> Predictions of new cancer cases (<span class="millions">millions</span>) from 2012 to 2035 in less developed and more developed regions (all ages - both sexes)</h3>
+    <h3 style="color: #0b80b7; width: 50%; text-align: center;"> Predictions of new cancer cases (<span class="millions">millions</span>) from 2012 to 2030 in less developed and more developed regions (all ages - both sexes)</h3>
 
-    <div class="row">
+    <div class="row" id="row_bars">
+
+        <div class="legend">
+             <ul>
+                <li><span class="square" id="less" style="background:#1aba9a;"></span> <span class="text">Less developped regions</span></li>
+                <li><span class="square" id="more" style="background:#9959b5;"></span> <span class="text">More developped regions</span></li>
+             <ul>
+         </div> 
 
         <div id="bars"><svg style="height:350px;"></svg></div>
 
@@ -857,21 +899,24 @@ $(document).ready(function () {
         var data = [
             { 'key' : 'Less developed regions' , 'values' : [
                 {'label':'2012','value':8000000},
-                {'label':'2015','value':8700000},
+                {'label':'2015','value':9000000},
                 {'label':'2020','value':10000000},
-                {'label':'2025','value':11400000},
-                {'label':'2030','value':13000000},
-                {'label':'2035','value':14700000}
+                {'label':'2025','value':11500000},
+                {'label':'2030','value':13000000}//,
+                //{'label':'2035','value':15000000}
                 ] , 'color' : '#1aba9a'},
             { 'key' : 'More developed regions' , 'values' : [
                 {'label':'2012','value':6000000},
                 {'label':'2015','value':6400000},
                 {'label':'2020','value':6800000},
                 {'label':'2025','value':7200000},
-                {'label':'2030','value':7600000},
-                {'label':'2035','value':7900000}
+                {'label':'2030','value':7600000}//,
+                //{'label':'2035','value':7900000}
                 ] , 'color' : '#9959b5' }
         ];
+
+        // $('ul.legend span#less').css('background', data[0].color );
+        // $('ul.legend span#more').css('background', data[1].color );
 
         nv.addGraph(function() {
             var chart = nv.models.multiBarChart()
@@ -895,6 +940,49 @@ $(document).ready(function () {
 
             return chart;
         });
+
+
+        setTimeout( function(){
+
+            d3.selectAll('.nv-multibar .nv-group').each(function(group){
+              
+              var g = d3.select(this);
+              
+              // Remove previous labels if there is any
+              g.selectAll('text').remove();
+              g.selectAll('.nv-bar').each(function(bar){
+                var b = d3.select(this);
+                var barWidth = b.attr('width');
+                var barHeight = b.attr('height');
+
+                g.append('text')
+                  // Transforms shift the origin point then the x and y of the bar
+                  // is altered by this transform. In order to align the labels
+                  // we need to apply this transform to those.
+                  .attr('transform', b.attr('transform'))
+                  .attr('stroke','none')
+                  .attr('fill','#000000')
+                  .text(function(){
+                    // Two decimals format
+                    return d3.format('s')(bar.value);
+                  })
+                  .attr('y', function(){
+                    // Center label vertically
+                    var height = this.getBBox().height;
+                    return parseFloat(b.attr('y')) - 10; // 10 is the label's magin from the bar
+                  })
+                  .attr('x', function(){
+                    // Center label horizontally
+                    var width = this.getBBox().width;
+                    return parseFloat(b.attr('x')) + (parseFloat(barWidth) / 2) - (width / 2);
+                  })
+                  .attr('class', 'bar-values');
+              });
+
+            });
+
+        } , 1500 ) ;
+
 
     })
     
