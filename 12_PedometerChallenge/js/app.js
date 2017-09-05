@@ -143,10 +143,10 @@
 				.entries( dataset ) ;
 
 
-			nv.addGraph(function() {
+			/*nv.addGraph(function() {
 			var chart = nv.models.lineChart()
-				.height(350)
-                .margin({left: 220})  //Adjust chart margins to give the x-axis some breathing room.
+				.height(450)
+                .margin({left: 220,top:50,bottom:50})  //Adjust chart margins to give the x-axis some breathing room.
                 .x(function(d,i) { return d.x; })
                 //.useInteractiveGuideline(true)  //We want nice looking tooltips and a guideline!
                 //.transitionDuration(350)  //how fast do you want the lines to transition?
@@ -159,7 +159,7 @@
 
 			chart.xAxis     //Chart x-axis settings
 			    .axisLabel('Day')
-			    .tickFormat(function(d,i) { return daysName[d] ;});
+			    .tickFormat(function(d,i) { return daysName[i] ;});
 			;
 
 			chart.yAxis     //Chart y-axis settings
@@ -167,7 +167,7 @@
 			    .tickFormat(d3.format('s'))
 			;
 
-			/* Done setting the chart up? Time to render it!*/
+			// Done setting the chart up? Time to render it!
 			var lines_data = [{ 'key' : 'Steps' , 'color' : '#CB7E94' , 'values' : [] }] ; 
 
 			for ( var l in per_day )
@@ -175,7 +175,7 @@
 				lines_data[0].values.push({ 'x' : l , 'y' : per_day[l].values.total }) ; 
 			}
 
-			console.info( lines_data );
+			//console.info( lines_data );
 
 			d3.select('#lines svg')    //Select the <svg> element you want to render the chart in.   
 			    .datum( lines_data )         //Populate the <svg> element with chart data...
@@ -184,7 +184,7 @@
 			//Update the chart when window resizes.
 			nv.utils.windowResize(function() { chart.update() });
 			  return chart;
-			});
+			});*/
 
 
 			var sum = d3.sum( dataset , function(d){ return d.step }) ; 

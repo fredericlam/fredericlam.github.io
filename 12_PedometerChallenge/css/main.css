@@ -912,8 +912,13 @@ form .filter select[name="geography"] option.hub-country{
     background-color: #fff ; 
 }
 
-#lines svg{
-    height: 350px!important;
+#lines img{
+    text-align: center ; 
+}
+
+#pic_lines{
+        margin: auto;
+    display: block;
 }
 
 /* ==========================================================================

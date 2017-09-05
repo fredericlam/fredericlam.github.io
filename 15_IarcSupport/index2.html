@@ -91,14 +91,14 @@
     }
     .legend{
         position: absolute;
-        right: 40px;
-        top: -40px;
+        left: 50%;
+        /* top: -40px; */
         font-size: 0.9em;
-        width: 215px;
+        width: 480px;
+        margin-left: -140px;
     }
     .legend li{
-        width: 100%; 
-        float: left ; 
+        display: inline-block;
     }
     .legend span.square{
         display: block;
@@ -490,18 +490,28 @@ var show_print = '';
 <div class="contentpage">
 	<br/>
 	<h2>Support the fight against cancer</h2>
-	<p class="text-justify">
-		Cancer causes enormous suffering for patients and the people close to them. It is imperative that we continue to make progress in reducing the burden that cancer imposes on our society.
-		<span class="textbleudonnation">Cancer can be treated, but better still, it can be prevented.</span>
-	</p>
+	
+    <!--<p class="text-justify">
+		
+	</p>-->
+
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
+            Cancer causes enormous suffering for patients and the people close to them. It is imperative that we continue to make progress in reducing the burden that cancer imposes on our society.
+            <span class="textbleudonnation">Cancer can be treated, but better still, it can be prevented.</span>
+             Globally, more than 8 million people died due to cancer in 2012, and it is estimated that more than 50% of all cancer cases could be prevented based on current knowledge (<a href="http://publications.iarc.fr/Non-Series-Publications/World-Cancer-Reports/World-Cancer-Report-2014" target="_blank">Stewart &amp; Wild, 2014</a>). 
+        </div>
+        <div class="col-md-6">
         <p class="text-justify">
-            Globally, more than 8 million people died due to cancer in 2012, and it is estimated that more than 50% of all cancer cases could be prevented based on current knowledge (<a href="http://publications.iarc.fr/Non-Series-Publications/World-Cancer-Reports/World-Cancer-Report-2014" target="_blank">Stewart &amp; Wild, 2014</a>). Cancer can be prevented by minimizing exposure to risk factors and by implementing effective prevention strategies. The cancer burden can also be reduced through screening and early detection. Many cancers have a high rate of cure when they are diagnosed early and treated adequately.
+           Cancer can be prevented by minimizing exposure to risk factors and by implementing effective prevention strategies. The cancer burden can also be reduced through screening and early detection. Many cancers have a high rate of cure when they are diagnosed early and treated adequately.
         </p>
 
-            </div>
+        </div>
+    </div>
+     <hr/>
+    <div class="row">
+        <div class="col-md-2"></div>
 	       <div class="col-md-8">
                 <h3 style="color: #0b80b7;"> Global predictions of new cancer cases and cancer deaths (<span class="millions">millions</span>) from 2012 to 2030</h3>
                 
@@ -524,14 +534,19 @@ var show_print = '';
                         <br><i>All cancers excl. non-melanoma skin cancer</i>
                     </div>
         </div>   
+        <div class="col-md-2"></div>
      </div>   
-            
+    <hr/>
+      <p>
+     Along with an increasing NCD burden, more than <span class="hightlight">21 million</span> new cases of cancer are predicted worldwide in <span class="hightlight">2030</span>, with around <span class="hightlight">62%</span> of the burden falling on less developed regions.That will mean one case diagnosed every <span class="hightlight">2 seconds</span>
+     </p>
 
+     <hr/>
     
         
 
     <br/>
-    <h3 style="color: #0b80b7; width: 50%; text-align: center;"> Predictions of new cancer cases (<span class="millions">millions</span>) from 2012 to 2030 in less developed and more developed regions (all ages - both sexes)</h3>
+    <h3 style="color: #0b80b7; text-align: center;"> Predictions of new cancer cases (<span class="millions">millions</span>) from 2012 to 2030 in less developed and more developed regions (all ages - both sexes)</h3>
 
     <div class="row" id="row_bars">
 
