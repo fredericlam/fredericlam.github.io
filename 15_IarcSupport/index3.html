@@ -866,7 +866,7 @@ $(document).ready(function () {
 
                     // console.info( $(this).text() , start ) ; 
 
-                    $(this).prop('Counter', start ).animate({
+                    $(this).prop('Counter', start * 1000000 ).animate({
                         Counter: prediction
                     }, {
                         duration: prediction_duration ,
