@@ -631,7 +631,7 @@ var show_print = '';
 		
 	<h2>Still have questions?</h2>
 	<div class="donationsquestionbloc">
-		We would be happy to answer any questions you may have about how to support IARC. Please contact the Agency&prime;s Office of the Director of Administration and Finance at  <script language="JavaScript" type="text/javascript">fncouriel3('daf','');</script>.
+		We would be happy to answer any questions you may have about how to support IARC. Please contact the Agency&prime;s Office of the Director of Administration and Finance at  <script language="JavaScript" type="text/javascript">fnclesouriel3('daf','');</script>.
 	</div>
 	<br/>
 	<br/>
@@ -959,15 +959,17 @@ $(document).ready(function () {
         // $('ul.legend span#less').css('background', data[0].color );
         // $('ul.legend span#more').css('background', data[1].color );
 
+
+
         nv.addGraph(function() {
             var chart = nv.models.multiBarChart()
                 .x( function(d) { return d.label.toString() ; })
                 .y( function(d) { return d.value ; })
-              .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
-              .rotateLabels(0)      //Angle to rotate x-axis labels.
-              .showControls(false)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
-              .groupSpacing(0.2)    //Distance between each group of bars.
-              .yDomain([ 0, 15000000 ])
+                .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
+                .rotateLabels(0)      //Angle to rotate x-axis labels.
+                .showControls(false)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
+                .groupSpacing(0.2)    //Distance between each group of bars.
+                .yDomain([ 0, 15000000 ])
             ;
             chart.yAxis
                 .tickFormat(formatDonate);
