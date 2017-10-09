@@ -31,6 +31,15 @@
 <link rel="stylesheet" href="/stylesheets/print.css" type="text/css" media="print"/>
 <link rel="stylesheet" href="http://gco.iarc.fr/today/css/nv.d3.min.css" type="text/css"/>
 
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="/en/about/donations.css" rel="stylesheet">
+<link rel="stylesheet" href="/stylesheets/override.css"/>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/en/contact-us/jquery.validate.min.js"></script>
+<script src="/en/about/country.js"></script>
+<script src='https://www.google.com/recaptcha/api.js?hl=en'></script>
+
 
 <style type="text/css">
     h3{
@@ -50,6 +59,7 @@
     }
     h3{
         font-weight: normal!important;
+        font-size: 14px; 
     }
     /* line 1288, ../sass/pages/_home.scss */
     .bloc i {
@@ -116,13 +126,13 @@
     .nvd3 .nv-axis.nv-x line {
         stroke: none;
     }
-    .bar-values{
+    /*.bar-values{
         font-size: 14px!important ; 
         fill: #0b80b7;
     }
     .bar-values.left{
         font-weight: bold!important; 
-    }
+    }*/
 </style>
 
 <script type="text/javascript">
@@ -478,14 +488,6 @@ var show_print = '';
                 	<div id="content-inner">
                                                  <!-- PAGE CONTENT: START -->
                         
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="/en/about/donations.css" rel="stylesheet">
-<link rel="stylesheet" href="/stylesheets/override.css"/>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/en/contact-us/jquery.validate.min.js"></script>
-<script src="/en/about/country.js"></script>
-<script src='https://www.google.com/recaptcha/api.js?hl=en'></script>
 
 <div class="page-row bg-blue clearfix">
 	<div class="page-position landmark">
@@ -548,7 +550,7 @@ var show_print = '';
      </div>   
     <hr/>
       <p>
-     About <span class="hightlight">21 million new cases</span> of <span class="hightlight">cancer</span> are <span class="hightlight">predicted worldwide</span> in <span class="hightlight">2030</span>, with <span class="hightlight">two-thirds</span> of the <span class="hightlight">burden</span> falling on <span class="hightlight">less developed regions</span>.That will mean <span class="hightlight">2 new cases every 3 seconds</span>.
+     About <span class="hightlight">21 million new cases</span> of <span class="hightlight">cancer</span> are <span class="hightlight">predicted worldwide</span> in <span class="hightlight">2030</span>, with <span class="hightlight">two-thirds</span> of the <span class="hightlight">burden</span> falling on <span class="hightlight">low and middle income countries </span>.That will mean <span class="hightlight">2 new cases every 3 seconds</span>.
      </p>
 
      <hr/>
@@ -556,14 +558,14 @@ var show_print = '';
         
 
     <br/>
-    <h3 style="color: #0b80b7; text-align: center;"> Predictions of new cancer cases (<span class="millions">millions</span>) from 2012 to 2030 in less developed and more developed regions (all ages - both sexes)</h3>
+    <h3 style="color: #0b80b7; text-align: center;"> Predictions of new cancer cases (<span class="millions">millions</span>) from 2012 to 2030 in low & middle income countries and high income countries  (all ages - both sexes)</h3>
 
     <div class="row" id="row_bars">
 
         <div class="legend">
              <ul>
-                <li><span class="square" id="less" style="background:#1aba9a;"></span> <span class="text">Less developped regions</span></li>
-                <li><span class="square" id="more" style="background:#9959b5;"></span> <span class="text">More developped regions</span></li>
+                <li><span class="square" id="less" style="background:#1aba9a;"></span> <span class="text">Low and middle income countries </span></li>
+                <li><span class="square" id="more" style="background:#9959b5;"></span> <span class="text">High income countries </span></li>
              <ul>
          </div> 
 
@@ -938,7 +940,7 @@ $(document).ready(function () {
     $(document).ready(function(){
 
         var data = [
-            { 'key' : 'Less developed regions' , 'values' : [
+            { 'key' : 'Low and middle income countries' , 'values' : [
                 {'label':'2012','value':8000000},
                 {'label':'2015','value':9000000},
                 {'label':'2020','value':10000000},
@@ -946,7 +948,7 @@ $(document).ready(function () {
                 {'label':'2030','value':13000000}//,
                 //{'label':'2035','value':15000000}
                 ] , 'color' : '#1aba9a'},
-            { 'key' : 'More developed regions' , 'values' : [
+            { 'key' : 'High income countries' , 'values' : [
                 {'label':'2012','value':6000000},
                 {'label':'2015','value':6000000},
                 {'label':'2020','value':7000000},
