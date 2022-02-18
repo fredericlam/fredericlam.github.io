@@ -8,4 +8,4 @@ def test(n):
 	t1 = t.time()
 	print(t1-t0)
 
-test(100000000)
+test(1000)
