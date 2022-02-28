@@ -150,9 +150,6 @@ export default {
 	mounted(){
 
 		this.width = $('#graphic').width() ; 
-
-		this.tooltip = d3.select('#graphic').append('div')
-			.attr('class','tooltip_viz') ; 
 			
 		// create svg
 		this.svg = d3.select('#graphic').append("svg")
@@ -162,6 +159,10 @@ export default {
 	      	.attr("viewBox", [0, 0, this.width, this.height])
 	      	//.attr("style", "max-width: 100%; height: auto;")
 
+	    this.tooltip = d3.select('#graphic').append('div')
+			.attr('class','tooltip_viz') 
+			.style('opacity',0)
+		; 
 
 	    // this.y_scale = d3.scaleLinear()
     		//.range([this.margin.top, this.height - this.margin.bottom- this.margin.top]);
@@ -305,11 +306,21 @@ export default {
 		mouseOver : function( edu ){
 
 			this.g_circles.selectAll(".country")
-				.transition()
-	            .duration(50)
 				.style('opacity', o => {
 					if ( o.asr == 'NA') return 0 ; 
-					let opacity = 0.1 ;
+					let opacity = 0 ;
+					if ( edu.includes(o.edu) ) opacity = 1 ; 
+					return opacity ; 
+				})
+				.transition()
+	            .duration(500)
+	            .attr("cy",this.height-this.margin.bottom)
+				.transition()
+	            .duration(2000)
+	            .attr("cy",d=>this.y_scale(d.asr))
+				.style('opacity', o => {
+					if ( o.asr == 'NA') return 0 ; 
+					let opacity = 0 ;
 					if ( edu.includes(o.edu) ) opacity = 1 ; 
 					return opacity ; 
 				}) ; 
@@ -452,34 +463,40 @@ export default {
 	            .style("stroke","#000")
 	            .style("stroke-width","0.5px")
 	            
-	            /*.on("mousemove", (d)=> {
-	            	this.tooltip.html(`
-	            		<table>
-	            			<tr>
-	            				<td class="metric"></td>
-	            				<td class="value"></td>
-	            			</tr>
-	            		</table>
-	            		`)
-	                .style('top', d3.event.pageY - 12 + 'px')
-	                .style('left', d3.event.pageX + 25 + 'px')
-	                .style("opacity", 0.9);
+	        this.g_circles.selectAll(".country")
+	        	.on("mousemove", (event, d) => {
 
-	                //console.info("d3.select(`circle#${d.country}`)",d3.select(`circle#${d.country}`)) ;
-	                //return ; 
+	        		let pointer = d3.pointer(event,this.g_circles.node())
 
-	            	this.xLine.attr("x1", d=>d.x)
-		                .attr("y1", d=>d.y)
-		                .attr("y2", (this.height - this.margin.bottom))
-		                .attr("x2", d=>d.x)
-		                .attr("opacity", 1);
+		        	this.tooltip.html(`
+		        		<table>
+		        			<tr>
+		        				<td class="metric">Population</td>
+		        				<td class="value">${d.country}</td>
+		        			</tr>
+		        			<tr>
+		        				<td class="metric">Education</td>
+		        				<td class="value">${d.edu}</td>
+		        			</tr>
+		        			<tr>
+		        				<td class="metric">ASR</td>
+		        				<td class="value">${d.asr.toFixed(2)}</td>
+		        			</tr>
+		        		</table>
+		        		`)
+		            .style('top', pointer[1] - 100 + 'px')
+		            .style('left', pointer[0] - 120  + 'px')
+		            .style('display','block')
+		            .style("opacity", 0.9);
+		    	})
 
-	            }).on("mouseout", (_)=> {
-		            
-		            this.tooltip.style("opacity", 0);
+	            .on("mouseout", (_)=> {
+		        	this.tooltip
+		        		.style("top", 0)
+		        		.style("left", 0)
+		        		.style("opacity", 0);
 		            //this.xLine.attr("opacity", 0);
-
-	        	});*/
+	        	});
 
 	            //.attr("cx", d => d.x )
 	            //.attr("cy", d => d.y )
@@ -539,6 +556,10 @@ h1{
 			}
 		}
 	}
+}
+
+#graphic{
+	position: relative ; 
 }
 
 
