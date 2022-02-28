@@ -9,6 +9,12 @@ const routes = [
     component: () => import('./pages/Home.vue') , 
     meta: { breadcrumb: [ { name: 'home' } ] }
   },
+  {
+    path: '/cervix',
+    name: 'cervix',
+    component: () => import('./pages/Cervix.vue') , 
+    meta: { breadcrumb: [ { name: 'home' } ] }
+  },
   // aliases
   { path: "/:catchAll(.*)", redirect: '/404' }
 ] ; 

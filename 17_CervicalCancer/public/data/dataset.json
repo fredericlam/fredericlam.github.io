@@ -1,0 +1,380 @@
+[
+  {
+    "country_iso2": "CH",
+    "country": "Switzerland",
+    "midyear": "2012,5",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Lower",
+    "asmr": "3,542869568"
+  },
+  {
+    "country_iso2": "CH",
+    "country": "Switzerland",
+    "midyear": "2012,5",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Intermediate",
+    "asmr": "2,433331013"
+  },
+  {
+    "country_iso2": "CH",
+    "country": "Switzerland",
+    "midyear": "2012,5",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Higher",
+    "asmr": "1,633623838"
+  },
+  {
+    "country_iso2": "ES",
+    "country": "Spain (National)",
+    "midyear": 2009,
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Lower",
+    "asmr": "4,753269196"
+  },
+  {
+    "country_iso2": "ES",
+    "country": "Spain (National)",
+    "midyear": 2009,
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Intermediate",
+    "asmr": "3,857752323"
+  },
+  {
+    "country_iso2": "ES",
+    "country": "Spain (National)",
+    "midyear": 2009,
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Higher",
+    "asmr": "2,39874053"
+  },
+  {
+    "country_iso2": "SI",
+    "country": "Slovenia",
+    "midyear": 2004,
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Lower",
+    "asmr": "8,655719757"
+  },
+  {
+    "country_iso2": "SI",
+    "country": "Slovenia",
+    "midyear": 2004,
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Intermediate",
+    "asmr": "8,548556328"
+  },
+  {
+    "country_iso2": "SI",
+    "country": "Slovenia",
+    "midyear": 2004,
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Higher",
+    "asmr": "6,096475601"
+  },
+  {
+    "country_iso2": "PL",
+    "country": "Poland",
+    "midyear": 2012,
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Lower",
+    "asmr": "21,226511"
+  },
+  {
+    "country_iso2": "PL",
+    "country": "Poland",
+    "midyear": 2012,
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Intermediate",
+    "asmr": "12,74424553"
+  },
+  {
+    "country_iso2": "PL",
+    "country": "Poland",
+    "midyear": 2012,
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Higher",
+    "asmr": "7,293757439"
+  },
+  {
+    "country_iso2": "NO",
+    "country": "Norway",
+    "midyear": "2007,9",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Lower",
+    "asmr": "10,17312717"
+  },
+  {
+    "country_iso2": "NO",
+    "country": "Norway",
+    "midyear": "2007,9",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Intermediate",
+    "asmr": "4,85094595"
+  },
+  {
+    "country_iso2": "NO",
+    "country": "Norway",
+    "midyear": "2007,9",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Higher",
+    "asmr": "2,875587702"
+  },
+  {
+    "country_iso2": "LT",
+    "country": "Lithuania",
+    "midyear": "2012,6",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Lower",
+    "asmr": "35,76032257"
+  },
+  {
+    "country_iso2": "LT",
+    "country": "Lithuania",
+    "midyear": "2012,6",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Intermediate",
+    "asmr": "16,91221046"
+  },
+  {
+    "country_iso2": "LT",
+    "country": "Lithuania",
+    "midyear": "2012,6",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Higher",
+    "asmr": "6,832378864"
+  },
+  {
+    "country_iso2": "IT",
+    "country": "Italy (Torino)",
+    "midyear": "2012,8",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Lower",
+    "asmr": "2,64174962"
+  },
+  {
+    "country_iso2": "IT",
+    "country": "Italy (Torino)",
+    "midyear": "2012,8",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Intermediate",
+    "asmr": "1,497197032"
+  },
+  {
+    "country_iso2": "IT",
+    "country": "Italy (Torino)",
+    "midyear": "2012,8",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Higher",
+    "asmr": "2,141744614"
+  },
+  {
+    "country_iso2": "HU",
+    "country": "Hungary",
+    "midyear": 2011,
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Lower",
+    "asmr": "14,94416904"
+  },
+  {
+    "country_iso2": "HU",
+    "country": "Hungary",
+    "midyear": 2011,
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Intermediate",
+    "asmr": "9,504232407"
+  },
+  {
+    "country_iso2": "HU",
+    "country": "Hungary",
+    "midyear": 2011,
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Higher",
+    "asmr": "7,412825108"
+  },
+  {
+    "country_iso2": "FI",
+    "country": "Finland",
+    "midyear": 2013,
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Lower",
+    "asmr": "4,009594917"
+  },
+  {
+    "country_iso2": "FI",
+    "country": "Finland",
+    "midyear": 2013,
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Intermediate",
+    "asmr": "2,024705887"
+  },
+  {
+    "country_iso2": "FI",
+    "country": "Finland",
+    "midyear": 2013,
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Higher",
+    "asmr": "1,577156186"
+  },
+  {
+    "country_iso2": "EE",
+    "country": "Estonia",
+    "midyear": "2013,5",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Lower",
+    "asmr": "40,47546387"
+  },
+  {
+    "country_iso2": "EE",
+    "country": "Estonia",
+    "midyear": "2013,5",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Intermediate",
+    "asmr": "13,76121521"
+  },
+  {
+    "country_iso2": "EE",
+    "country": "Estonia",
+    "midyear": "2013,5",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Higher",
+    "asmr": "4,79898262"
+  },
+  {
+    "country_iso2": "UK",
+    "country": "England/Wales",
+    "midyear": "2012,1",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Lower",
+    "asmr": "8,496091843"
+  },
+  {
+    "country_iso2": "UK",
+    "country": "England/Wales",
+    "midyear": "2012,1",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Higher",
+    "asmr": "3,379929304"
+  },
+  {
+    "country_iso2": "UK",
+    "country": "England/Wales",
+    "midyear": "2012,1",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Intermediate",
+    "asmr": "NA"
+  },
+  {
+    "country_iso2": "CZ",
+    "country": "Czech Republic",
+    "midyear": "2000,5",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Lower",
+    "asmr": "15,16193771"
+  },
+  {
+    "country_iso2": "CZ",
+    "country": "Czech Republic",
+    "midyear": "2000,5",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Intermediate",
+    "asmr": "10,79236317"
+  },
+  {
+    "country_iso2": "CZ",
+    "country": "Czech Republic",
+    "midyear": "2000,5",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Higher",
+    "asmr": "5,343547821"
+  },
+  {
+    "country_iso2": "BE",
+    "country": "Belgium",
+    "midyear": "2008,9",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Lower",
+    "asmr": "5,881646156"
+  },
+  {
+    "country_iso2": "BE",
+    "country": "Belgium",
+    "midyear": "2008,9",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Intermediate",
+    "asmr": "4,60529089"
+  },
+  {
+    "country_iso2": "BE",
+    "country": "Belgium",
+    "midyear": "2008,9",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Higher",
+    "asmr": "2,426483631"
+  },
+  {
+    "country_iso2": "AT",
+    "country": "Austria",
+    "midyear": "2012,3",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Lower",
+    "asmr": "6,100168228"
+  },
+  {
+    "country_iso2": "AT",
+    "country": "Austria",
+    "midyear": "2012,3",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Intermediate",
+    "asmr": "4,687691212"
+  },
+  {
+    "country_iso2": "AT",
+    "country": "Austria",
+    "midyear": "2012,3",
+    "cancer.02": "Cervix",
+    "sex": "Women",
+    "edu_3cat": "Higher",
+    "asmr": "4,776012897"
+  }
+]

@@ -6,13 +6,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet" type="text/css">
+
 		<style type="text/css">
 		/* ---- reset ---- */ 
-		body{ margin:0; font:normal 75% Arial, Helvetica, sans-serif; } 
+		body{ margin:0; font-family: 'Source Sans Pro', sans-serif;} 
 		canvas{ display: block; vertical-align: bottom; } 
 		/* ---- particles.js container ---- */ 
 
-		#particles-js{ position:absolute; width: 100%; height: 100%; background-color: #1822b6; background-image: url(""); background-repeat: no-repeat; background-size: cover; background-position: 50% 50%; } 
+		#particles-js{ position:absolute; width: 100%; height: 100%; background-color: #1e7fb8; background-image: url(""); background-repeat: no-repeat; background-size: cover; background-position: 50% 50%; } 
 
 		/* ---- stats.js ---- */ 
 		.count-particles{ background: #a317b6; position: absolute; top: 48px; left: 0; width: 80px; color: #13E8E9; font-size: .8em; text-align: left; text-indent: 4px; line-height: 14px; padding-bottom: 2px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; } 
@@ -22,12 +26,11 @@
 		#stats{ border-radius: 3px 3px 0 0; overflow: hidden; } 
 		.count-particles{ border-radius: 0 0 3px 3px; }
 		.panel {
-		    font-family: 'Source Sans Pro';
 		    font-size: 1.3em;
 		    position: absolute;
 		    z-index: 10;
-		    width: 200px;
-		    height: 220px;
+		    width: 280px;
+    		height: 250px;
 		    background: #eee;
 		    top: 50%;
 		    left: 50%;
@@ -54,7 +57,7 @@
 		  }
 
 		.panel  h2{
-		    font-weight:400;
+		    font-weight:900;
 		    font-size:.8em;
 		    margin-bottom:16px;
 		    text-align:center;
@@ -71,21 +74,56 @@
 		    margin-top:10px;
 		    color:#222 ;
 		 }
+
+		 .panel img{
+		 	max-width: 50px;
+		 	display: block;
+		 	margin: auto;
+		 }
 		</style>
 	</head>
 	<body id="top">
 
 		<div class="panel" style="display: block;">
 			<h1>Frédéric LAM</h1>
-		  	<span class="r-version"></span>
-			<h2>Senior assistant information(web) at International Agency on Research for Cancer / World Health Organisation</h2>		
+		  	<span class="r-version">International Agency on Research for Cancer / World Health Organisation</span>
+			<h2>Senior Assistant Information</h2>	
+
+			<ul>
+				<li>
+		      		<a href="https://github.com/VincentGarreau/particles.js/" target="_blank">
+				        <span class="label">GitHub</span>
+				        <div class="svg-wrap">
+				          <svg class="icon-github">
+				            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-github"></use>
+				          </svg>
+				        </div>
+		      		</a>
+	    		</li>
+				<li>
+			      	<a href="https://www.linkedin.com/fredericlam">
+			        	<span class="label">Linkedin</span>
+				        <div class="svg-wrap">
+				          <svg class="icon-download">
+				            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-download"></use>
+				          </svg>
+				        </div>
+			      	</a>
+		    	</li>
+			</ul>
+
+			<p>
+				<a href="https://www.iarc.fr" target="_blank">
+					<img src="/images/who.jpeg" title="IARC / WHO">
+				</a>
+			</p>	
 		</div>
 
 		<!-- particles.js container --> 
 		<div id="particles-js"></div> 
 
 		<!-- particles.js lib - https://github.com/VincentGarreau/particles.js -->
-		<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+		<script src="/js/particles.min.js"></script>
 
 		<!-- stats.js lib -->
 		<script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
