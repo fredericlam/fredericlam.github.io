@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Portfolio - Data Visualization Projects</title>
+
+		<link rel="stylesheet" href="../19_PresentationsRevealJS/dist/reset.css">
+		<link rel="stylesheet" href="../19_PresentationsRevealJS/dist/reveal.css">
+		<link rel="stylesheet" href="../19_PresentationsRevealJS/dist/theme/iarc.css">
+
+		<style>
+			.iarc-logo {
+				position: fixed;
+				bottom: 30px;
+				left: 30px;
+				z-index: 10;
+			}
+			
+			.balls-decoration {
+				position: fixed;
+				bottom: 30px;
+				right: 30px;
+				z-index: 10;
+				opacity: 0;
+				transition: opacity 0.3s;
+			}
+			
+			body.transition-complete:not(.show-right-bg) .balls-decoration {
+				opacity: 1;
+			}
+			
+			/* Circle decoration for titles */
+			.reveal .slides section h1::before,
+			.reveal .slides section h2::before {
+				content: '';
+				display: inline-block;
+				width: 36px;
+				height: 36px;
+				background-color: #f19c82;
+				border-radius: 50%;
+				margin-right: 15px;
+				vertical-align: middle;
+			}
+			
+			/* Alternating background images for slides */
+			body::before {
+				content: '';
+				position: fixed;
+				right: 0;
+				top: 0;
+				width: 550px;
+				height: 100vh;
+				background-image: url('../19_PresentationsRevealJS/images/right-bg.png');
+				background-position: right center;
+				background-repeat: no-repeat;
+				background-size: cover;
+				pointer-events: none;
+				z-index: 0;
+				opacity: 0;
+				transition: opacity 0.3s;
+			}
+			
+			body.show-right-bg::before {
+				opacity: 1;
+			}
+			
+			/* Project cards styling */
+			.project-grid {
+				display: grid;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 20px;
+				margin-top: 20px;
+			}
+			
+			.project-card {
+				background: rgba(255, 255, 255, 0.1);
+				padding: 15px;
+				border-radius: 8px;
+				border-left: 4px solid #f19c82;
+			}
+			
+			.project-card h3 {
+				margin: 0 0 10px 0 !important;
+				font-size: 1.2em;
+			}
+			
+			.project-card p {
+				margin: 5px 0 !important;
+				font-size: 0.8em;
+			}
+			
+			.project-card a {
+				color: #f19c82;
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<!-- IARC Logo -->
+			<img src="../19_PresentationsRevealJS/images/iarc-logo.png" class="iarc-logo" alt="IARC Logo">
+			<!-- Balls decoration -->
+			<img src="../19_PresentationsRevealJS/images/balls.png" class="balls-decoration" alt="Balls Decoration">
+			
+			<div class="slides">
+				<!-- Title Slide -->
+				<section data-markdown>
+					<textarea data-template>
+						# Portfolio
+						### Data Visualization & Web Projects
+						
+						Frederic Lam
+					</textarea>
+				</section>
+				
+				<!-- Overview -->
+				<section data-markdown>
+					<textarea data-template>
+						## Overview
+						
+						- 📊 **18+ Data Visualization Projects**
+						- 🌍 **Geographic & Interactive Maps**
+						- 📈 **Health & Cancer Research Visualizations**
+						- 🎨 **Custom D3.js & Chart Libraries**
+						- 🔧 **Python & JavaScript Tools**
+					</textarea>
+				</section>
+				
+				<!-- Elections & Geographic Viz -->
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							## Geographic Visualizations
+							
+							Interactive maps and regional data
+							
+							**↓ Explore Projects ↓**
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### French Regional Elections 2015
+							
+							**Technologies**: D3.js, GeoJSON, TopoJSON
+							
+							**Features**:
+							- Interactive department-level results
+							- Political party breakdown
+							- Regional aggregation
+							
+							[View Project](../01_ElectionsRegionales2015/)
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### Thailand Map Visualization
+							
+							**Technologies**: D3.js, NVD3, TopoJSON
+							
+							**Features**:
+							- Regional data overlay
+							- Multiple chart types (pie, bar)
+							- Responsive design
+							
+							[View Project](../02_ThailandMap/)
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### French Presidential Elections
+							
+							**Technologies**: D3.js, GeoJSON
+							
+							**Features**:
+							- Real-time results visualization
+							- Department-level mapping
+							- Comparative analysis
+							
+							[View Project](../14_presidentielles/)
+						</textarea>
+					</section>
+				</section>
+				
+				<!-- Health & Cancer Research -->
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							## Health & Cancer Research
+							
+							Data visualizations for medical research
+							
+							**↓ Explore Projects ↓**
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### Breast Cancer Screening (EU)
+							
+							**Focus**: European screening programs
+							
+							**Features**:
+							- Country comparison
+							- Screening rates over time
+							- Interactive charts
+							
+							[View Project](../06_Breast_EU_Screening/)
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### Carcinogen Database
+							
+							**Focus**: Known carcinogens research
+							
+							**Features**:
+							- Searchable database
+							- Classification system
+							- Evidence levels
+							
+							[View Project](../10_Carcinogen/)
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### Cervical Cancer Visualization
+							
+							**Technologies**: Vite, Modern JavaScript
+							
+							**Features**:
+							- Global incidence data
+							- Risk factors analysis
+							- Prevention strategies
+							
+							[View Project](../17_CervicalCancer/)
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### Female Genital Mutilation (FGM)
+							
+							**Focus**: Global FGM prevalence data
+							
+							**Features**:
+							- Country-level statistics
+							- Age group breakdown
+							- Trend analysis
+							
+							[View Project](../11_FGM/)
+						</textarea>
+					</section>
+				</section>
+				
+				<!-- Sports & Social -->
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							## Sports & Social Visualizations
+							
+							Cycling, football, and social data
+							
+							**↓ Explore Projects ↓**
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### Champions Cyclistes
+							
+							**Focus**: Professional cycling champions
+							
+							**Features**:
+							- Career statistics
+							- Race results timeline
+							- Performance metrics
+							
+							[View Project](../04_ChampionsCyclistes/)
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### OL-ASSE Football Network
+							
+							**Technologies**: D3.js force layout
+							
+							**Features**:
+							- Player connections
+							- Team relationships
+							- Network visualization
+							
+							[View Project](../03_OL_ASSE/)
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### Pedometer Challenge
+							
+							**Focus**: Fitness tracking visualization
+							
+							**Features**:
+							- Daily step counts
+							- Progress tracking
+							- Goal visualization
+							
+							[View Project](../12_PedometerChallenge/)
+						</textarea>
+					</section>
+				</section>
+				
+				<!-- Policy & Demographics -->
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							## Policy & Demographics
+							
+							Social policy and demographic data
+							
+							**↓ Explore Projects ↓**
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### Maternity Leave Policies
+							
+							**Focus**: Global maternity leave comparison
+							
+							**Features**:
+							- Country policies
+							- Duration comparison
+							- Paid vs unpaid leave
+							
+							[View Project](../05_MaternityLeave/)
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### Population Pyramid
+							
+							**Technologies**: D3.js
+							
+							**Features**:
+							- Age distribution
+							- Gender comparison
+							- Time series animation
+							
+							[View Project](../07_Pyramid/)
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### Traffic Accidents Analysis
+							
+							**Focus**: Road safety statistics
+							
+							**Features**:
+							- Accident hotspots
+							- Time-based patterns
+							- Severity analysis
+							
+							[View Project](../13_Accidents/)
+						</textarea>
+					</section>
+				</section>
+				
+				<!-- Tools & Utilities -->
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							## Tools & Utilities
+							
+							Development tools and experiments
+							
+							**↓ Explore Projects ↓**
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### Lab Graph Visualization
+							
+							**Technologies**: D3.js, custom layouts
+							
+							**Features**:
+							- Research network graphs
+							- Interactive exploration
+							- Data relationships
+							
+							[View Project](../08_LabGraph/)
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### GICR Data Platform
+							
+							**Focus**: Global cancer registry integration
+							
+							**Features**:
+							- Multi-source data
+							- Standardization tools
+							- Quality metrics
+							
+							[View Project](../09_GICR/)
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### IARC Support Dashboard
+							
+							**Technologies**: Custom web components
+							
+							**Features**:
+							- Support metrics
+							- Resource tracking
+							- Team analytics
+							
+							[View Project](../15_IarcSupport/)
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### Python Scripts Collection
+							
+							**Focus**: Data processing utilities
+							
+							**Tools**:
+							- CPU monitoring
+							- Mathematical calculations
+							- Automation scripts
+							
+							[View Project](../16_PythonScript/)
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### Web Calculator
+							
+							**Technologies**: React/Vue
+							
+							**Features**:
+							- Scientific calculations
+							- History tracking
+							- Keyboard shortcuts
+							
+							[View Project](../18_Calculator/)
+						</textarea>
+					</section>
+				</section>
+				
+				<!-- Presentations -->
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							## Presentations
+							
+							Reveal.js & SliDev presentations
+							
+							**↓ View More ↓**
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### GitHub Copilot Presentation
+							
+							**Framework**: Reveal.js with IARC theme
+							
+							**Topics**:
+							- AI-powered coding assistant
+							- Use cases & examples
+							- Best practices
+							
+							[View Presentation](../ai/)
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### Reveal.js Template Library
+							
+							**Features**:
+							- Custom IARC theme
+							- IARC 60th anniversary theme
+							- Reusable components
+							
+							[Explore Templates](../19_PresentationsRevealJS/)
+						</textarea>
+					</section>
+					
+					<section data-markdown>
+						<textarea data-template>
+							### SliDev Projects
+							
+							**Framework**: Vue-based presentations
+							
+							**Features**:
+							- Markdown-driven slides
+							- Interactive components
+							- Developer-focused
+							
+							[View SliDev](../20_SliDev/)
+						</textarea>
+					</section>
+				</section>
+				
+				<!-- Technologies -->
+				<section data-markdown>
+					<textarea data-template>
+						## Technologies Used
+						
+						**Visualization**:
+						- D3.js, NVD3, Chart.js
+						- TopoJSON, GeoJSON
+						- Custom SVG components
+						
+						**Frameworks**:
+						- React, Vue.js, Vite
+						- Reveal.js, SliDev
+						
+						**Backend**:
+						- Python (Flask, Pandas)
+						- Node.js
+						
+						**Styling**:
+						- SCSS/Sass, CSS3
+						- Responsive design
+					</textarea>
+				</section>
+				
+				<!-- Contact -->
+				<section data-markdown>
+					<textarea data-template>
+						## Get in Touch
+						
+						📧 **Email**: frederic.lam@iarc.who.int
+						
+						🔗 **GitHub**: [fredericlam.github.io](https://github.com/fredericlam/fredericlam.github.io)
+						
+						💼 **LinkedIn**: [Connect with me](https://www.linkedin.com/in/fredericlam)
+						
+						---
+						
+						### Thank you!
+					</textarea>
+				</section>
+			</div>
+		</div>
+
+		<script src="../19_PresentationsRevealJS/dist/reveal.js"></script>
+		<script src="../19_PresentationsRevealJS/plugin/notes/notes.js"></script>
+		<script src="../19_PresentationsRevealJS/plugin/markdown/markdown.js"></script>
+		<script src="../19_PresentationsRevealJS/plugin/highlight/highlight.js"></script>
+		<script>
+			Reveal.initialize({
+				hash: true,
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+			
+			// Toggle right-bg.png on even slides
+			Reveal.on('slidechanged', event => {
+				const slideNumber = event.indexh + 1;
+				if (slideNumber % 2 === 0) {
+					document.body.classList.add('show-right-bg');
+				} else {
+					document.body.classList.remove('show-right-bg');
+				}
+			});
+			
+			// Set initial state
+			Reveal.on('ready', event => {
+				const slideNumber = event.indexh + 1;
+				if (slideNumber % 2 === 0) {
+					document.body.classList.add('show-right-bg');
+				}
+			});
+			
+			// Show balls.png after slide transition ends (but not on vertical slides)
+			Reveal.on('slidetransitionend', event => {
+				const indices = Reveal.getIndices();
+				if (indices.v === 0) {
+					document.body.classList.add('transition-complete');
+				} else {
+					document.body.classList.remove('transition-complete');
+				}
+			});
+			
+			// Hide balls.png when transition starts
+			Reveal.on('slidechanged', event => {
+				document.body.classList.remove('transition-complete');
+			});
+		</script>
+	</body>
+</html>
