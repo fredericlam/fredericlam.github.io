@@ -1,0 +1,291 @@
+/**
+ * IARC theme for reveal.js
+ * 
+ * International Agency for Research on Cancer
+ * Custom theme with IARC branding
+ */
+
+
+// Default mixins and settings -----------------
+@use "sass:color";
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Montserrat:wght@600;700;800&display=swap');
+
+
+// IARC Brand Colors (Customize these)
+// ---------------------------------------------
+$iarc-primary: #ffffff;        // IARC Blue - customize as needed
+$iarc-secondary: #f19c82;      // Dark slate - customize as needed
+$iarc-accent: #e74c3c;         // Accent red - customize as needed
+$iarc-light: #ecf0f1;          // Light gray - customize as needed
+$iarc-dark: #f19c82;           // Dark text - customize as needed
+
+
+// Override theme settings (see ../template/settings.scss)
+// ---------------------------------------------
+
+// Background & Main Colors
+$backgroundColor: #2b3257;
+$mainColor: $iarc-dark;
+$headingColor: $iarc-primary;
+
+// Typography
+$mainFontSize: 38px;
+$mainFont: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$headingFont: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: -0.02em;
+$headingTextTransform: none;
+$headingFontWeight: 700;
+
+// Heading Sizes
+$heading1Size: 2.8em;
+$heading2Size: 2.0em;
+$heading3Size: 1.5em;
+$heading4Size: 1.2em;
+
+// Links
+$linkColor: $iarc-primary;
+$linkColorHover: color.scale($linkColor, $lightness: 15%);
+$selectionBackgroundColor: color.scale($linkColor, $lightness: 70%);
+
+// Code blocks
+$codeFont: 'Monaco', 'Courier New', monospace;
+
+// Overlays
+$overlayElementBgColor: 0, 0, 0;
+$overlayElementFgColor: 240, 240, 240;
+
+// Change text colors against dark slide backgrounds
+@include dark-bg-text-color(#fff);
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+
+// Custom IARC Styling
+// ---------------------------------------------
+
+.reveal {
+	// Align all content to top left with minimal spacing
+	.slides {
+		text-align: left;
+		
+		section {
+			height: 100%;
+			padding: 20px 30px !important;
+			top: 0 !important;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: flex-start;
+		}
+		
+		h1, h2, h3, h4, h5, h6 {
+			text-align: left;
+			margin: 0 0 15px 0 !important;
+		}
+		
+		p, ol, pre {
+			text-align: left;
+			margin: 5px 0 !important;
+		}
+	}
+
+	a:hover{
+		color: $iarc-secondary !important;
+	}
+	
+	// Custom slide backgrounds
+	.slide-background {
+		&.iarc-primary-bg {
+			background-color: $iarc-primary !important;
+		}
+		
+		&.iarc-secondary-bg {
+			background-color: $iarc-secondary !important;
+		}
+		
+		&.iarc-accent-bg {
+			background-color: $iarc-accent !important;
+		}
+	}
+	
+	// Title slide styling
+	.title-slide {
+		h1 {
+			color: $iarc-primary;
+			font-weight: 800;
+			margin-bottom: 10px !important;
+			text-transform: none;
+		}
+		
+		h2 {
+			color: $iarc-secondary;
+			font-weight: 400;
+			font-size: 1.3em;
+			font-size: 1.7em!important;
+			margin-bottom: 8px !important;
+		}
+		
+		h3 {
+			color: $iarc-dark;
+			font-weight: 300;
+			font-size: 1em;
+			margin-bottom: 5px !important;
+		}
+	}
+	
+	// Emphasis and highlights
+	strong, b {
+		color: $iarc-primary;
+		font-weight: 700;
+	}
+	
+	em {
+		color: $iarc-accent;
+		font-style: italic;
+	}
+	
+	// Lists
+	ul, ol {
+		margin-left: 51px !important;
+		padding-left: 0 !important;
+		
+		li {
+			margin-bottom: 5px;
+			padding-left: 0;
+			
+			&::marker {
+				color: $iarc-primary;
+			}
+		}
+	}
+	
+	// Blockquotes
+	blockquote {
+		border-left: 5px solid $iarc-primary;
+		padding: 10px 15px;
+		margin: 5px 0;
+		font-style: italic;
+		background: $iarc-light;
+	}
+	
+	// Tables
+	table {
+		margin: 5px 0 !important;
+		
+		th {
+			background-color: $iarc-primary;
+			color: white;
+			font-weight: 600;
+			padding: 8px;
+		}
+		
+		td {
+			padding: 6px 8px;
+		}
+		
+		tr:nth-child(even) {
+			background-color: $iarc-light;
+		}
+	}
+	
+	// Code blocks
+	pre {
+		box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+		border-left: 5px solid $iarc-primary;
+		margin: 10px 0 !important;
+		
+		code {
+			padding: 15px;
+			max-height: 600px;
+		}
+	}
+	
+	// Inline code
+	code {
+		background: $iarc-light;
+		color: $iarc-accent;
+		padding: 0.2em 0.4em;
+		border-radius: 3px;
+		font-size: 0.9em;
+	}
+	
+	pre code {
+		background: transparent;
+		color: inherit;
+		padding: 0;
+	}
+	
+	// Custom accent classes
+	.accent {
+		color: $iarc-accent !important;
+	}
+	
+	.primary {
+		color: $iarc-primary !important;
+	}
+	
+	.secondary {
+		color: $iarc-secondary !important;
+	}
+	
+	// Custom boxes
+	.info-box {
+		background: color.scale($iarc-primary, $lightness: 90%);
+		border-left: 5px solid $iarc-primary;
+		padding: 10px 15px;
+		margin: 10px 0;
+		text-align: left;
+	}
+	
+	.warning-box {
+		background: color.scale($iarc-accent, $lightness: 90%);
+		border-left: 5px solid $iarc-accent;
+		padding: 10px 15px;
+		margin: 10px 0;
+		text-align: left;
+	}
+	
+	.success-box {
+		background: color.scale(#27ae60, $lightness: 90%);
+		border-left: 5px solid #27ae60;
+		padding: 10px 15px;
+		margin: 10px 0;
+		text-align: left;
+	}
+	
+	// Footer styling (if using footer)
+	.footer {
+		position: absolute;
+		bottom: 1em;
+		left: 1em;
+		font-size: 0.6em;
+		color: color.scale($iarc-dark, $lightness: 50%);
+	}
+	
+	// IARC Logo on every slide
+	.slide-background::after {
+		
+	}
+	
+	// Progress bar customization
+	.progress {
+		span {
+			background: $iarc-primary;
+		}
+	}
+	
+	// Controls customization
+	.controls {
+		color: $iarc-primary;
+	}
+}
