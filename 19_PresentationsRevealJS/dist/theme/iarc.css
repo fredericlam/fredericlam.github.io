@@ -363,7 +363,7 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
 }
 .reveal .slides section {
   height: 100%;
-  padding: 20px 30px !important;
+  padding: 60px 260px !important;
   top: 0 !important;
   display: flex;
   flex-direction: column;
@@ -513,4 +513,59 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
 }
 .reveal .controls {
   color: #ffffff;
+}
+
+@media screen and (max-width: 768px) {
+  .reveal .slides section {
+    padding: 40px 30px 120px 30px !important;
+  }
+  .reveal h1 {
+    font-size: 2.2em !important;
+    margin: 15px 0 12px 0 !important;
+  }
+  .reveal h2 {
+    font-size: 1.8em !important;
+    margin: 12px 0 10px 0 !important;
+  }
+  .reveal h3 {
+    font-size: 1.4em !important;
+    margin: 10px 0 8px 0 !important;
+  }
+  .reveal p, .reveal ul, .reveal ol {
+    font-size: 1.1em !important;
+    margin: 8px 0 !important;
+  }
+  .reveal ul, .reveal ol {
+    margin-left: 35px !important;
+  }
+  .reveal li {
+    margin-bottom: 8px !important;
+  }
+}
+@media screen and (max-width: 480px) {
+  .reveal .slides section {
+    padding: 30px 20px 100px 20px !important;
+  }
+  .reveal h1 {
+    font-size: 1.8em !important;
+    margin: 12px 0 10px 0 !important;
+  }
+  .reveal h2 {
+    font-size: 1.5em !important;
+    margin: 10px 0 8px 0 !important;
+  }
+  .reveal h3 {
+    font-size: 1.2em !important;
+    margin: 8px 0 6px 0 !important;
+  }
+  .reveal p, .reveal ul, .reveal ol {
+    font-size: 1em !important;
+    margin: 6px 0 !important;
+  }
+  .reveal ul, .reveal ol {
+    margin-left: 30px !important;
+  }
+  .reveal li {
+    margin-bottom: 6px !important;
+  }
 }

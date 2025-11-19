@@ -14,14 +14,12 @@ x<!doctype html>
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
 		
 		<style>
-			.iarc-logo {
-				position: fixed;
-				bottom: 30px;
-				left: 30px;
-				z-index: 10;
-			}
-			
-			.balls-decoration {
+		.iarc-logo {
+			position: fixed;
+			bottom: 30px;
+			left: 30px;
+			z-index: 10;
+		}			.balls-decoration {
 				position: fixed;
 				bottom: 30px;
 				right: 30px;
@@ -67,6 +65,151 @@ x<!doctype html>
 			
 			body.show-right-bg::before {
 				opacity: 1;
+			}
+			
+			/* Mobile optimizations */
+			@media screen and (max-width: 768px) {
+				.iarc-logo {
+					width: 70px;
+					bottom: 10px;
+				}
+				
+				.balls-decoration {
+					width: 60px;
+					bottom: 15px;
+					right: 15px;
+				}
+				
+				body::before {
+					width: 200px;
+				}
+				
+				.reveal .slides section h1::before,
+				.reveal .slides section h2::before {
+					width: 24px;
+					height: 24px;
+					margin-right: 10px;
+				}
+				
+				.reveal h1 {
+					font-size: 2.2em !important;
+					margin-top: 20px !important;
+				}
+				
+				.reveal h2 {
+					font-size: 1.8em !important;
+					margin-top: 20px !important;
+				}
+				
+				.reveal h3 {
+					font-size: 1.4em !important;
+					margin-top: 20px !important;
+				}
+				
+				.reveal p, .reveal ul, .reveal ol {
+					font-size: 1.1em !important;
+					margin-top: 15px !important;
+				}
+				
+				.reveal li {
+					margin-bottom: 10px !important;
+				}
+				
+				.reveal pre code {
+					font-size: 0.8em !important;
+					padding: 10px !important;
+				}
+				
+				.reveal .slides section {
+					padding: 30px 25px 100px 25px !important;
+					justify-content: flex-start !important;
+				}
+				
+				/* Hide decorations on very small screens */
+				body::before {
+					display: none;
+				}
+			}
+			
+			@media screen and (max-width: 480px) {
+				.iarc-logo {
+					width: 60px;
+					bottom: 8px;
+				}
+				
+				.balls-decoration {
+					width: 40px;
+					bottom: 10px;
+					right: 10px;
+				}
+				
+				.reveal .slides section h1::before,
+				.reveal .slides section h2::before {
+					width: 20px;
+					height: 20px;
+					margin-right: 8px;
+				}
+				
+				.reveal h1 {
+					font-size: 1.8em !important;
+					margin-top: 20px !important;
+				}
+				
+				.reveal h2 {
+					font-size: 1.5em !important;
+					margin-top: 20px !important;
+				}
+				
+				.reveal h3 {
+					font-size: 1.2em !important;
+					margin-top: 15px !important;
+				}
+				
+				.reveal p, .reveal ul, .reveal ol {
+					font-size: 1em !important;
+					margin-top: 12px !important;
+				}
+				
+				.reveal li {
+					margin-bottom: 8px !important;
+				}
+				
+				.reveal pre code {
+					font-size: 0.7em !important;
+					padding: 8px !important;
+				}
+				
+				.reveal .slides section {
+					padding: 25px 20px 90px 20px !important;
+					justify-content: flex-start !important;
+				}
+			}
+			
+			/* Touch-friendly controls */
+			.reveal .controls {
+				bottom: 20px !important;
+				right: 20px !important;
+			}
+			
+			@media screen and (max-width: 768px) {
+				.reveal .controls {
+					bottom: 10px !important;
+					right: 10px !important;
+				}
+				
+				.reveal .controls button {
+					width: 40px !important;
+					height: 40px !important;
+				}
+			}
+			
+			/* Improve readability on mobile */
+			.reveal ul, .reveal ol {
+				width: 100%;
+			}
+			
+			.reveal li {
+				line-height: 1.6 !important;
 			}
 		</style>
 	</head>
@@ -228,6 +371,29 @@ x<!doctype html>
 			// - https://revealjs.com/config/
 			Reveal.initialize({
 				hash: true,
+				
+				// Mobile optimizations
+				touch: true,
+				controls: true,
+				progress: true,
+				center: false,
+				
+				// Enable touch navigation
+				respondToHashChanges: true,
+				
+				// Better mobile performance
+				embedded: false,
+				autoSlide: 0,
+				
+				// Improved touch gestures
+				touchEnabled: true,
+				
+				// Better scaling on mobile
+				width: '100%',
+				height: '100%',
+				margin: 0.04,
+				minScale: 0.2,
+				maxScale: 2.0,
 
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
