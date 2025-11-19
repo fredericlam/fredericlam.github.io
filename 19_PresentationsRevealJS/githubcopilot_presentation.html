@@ -211,9 +211,77 @@ x<!doctype html>
 			.reveal li {
 				line-height: 1.6 !important;
 			}
-		</style>
+
+		/* Video fullscreen modal */
+		.video-modal {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			background: rgba(0, 0, 0, 0.95);
+			z-index: 9999;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		.video-modal.active {
+			display: flex;
+		}
+		
+		.video-modal video {
+			width: 90%;
+			max-height: 90vh;
+			border-radius: 8px;
+			object-fit: contain;
+		}
+		
+		.video-modal-close {
+			position: absolute;
+			top: 20px;
+			right: 20px;
+			color: white;
+			font-size: 50px;
+			cursor: pointer;
+			background: rgba(0, 0, 0, 0.7);
+			border: 3px solid white;
+			border-radius: 50%;
+			width: 70px;
+			height: 70px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 10000;
+			transition: all 0.3s;
+			line-height: 1;
+			padding: 0;
+		}
+		
+		.video-modal-close:hover {
+			background: rgba(255, 255, 255, 0.3);
+			transform: scale(1.1);
+		}
+		
+		.reveal video {
+			cursor: pointer;
+		}
+		
+		/* Hide balls on "How It Works" slide (slide index 2) */
+		body[data-slide="2"] .balls-decoration {
+			display: none !important;
+		}
+	</style>
 	</head>
 	<body>
+		<!-- Video Modal -->
+		<div class="video-modal" id="videoModal">
+			<button class="video-modal-close" onclick="closeVideoModal()">×</button>
+			<video id="modalVideo" autoplay loop muted playsinline controls>
+				<source src="https://videos.ctfassets.net/8aevphvgewt8/5R57iyx96ENtWp4nOHBsAl/f935b264e79099bd8ed54e2d74db7ab5/hero-animation-lg.mp4" type="video/mp4">
+			</video>
+		</div>
+		
 		<div class="reveal">
 			<!-- IARC Logo -->
 			<img src="images/iarc-logo.png" class="iarc-logo" alt="IARC Logo">
@@ -222,158 +290,145 @@ x<!doctype html>
 			
 			<div class="slides">
 				<!-- Markdown content -->
-				<section data-markdown>
-					<textarea data-template>
-						# GitHub Copilot
-						### AI-Powered Code Assistant
-						
-						<img src="./images/github-copilot.png" style="width: 200px; margin: 80px auto; display: block">
+			<section data-markdown>
+				<textarea data-template>
+					# GitHub Copilot
+					### AI-Powered Code Assistant
+					
+					<img src="./images/github-copilot.png" style="width: 200px; margin: 80px auto; display: block">
 
-						<p align="center" style=" width: 100%; display: block; text-align: center;"><a href="https://github.com/features/copilot">https://github.com/features/copilot</a></p>
+					<p align="center" style=" width: 100%; display: block; text-align: center;"><a href="https://github.com/features/copilot">https://github.com/features/copilot</a></p>
 
 					---
+					
+					## What is GitHub Copilot?
+					
+					- AI pair programmer
+					- Powered by OpenAI
+					- Suggests code in real-time
+					- Works in your IDE (Visual Studio Code)
+							
+					---
+					
+					## How It Works
+					
+					- Write a comment describing what you want
+					- Copilot suggests code
+					- Accept, reject, or modify suggestions
+					- 3 modes : ask, edit, agent
+
+					<video autoplay loop muted playsinline style="width: 38%; max-height: 70vh; border-radius: 8px; object-fit: contain;    position: absolute; right: 300px; top: 175px;">
+						<source src="https://videos.ctfassets.net/8aevphvgewt8/5R57iyx96ENtWp4nOHBsAl/f935b264e79099bd8ed54e2d74db7ab5/hero-animation-lg.mp4" type="video/mp4">
+					</video>
 				</textarea>
 			</section>
 			
-			<!-- What is GitHub Copilot Section with Video -->
-			<section>
-				<h2>What is GitHub Copilot?</h2>
-				<div style="display: flex; align-items: flex-start; gap: 40px; margin-top: 30px;">
-					<div style="flex: 0 0 25%;">
-						<ul>
-							<li>AI pair programmer</li>
-							<li>Powered by OpenAI</li>
-							<li>Suggests code in real-time</li>
-							<li>Works in your IDE (Visual Studio Code)</li>
-						</ul>
-					</div>
-					<div style="flex: 1;">
-						<video autoplay loop muted playsinline style="width: 100%; max-height: 70vh; border-radius: 8px; object-fit: contain;">
-							<source src="https://videos.ctfassets.net/8aevphvgewt8/5R57iyx96ENtWp4nOHBsAl/f935b264e79099bd8ed54e2d74db7ab5/hero-animation-lg.mp4" type="video/mp4">
-						</video>
-					</div>
-				</div>
-			</section>
-			
-			<!-- How It Works Section -->
+			<!-- Benefits Section -->
 			<section data-markdown>
 				<textarea data-template>
-					---						## How It Works
-						
-						- Write a comment describing what you want
-						- Copilot suggests code
-						- Accept, reject, or modify suggestions
-						- 3 modes : ask, edit, agent
-					</textarea>
-				</section>
-				
-				<!-- Benefits Section -->
-				<section data-markdown>
-					<textarea data-template>
-						## Benefits
-						
-						- **Increased Productivity** - Write code faster
-						- **Learn as You Go** - See different approaches
-						- **Discover APIs** - Find the right functions
-					</textarea>
-				</section>
-				
-				<!-- Use Cases Section with Vertical Sub-slides -->
-				<section>
-					<!-- Main Use Cases Slide -->
-					<section data-markdown>
-						<textarea data-template>
-							## Use Cases
-							- Website Translation
-						</textarea>
-					</section>
+					## Benefits
 					
-					<!-- Sub-slide 1: Website Translation -->
-					<section data-markdown>
-						<textarea data-template>
-							<img src="./images/screenshot1.png">
-						</textarea>
-					</section>
+					- **Increased Productivity** - Write code faster
+					- **Learn as You Go** - See different approaches
+					- **Discover APIs** - Find the right functions
+				</textarea>
+			</section>					<!-- Use Cases Section with Vertical Sub-slides -->
+					<section>
+						<!-- Main Use Cases Slide -->
+						<section data-markdown>
+							<textarea data-template>
+								## Use Cases
+								- Website Translation
+							</textarea>
+						</section>
+						
+						<!-- Sub-slide 1: Website Translation -->
+						<section data-markdown>
+							<textarea data-template>
+								<img src="./images/screenshot1.png">
+							</textarea>
+						</section>
 
-					<!-- Main Use Cases Slide -->
-					<section data-markdown>
-						<textarea data-template>
-							## Use Cases
-							- Website Translation
-							- Platform Revamp
-						</textarea>
-					</section>
-					
-					<!-- Sub-slide 2: Data Visualization -->
-					<section data-markdown>
-						<textarea data-template>
-							<img src="./images/screenshot2.png">
-						</textarea>
-					</section>
+						<!-- Main Use Cases Slide -->
+						<section data-markdown>
+							<textarea data-template>
+								## Use Cases
+								- Website Translation
+								- Platform Revamp
+							</textarea>
+						</section>
+						
+						<!-- Sub-slide 2: Data Visualization -->
+						<section data-markdown>
+							<textarea data-template>
+								<img src="./images/screenshot2.png">
+							</textarea>
+						</section>
 
-					<!-- Main Use Cases Slide -->
-					<section data-markdown>
-						<textarea data-template>
-							## Use Cases
-							- Website Translation
-							- Platform Revamp
-							- Data Visualization Library
-						</textarea>
+						<!-- Main Use Cases Slide -->
+						<section data-markdown>
+							<textarea data-template>
+								## Use Cases
+								- Website Translation
+								- Platform Revamp
+								- Data Visualization Library
+							</textarea>
+						</section>
+						
+						<!-- Sub-slide 3: Platform Revamp -->
+						<section data-markdown>
+							<textarea data-template>
+								<img src="./images/screenshot3.png">
+							</textarea>
+						</section>
+						<!-- Main Use Cases Slide -->	
+						<section data-markdown>
+							<textarea data-template>
+								## Use Cases
+								- Website Translation
+								- Data Visualization Library
+								- Platform Revamp
+								- Code Refactoring
+								- Documentation
+							</textarea>
+						</section>
 					</section>
 					
-					<!-- Sub-slide 3: Platform Revamp -->
+					<!-- Continue with remaining sections -->
 					<section data-markdown>
 						<textarea data-template>
-							<img src="./images/screenshot3.png">
+							## Limitations
+							
+							- May suggest incorrect code
+							- Requires code review
+							- Works best with common patterns
+							- Privacy considerations						
+							---
+							
+							## Pricing
+							
+							- **Individual**: $10/month or $100/year
+							- **Business**: $19/user/month
+							- **Free for students and open source maintainers**
+							
+							---
+							
+							## Resources
+							
+							- [copilot.github.com](https://copilot.github.com)
+							- [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
+							- [Documentation](https://docs.github.com/en/copilot)
+							- [Best Practices Guide](https://github.blog/tag/github-copilot/)
+							
+							---
+							
+							## Demo Time
+							
+							Let's see GitHub Copilot in action!
+							
 						</textarea>
 					</section>
-					<!-- Main Use Cases Slide -->	
-					<section data-markdown>
-						<textarea data-template>
-							## Use Cases
-							- Website Translation
-							- Data Visualization Library
-							- Platform Revamp
-							- Code Refactoring
-							- Documentation
-						</textarea>
-					</section>
-				</section>
-				
-				<!-- Continue with remaining sections -->
-				<section data-markdown>
-					<textarea data-template>
-						## Limitations
-						
-						- May suggest incorrect code
-						- Requires code review
-						- Works best with common patterns
-						- Privacy considerations						
-						---
-						
-						## Pricing
-						
-						- **Individual**: $10/month or $100/year
-						- **Business**: $19/user/month
-						- **Free for students and open source maintainers**
-						
-						---
-						
-						## Resources
-						
-						- [copilot.github.com](https://copilot.github.com)
-						- [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
-						- [Documentation](https://docs.github.com/en/copilot)
-						- [Best Practices Guide](https://github.blog/tag/github-copilot/)
-						
-						---
-						
-						## Demo Time
-						
-						Let's see GitHub Copilot in action!
-						
-					</textarea>
-				</section>
+				</div>
 			</div>
 		</div>
 
@@ -444,10 +499,40 @@ x<!doctype html>
 				}
 			});
 			
-			// Hide balls.png when transition starts
-			Reveal.on('slidechanged', event => {
-				document.body.classList.remove('transition-complete');
-			});
-		</script>
-	</body>
+		// Hide balls.png when transition starts
+		Reveal.on('slidechanged', event => {
+			document.body.classList.remove('transition-complete');
+		});
+		
+		// Video modal functionality
+		function openVideoModal() {
+			const modal = document.getElementById('videoModal');
+			const modalVideo = document.getElementById('modalVideo');
+			modal.classList.add('active');
+			modalVideo.play();
+		}
+		
+		function closeVideoModal() {
+			const modal = document.getElementById('videoModal');
+			const modalVideo = document.getElementById('modalVideo');
+			modal.classList.remove('active');
+			modalVideo.pause();
+		}
+		
+		// Add click handler to inline video
+		setTimeout(() => {
+			const inlineVideo = document.querySelector('.reveal video');
+			if (inlineVideo) {
+				inlineVideo.addEventListener('click', openVideoModal);
+			}
+		}, 1000);
+		
+		// Close modal on background click
+		document.getElementById('videoModal').addEventListener('click', function(e) {
+			if (e.target === this) {
+				closeVideoModal();
+			}
+		});
+	</script>
+</body>
 </html>
