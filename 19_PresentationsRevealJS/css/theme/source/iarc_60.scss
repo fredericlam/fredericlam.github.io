@@ -1,0 +1,493 @@
+/**
+ * IARC 60th Anniversary theme for reveal.js
+ * 
+ * International Agency for Research on Cancer
+ * 60th Anniversary Brand Colors - Extracted from IARC60_PowerPointTemplate_EN.potx
+ */
+
+
+// Default mixins and settings -----------------
+@use "sass:color";
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts (Arial as per PowerPoint template)
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+
+// IARC 60th Anniversary Brand Colors (From PowerPoint Template)
+// ---------------------------------------------
+$iarc60-deep-blue: #243883;      // Dark 1 / Accent 3 - Primary brand color
+$iarc60-white: #FFFEFE;          // Light 1 - White/Light backgrounds
+$iarc60-pink: #ED709D;           // Dark 2 / Accent 4 - Secondary accent
+$iarc60-coral: #F18F8C;          // Light 2 / Accent 6 - Light coral
+$iarc60-turquoise: #63BFB5;      // Accent 1 - Turquoise/Teal (Hyperlinks)
+$iarc60-orange: #F3A26F;         // Accent 2 / Accent 5 - Orange accent
+
+// Additional utility colors
+$iarc60-dark-text: #2c3e50;      // For body text on light backgrounds
+$iarc60-light-bg: #f8f9fa;       // Very light gray for subtle backgrounds
+
+
+// Override theme settings (see ../template/settings.scss)
+// ---------------------------------------------
+
+// Background & Main Colors
+$backgroundColor: $iarc60-white;
+$mainColor: $iarc60-dark-text;
+$headingColor: $iarc60-deep-blue;
+
+// Typography (Arial as specified in template)
+$mainFontSize: 36px;
+$mainFont: 'Arial', 'Roboto', 'Helvetica Neue', Helvetica, sans-serif;
+$headingFont: 'Arial', 'Roboto', 'Helvetica Neue', Helvetica, sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: none;
+$headingFontWeight: 700;
+
+// Heading Sizes
+$heading1Size: 2.5em;
+$heading2Size: 1.8em;
+$heading3Size: 1.4em;
+$heading4Size: 1.1em;
+
+// Links
+$linkColor: $iarc60-turquoise;
+$linkColorHover: color.scale($linkColor, $lightness: -15%);
+$selectionBackgroundColor: color.scale($iarc60-turquoise, $lightness: 60%);
+
+// Code blocks
+$codeFont: 'Courier New', 'Monaco', monospace;
+
+// Overlays
+$overlayElementBgColor: 0, 0, 0;
+$overlayElementFgColor: 240, 240, 240;
+
+// Change text colors against dark slide backgrounds
+@include dark-bg-text-color(#fff);
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+
+// Custom IARC 60 Styling
+// ---------------------------------------------
+
+.reveal {
+	
+	// Custom slide backgrounds
+	.slide-background {
+		&.bg-deep-blue {
+			background-color: $iarc60-deep-blue !important;
+		}
+		
+		&.bg-pink {
+			background-color: $iarc60-pink !important;
+		}
+		
+		&.bg-coral {
+			background-color: $iarc60-coral !important;
+		}
+		
+		&.bg-turquoise {
+			background-color: $iarc60-turquoise !important;
+		}
+		
+		&.bg-orange {
+			background-color: $iarc60-orange !important;
+		}
+		
+		&.bg-gradient-primary {
+			background: linear-gradient(135deg, $iarc60-deep-blue 0%, $iarc60-turquoise 100%) !important;
+		}
+		
+		&.bg-gradient-warm {
+			background: linear-gradient(135deg, $iarc60-orange 0%, $iarc60-pink 100%) !important;
+		}
+	}
+	
+	// Title slide styling
+	.title-slide {
+		h1 {
+			color: $iarc60-deep-blue;
+			font-weight: 900;
+			margin-bottom: 0.5em;
+			text-transform: none;
+			line-height: 1.2;
+		}
+		
+		h2 {
+			color: $iarc60-pink;
+			font-weight: 400;
+			font-size: 1.4em;
+			margin-bottom: 0.3em;
+		}
+		
+		h3 {
+			color: $iarc60-turquoise;
+			font-weight: 300;
+			font-size: 1em;
+		}
+		
+		.anniversary-badge {
+			display: inline-block;
+			background: linear-gradient(135deg, $iarc60-deep-blue, $iarc60-turquoise);
+			color: white;
+			padding: 0.5em 1em;
+			border-radius: 50px;
+			font-size: 0.8em;
+			font-weight: 700;
+			margin-top: 1em;
+		}
+	}
+	
+	// Section headers
+	.section-slide {
+		background: linear-gradient(135deg, $iarc60-deep-blue 0%, darken($iarc60-deep-blue, 10%) 100%);
+		
+		h2 {
+			color: white;
+			font-weight: 700;
+			font-size: 2.5em;
+		}
+		
+		p {
+			color: $iarc60-turquoise;
+			font-size: 1.2em;
+		}
+	}
+	
+	// Emphasis and highlights
+	strong, b {
+		color: $iarc60-pink;
+		font-weight: 700;
+	}
+	
+	em {
+		color: $iarc60-orange;
+		font-style: italic;
+	}
+	
+	// Color utility classes
+	.text-deep-blue { color: $iarc60-deep-blue !important; }
+	.text-pink { color: $iarc60-pink !important; }
+	.text-coral { color: $iarc60-coral !important; }
+	.text-turquoise { color: $iarc60-turquoise !important; }
+	.text-orange { color: $iarc60-orange !important; }
+	.text-white { color: white !important; }
+	
+	// Lists
+	ul, ol {
+		li {
+			margin-bottom: 0.4em;
+			
+			&::marker {
+				color: $iarc60-turquoise;
+				font-weight: 700;
+			}
+		}
+	}
+	
+	ul.checked-list {
+		list-style: none;
+		
+		li::before {
+			content: "✓ ";
+			color: $iarc60-turquoise;
+			font-weight: 700;
+			margin-right: 0.5em;
+		}
+	}
+	
+	// Blockquotes
+	blockquote {
+		border-left: 5px solid $iarc60-turquoise;
+		padding-left: 1em;
+		margin-left: 0;
+		font-style: italic;
+		background: $iarc60-light-bg;
+		padding: 1em;
+		border-radius: 4px;
+		
+		&.highlight {
+			background: color.scale($iarc60-turquoise, $lightness: 85%);
+			border-left-color: $iarc60-deep-blue;
+		}
+	}
+	
+	// Tables
+	table {
+		border-collapse: separate;
+		border-spacing: 0;
+		border-radius: 8px;
+		overflow: hidden;
+		
+		th {
+			background: linear-gradient(135deg, $iarc60-deep-blue, darken($iarc60-deep-blue, 5%));
+			color: white;
+			font-weight: 700;
+			padding: 0.8em;
+			text-align: left;
+		}
+		
+		td {
+			padding: 0.6em 0.8em;
+			border-bottom: 1px solid #e0e0e0;
+		}
+		
+		tr:nth-child(even) {
+			background-color: $iarc60-light-bg;
+		}
+		
+		tr:hover {
+			background-color: color.scale($iarc60-turquoise, $lightness: 90%);
+		}
+	}
+	
+	// Code blocks
+	pre {
+		box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.15);
+		border-left: 5px solid $iarc60-turquoise;
+		border-radius: 8px;
+		
+		code {
+			padding: 1.5em;
+			max-height: 500px;
+			border-radius: 8px;
+		}
+	}
+	
+	// Inline code
+	code {
+		background: color.scale($iarc60-turquoise, $lightness: 85%);
+		color: $iarc60-deep-blue;
+		padding: 0.2em 0.5em;
+		border-radius: 4px;
+		font-size: 0.9em;
+		font-weight: 500;
+	}
+	
+	pre code {
+		background: transparent;
+		color: inherit;
+		padding: 0;
+		font-weight: normal;
+	}
+	
+	// Info boxes / Call-outs
+	.info-box {
+		background: color.scale($iarc60-turquoise, $lightness: 85%);
+		border-left: 5px solid $iarc60-turquoise;
+		padding: 1.2em;
+		margin: 1em 0;
+		text-align: left;
+		border-radius: 4px;
+		
+		strong {
+			color: $iarc60-deep-blue;
+		}
+	}
+	
+	.warning-box {
+		background: color.scale($iarc60-orange, $lightness: 85%);
+		border-left: 5px solid $iarc60-orange;
+		padding: 1.2em;
+		margin: 1em 0;
+		text-align: left;
+		border-radius: 4px;
+		
+		strong {
+			color: darken($iarc60-orange, 20%);
+		}
+	}
+	
+	.success-box {
+		background: color.scale($iarc60-turquoise, $lightness: 90%);
+		border-left: 5px solid darken($iarc60-turquoise, 15%);
+		padding: 1.2em;
+		margin: 1em 0;
+		text-align: left;
+		border-radius: 4px;
+	}
+	
+	.alert-box {
+		background: color.scale($iarc60-pink, $lightness: 85%);
+		border-left: 5px solid $iarc60-pink;
+		padding: 1.2em;
+		margin: 1em 0;
+		text-align: left;
+		border-radius: 4px;
+		
+		strong {
+			color: darken($iarc60-pink, 20%);
+		}
+	}
+	
+	// Two-column layout
+	.two-columns {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2em;
+		text-align: left;
+		
+		.column {
+			h3 {
+				color: $iarc60-deep-blue;
+				margin-bottom: 0.5em;
+			}
+		}
+	}
+	
+	// Three-column layout
+	.three-columns {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5em;
+		text-align: center;
+		
+		.column {
+			h4 {
+				color: $iarc60-deep-blue;
+				margin-bottom: 0.5em;
+			}
+		}
+	}
+	
+	// Feature cards
+	.feature-card {
+		background: white;
+		border: 2px solid $iarc60-light-bg;
+		border-radius: 12px;
+		padding: 1.5em;
+		margin: 0.5em;
+		transition: all 0.3s ease;
+		
+		&:hover {
+			border-color: $iarc60-turquoise;
+			box-shadow: 0 8px 20px rgba($iarc60-turquoise, 0.2);
+			transform: translateY(-5px);
+		}
+		
+		h3 {
+			color: $iarc60-deep-blue;
+			margin-bottom: 0.5em;
+		}
+		
+		.icon {
+			font-size: 3em;
+			color: $iarc60-turquoise;
+			margin-bottom: 0.3em;
+		}
+	}
+	
+	// Stats/Numbers highlighting
+	.big-number {
+		font-size: 4em;
+		font-weight: 900;
+		color: $iarc60-pink;
+		line-height: 1;
+		margin: 0.2em 0;
+		
+		small {
+			font-size: 0.4em;
+			color: $iarc60-dark-text;
+			font-weight: 400;
+			display: block;
+		}
+	}
+	
+	// Timeline
+	.timeline {
+		position: relative;
+		padding-left: 3em;
+		text-align: left;
+		
+		&::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			bottom: 0;
+			width: 4px;
+			background: linear-gradient(to bottom, $iarc60-turquoise, $iarc60-deep-blue);
+		}
+		
+		.timeline-item {
+			position: relative;
+			margin-bottom: 2em;
+			
+			&::before {
+				content: '';
+				position: absolute;
+				left: -3.5em;
+				top: 0.3em;
+				width: 20px;
+				height: 20px;
+				border-radius: 50%;
+				background: $iarc60-turquoise;
+				border: 4px solid white;
+				box-shadow: 0 0 0 2px $iarc60-turquoise;
+			}
+			
+			h4 {
+				color: $iarc60-deep-blue;
+				margin: 0 0 0.3em 0;
+			}
+			
+			p {
+				margin: 0;
+				color: $iarc60-dark-text;
+			}
+		}
+	}
+	
+	// Footer styling
+	.footer {
+		position: absolute;
+		bottom: 1em;
+		left: 1em;
+		right: 1em;
+		font-size: 0.5em;
+		color: color.scale($iarc60-dark-text, $lightness: 30%);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		
+		.logo {
+			height: 30px;
+		}
+	}
+	
+	// Progress bar customization
+	.progress {
+		height: 6px;
+		
+		span {
+			background: linear-gradient(to right, $iarc60-turquoise, $iarc60-deep-blue);
+		}
+	}
+	
+	// Controls customization
+	.controls {
+		color: $iarc60-turquoise;
+		
+		button {
+			&:hover {
+				color: $iarc60-deep-blue;
+			}
+		}
+	}
+	
+	// Slide number
+	.slide-number {
+		background-color: rgba($iarc60-deep-blue, 0.8);
+		color: white;
+		border-radius: 4px;
+		padding: 5px 10px;
+	}
+}

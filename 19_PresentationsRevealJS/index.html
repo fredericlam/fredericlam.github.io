@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>GCO Presentation</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/beige.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+					<textarea data-template>
+					    ## Slide 1
+					    A paragraph with some text and a [link](https://hakim.se).
+					    ---
+					    ## Slide 2
+					    ---
+					    ## Slide 3
+				  	</textarea>
+				</section>
+				<!--<section data-state="make-it-pop">Slide 2</section>
+				<section data-state="make-it-pop">
+					<section>Vertical Slide 1</section>
+      				<section>Vertical Slide 2</section>
+      			</section>
+				<section data-state="make-it-pop">Slide 4</section>
+				<section data-state="make-it-pop">Slide 5</section>
+				<section>Slide 6</section>-->
+
+				<!--
+				<section data-transition="slide">The train goes on …</section>
+				<section data-transition="slide">and on …</section>
+				<section data-transition="slide-in fade-out">and stops.</section>
+				<section data-transition="fade-in slide-out">
+				  (Passengers entering and leaving)
+				</section>
+				<section data-transition="slide">And it starts again.</section>
+				-->
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
