@@ -271,6 +271,12 @@ x<!doctype html>
 		body[data-slide="2"] .balls-decoration {
 			display: none !important;
 		}
+		
+		/* Screenshots with higher z-index */
+		.reveal img[src*="screenshot"] {
+			position: relative;
+			z-index: 100;
+		}
 	</style>
 	</head>
 	<body>
@@ -342,14 +348,12 @@ x<!doctype html>
 							</textarea>
 						</section>
 						
-						<!-- Sub-slide 1: Website Translation -->
-						<section data-markdown>
-							<textarea data-template>
-								<img src="./images/screenshot1.png">
-							</textarea>
-						</section>
-
-						<!-- Main Use Cases Slide -->
+					<!-- Sub-slide 1: Website Translation -->
+					<section data-markdown>
+						<textarea data-template>
+							<img src="./images/screenshot1.png" style="max-height: 85vh;">
+						</textarea>
+					</section>						<!-- Main Use Cases Slide -->
 						<section data-markdown>
 							<textarea data-template>
 								## Use Cases
@@ -358,14 +362,12 @@ x<!doctype html>
 							</textarea>
 						</section>
 						
-						<!-- Sub-slide 2: Data Visualization -->
-						<section data-markdown>
-							<textarea data-template>
-								<img src="./images/screenshot2.png">
-							</textarea>
-						</section>
-
-						<!-- Main Use Cases Slide -->
+					<!-- Sub-slide 2: Data Visualization -->
+					<section data-markdown>
+						<textarea data-template>
+							<img src="./images/screenshot2.png" style="max-height: 85vh;">
+						</textarea>
+					</section>						<!-- Main Use Cases Slide -->
 						<section data-markdown>
 							<textarea data-template>
 								## Use Cases
@@ -375,12 +377,12 @@ x<!doctype html>
 							</textarea>
 						</section>
 						
-						<!-- Sub-slide 3: Platform Revamp -->
-						<section data-markdown>
-							<textarea data-template>
-								<img src="./images/screenshot3.png">
-							</textarea>
-						</section>
+					<!-- Sub-slide 3: Platform Revamp -->
+					<section data-markdown>
+						<textarea data-template>
+							<img src="./images/screenshot3.png" style="max-height: 85vh;">
+						</textarea>
+					</section>
 						<!-- Main Use Cases Slide -->	
 						<section data-markdown>
 							<textarea data-template>
@@ -470,25 +472,29 @@ x<!doctype html>
 				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
 			});
 			
-			// Toggle right-bg.png on even slides
-			Reveal.on('slidechanged', event => {
-				const slideNumber = event.indexh + 1;
-				if (slideNumber % 2 === 0) {
-					document.body.classList.add('show-right-bg');
-				} else {
-					document.body.classList.remove('show-right-bg');
-				}
-			});
+		// Toggle right-bg.png on even slides
+		Reveal.on('slidechanged', event => {
+			const slideNumber = event.indexh + 1;
+			document.body.setAttribute('data-slide', event.indexh);
+			if (slideNumber % 2 === 0) {
+				document.body.classList.add('show-right-bg');
+			} else {
+			document.body.classList.remove('show-right-bg');
+		}
+	});			// Set initial state
+		Reveal.on('ready', event => {
+			const slideNumber = event.indexh + 1;
+			document.body.setAttribute('data-slide', event.indexh);
+			if (slideNumber % 2 === 0) {
+				document.body.classList.add('show-right-bg');
+			}
 			
-			// Set initial state
-			Reveal.on('ready', event => {
-				const slideNumber = event.indexh + 1;
-				if (slideNumber % 2 === 0) {
-					document.body.classList.add('show-right-bg');
-				}
-			});
-			
-			// Show balls.png after slide transition ends (but not on vertical slides)
+			// Check initial slide for balls decoration
+			const ballsDecoration = document.querySelector('.balls-decoration');
+			if (ballsDecoration && event.indexh === 2 && event.indexv === 0) {
+				ballsDecoration.style.display = 'none';
+			}
+		});			// Show balls.png after slide transition ends (but not on vertical slides)
 			Reveal.on('slidetransitionend', event => {
 				const indices = Reveal.getIndices();
 				// Hide balls on vertical slides (indexv > 0)
@@ -502,6 +508,16 @@ x<!doctype html>
 		// Hide balls.png when transition starts
 		Reveal.on('slidechanged', event => {
 			document.body.classList.remove('transition-complete');
+			
+			// Hide balls on "How It Works" slide (slide 2)
+			const ballsDecoration = document.querySelector('.balls-decoration');
+			if (ballsDecoration) {
+				if (event.indexh === 2 && event.indexv === 0) {
+					ballsDecoration.style.display = 'none';
+				} else {
+					ballsDecoration.style.display = '';
+				}
+			}
 		});
 		
 		// Video modal functionality
